@@ -1,1 +1,1 @@
-# nextsync
+Clone the repository.
