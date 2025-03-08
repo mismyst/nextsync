@@ -27,7 +27,7 @@ const communities = [
   },
 ];
 
-const CommunityImageCollage = () => {
+const CommunityPage = () => {
   return (
     <section className="bg-white py-8 px-4">
       <h2 className="text-4xl font-bold text-green-600 mb-2">Community</h2>
@@ -57,4 +57,4 @@ const CommunityImageCollage = () => {
   );
 };
 
-export default CommunityImageCollage;
+export default CommunityPage;
