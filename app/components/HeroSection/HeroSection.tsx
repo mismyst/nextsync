@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const HeroSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,11 +32,13 @@ const HeroSection = () => {
         </div>
         <div className="hidden md:block relative">
           <div className="absolute inset-0 bg-gradient-to-r from-teal-100 to-blue-100 rounded-2xl -rotate-3"></div>
-          <img 
-            src="/api/placeholder/600/400" 
-            alt="Learning community" 
-            className="relative z-10 rounded-2xl shadow-2xl transform rotate-3"
-          />
+          <Image 
+  src="https://source.unsplash.com/600x400/?education,technology" 
+  alt="Learning community" 
+  width={600} 
+  height={400} 
+  className="relative z-10 rounded-2xl shadow-2xl transform rotate-3"
+/>
         </div>
       </div>
 

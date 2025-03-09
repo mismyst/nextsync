@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Menu } from 'lucide-react';
 
 const Navbar = () => {
@@ -18,10 +19,10 @@ const Navbar = () => {
 
           {/* Center: Navigation Links */}
           <ul className="flex space-x-10 text-black font-medium">
-            <li><a href="#" className="hover:text-teal-500">Certificates</a></li>
-            <li><a href="#" className="hover:text-teal-500">Internships</a></li>
-            <li><a href="#" className="hover:text-teal-500">Training</a></li>
-            <li><a href="#" className="hover:text-teal-500">Community</a></li>
+            <li><Link href="/CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
+            <li><Link href="/InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
+            <li><Link href="/TrainingPage" className="hover:text-teal-500">Training</Link></li>
+            <li><Link href="/CommunityPage" className="hover:text-teal-500">Community</Link></li>
           </ul>
 
           {/* Right: "JOIN US" Button */}
@@ -65,7 +66,7 @@ const Navbar = () => {
               Subscribe
             </button>
             <p className="text-black text-sm mt-4">
-              Already a user? <a href="#" className="text-teal-600 font-medium">Login</a>
+              Already a user? <Link href="/login" className="text-teal-600 font-medium">Login</Link>
             </p>
           </div>
         </div>
