@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
-const communityData =   [
+const communityData = [
   {
     name: 'Unity Force Fires',
     followers: '95,066 Followers',
@@ -14,25 +14,25 @@ const communityData =   [
     name: 'Star Trek Indepter',
     followers: '9,566 Followers',
     description: 'Discuss your favorite episodes, theories, and characters, and connect with fellow explorers of the final frontier.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Star_Trek_insignia.png',
+    image: 'https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png',
   },
   {
     name: 'Pink',
     followers: '4,296 Followers',
     description: 'A supportive community for girls in coding! Connect, learn, and grow with like-minded women in tech.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/GitHub_logo.svg',
+    image: 'https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png',
   },
   {
     name: 'Clash of Codes',
     followers: '22,296 Followers',
     description: 'Whether you’re a beginner or a pro, join us to level up your coding game and clash with the best!',
-    image: 'https://upload.wikimedia.org/wikipedia/en/6/66/Clash_of_Codes_logo.png',
+    image: 'https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png',
   },
   {
     name: 'AI Innovators',
     followers: '12,890 Followers',
     description: 'Join AI enthusiasts, researchers, and developers in exploring the future of artificial intelligence.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/DeepMind_Logo.png',
+    image: 'https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png',
   },
   {
     name: 'Cyber Security Hub',
@@ -94,7 +94,7 @@ const communityData =   [
     description: 'Join discussions on Meta’s AI research, machine learning, and neural networks.',
     image: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Meta-Logo.png',
   }
- ];
+];
 
 const itemsPerPage = 6;
 
@@ -120,7 +120,7 @@ const CommunityPage = () => {
     <div>
       <Navbar />
       <section className="bg-white py-8 px-4">
-        <h2 className="text-4xl font-bold text-green-600 mb-2">Community</h2>
+        <h2 className="text-4xl font-bold text-teal-600 mb-2">Community</h2>
         <p className="text-lg text-gray-600 mb-6">Unlock your potential and earn your certification!</p>
 
         <div className="mb-6 flex items-center bg-gray-100 p-3 rounded-lg max-w-lg">
@@ -132,19 +132,18 @@ const CommunityPage = () => {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); // reset to first page on search
+              setCurrentPage(1);
             }}
           />
         </div>
 
-        {/* Pagination Top Right */}
         {totalPages > 1 && (
           <div className="flex justify-end mb-4">
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="border border-green-400 px-3 py-1 rounded-full hover:bg-green-200 disabled:opacity-50"
+                className="border border-teal-600 px-3 py-1 rounded-full hover:bg-teal-200 disabled:opacity-50"
               >
                 ◀
               </button>
@@ -154,8 +153,8 @@ const CommunityPage = () => {
                   onClick={() => handlePageChange(i + 1)}
                   className={`px-3 py-1 rounded-full border text-sm ${
                     currentPage === i + 1
-                      ? 'bg-green-500 text-white font-bold'
-                      : 'border-green-400 hover:bg-green-200'
+                      ? 'bg-teal-600 text-white font-bold'
+                      : 'border-teal-600 hover:bg-teal-200'
                   }`}
                 >
                   {i + 1}
@@ -164,7 +163,7 @@ const CommunityPage = () => {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="border border-green-400 px-3 py-1 rounded-full hover:bg-green-200 disabled:opacity-50"
+                className="border border-teal-600 px-3 py-1 rounded-full hover:bg-teal-200 disabled:opacity-50"
               >
                 ▶
               </button>
@@ -174,7 +173,7 @@ const CommunityPage = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedCommunities.map((community, index) => (
-            <div key={index} className="border-2 border-green-400 rounded-lg p-4 shadow-md">
+            <div key={index} className="border-2 border-teal-600 rounded-lg p-4 shadow-md">
               <div className="flex items-center mb-3">
                 <img src={community.image} alt={community.name} className="w-10 h-10 rounded-full mr-3 object-cover" />
                 <div>
@@ -183,7 +182,7 @@ const CommunityPage = () => {
                 </div>
               </div>
               <p className="text-sm text-black mb-4">{community.description}</p>
-              <button className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition">+ FOLLOW</button>
+              <button className="px-4 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition">+ FOLLOW</button>
             </div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu } from 'lucide-react';
 
 const Navbar = () => {
@@ -13,9 +14,22 @@ const Navbar = () => {
       <nav className="bg-white py-4 shadow-md">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           {/* Left: Menu Icon */}
-          <button className="p-2 border border-teal-500 rounded-lg hover:bg-teal-100">
-            <Menu size={24} className="text-black" />
-          </button>
+          <div className="flex items-center space-x-4">
+            <button className="p-2 border border-teal-500 rounded-lg hover:bg-teal-100">
+              <Menu size={24} className="text-black" />
+            </button>
+            
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <Image 
+                src="/images/logowhite.jpg" 
+                alt="Company Logo" 
+                width={150} 
+                height={50} 
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
+          </div>
 
           {/* Center: Navigation Links */}
           <ul className="flex space-x-10 text-black font-medium">

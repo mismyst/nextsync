@@ -10,7 +10,7 @@ const Footer = () => {
         <div>
           <h2 className="text-xl font-semibold flex items-center space-x-2">
             <span role="img" aria-label="graduation">🎓</span>
-            <span>Skill Hub</span>
+            <span>Nxt Sync</span>
           </h2>
           <p className="mt-3 text-gray-400 text-sm leading-relaxed">
             Learn over <span className="text-yellow-400 font-medium">25+ skills</span> from industry professionals and get ready for your dream career.
@@ -57,7 +57,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-3">
               <FaEnvelope className="text-yellow-400" />
-              <span>contact@skillhub.com</span>
+              <span>contact@NxtSync.com</span>
             </li>
             <li className="flex items-center space-x-3">
               <FaPhone className="text-yellow-400" />
@@ -67,7 +67,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="text-center text-gray-500 text-sm mt-10 border-t border-gray-700 pt-6">
-        &copy; 2025 Skill Hub. All rights reserved.
+        &copy; 2025 Nxt sync. All rights reserved.
       </p>
     </footer>
   );
