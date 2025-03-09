@@ -6,12 +6,15 @@ import Footer from './components/Footer/Footer';
 import IntershipsCourses from './components/IntershipsCourses/IntershipsCourses';
 import ContactForm from './components/ContactForm/ContactForm';
 import Socials from './components/Socials/Socials';
+import Banner from './components/Banner/Banner';
+
 const Page = () => {
   return (
     <div>
       <Navbar />
-      {/* <HeroSection /> */}
+      <HeroSection />
       <IntershipsCourses /> 
+      <Banner />
       <Socials />
       <ContactForm />
 
