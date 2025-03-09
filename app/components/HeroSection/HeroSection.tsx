@@ -33,7 +33,7 @@ const HeroSection = () => {
         <div className="hidden md:block relative">
           <div className="absolute inset-0 bg-gradient-to-r from-teal-100 to-blue-100 rounded-2xl -rotate-3"></div>
           <Image 
-  src="https://source.unsplash.com/600x400/?education,technology" 
+  src="/images/studying.jpg" 
   alt="Learning community" 
   width={600} 
   height={400} 
