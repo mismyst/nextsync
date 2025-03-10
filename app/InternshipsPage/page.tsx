@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
@@ -153,11 +154,16 @@ const InternshipsPage = () => {
               >
                 {/* Image section */}
                 <div className="relative h-60 overflow-hidden">
-                  <img
-                    src={internship.image}
-                    alt={internship.name}
-                    className="w-full h-full object-cover transition-transform duration-700 transform group-hover:scale-110"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={internship.image}
+                      alt={internship.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-700 transform group-hover:scale-110"
+                      priority={index < 2} // Prioritize loading the first two images
+                    />
+                  </div>
                   <div
                     className={`${internship.bgColor} absolute inset-0 opacity-80 mix-blend-multiply`}
                   ></div>
