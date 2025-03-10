@@ -1,9 +1,23 @@
 'use client';
 import React, { useState } from 'react';
-import { MessageCircle, Send, Sparkles, ThumbsUp, Zap } from 'lucide-react';
+import { MessageCircle, Send, Sparkles, ThumbsUp, Zap, LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 
-const SuggestionCard = ({ icon: Icon, title, isSelected, onClick }) => {
+// Define TypeScript interfaces for props
+interface SuggestionCardProps {
+  icon: LucideIcon;
+  title: string;
+  isSelected: boolean;
+  onClick: () => void;
+}
+
+interface SuggestionType {
+  id: string;
+  title: string;
+  icon: LucideIcon;
+}
+
+const SuggestionCard: React.FC<SuggestionCardProps> = ({ icon: Icon, title, isSelected, onClick }) => {
   return (
     <div 
       className={`relative overflow-hidden rounded-xl p-4 cursor-pointer ${
@@ -25,7 +39,7 @@ const SuggestionCard = ({ icon: Icon, title, isSelected, onClick }) => {
   );
 };
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -33,7 +47,7 @@ const ContactForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -53,7 +67,7 @@ const ContactForm = () => {
     }, 1500);
   };
   
-  const suggestionTypes = [
+  const suggestionTypes: SuggestionType[] = [
     { id: 'course', title: 'Course Suggestion', icon: Sparkles },
     { id: 'feature', title: 'Feature Request', icon: Zap },
     { id: 'feedback', title: 'General Feedback', icon: ThumbsUp },
