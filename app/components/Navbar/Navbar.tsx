@@ -33,10 +33,10 @@ const Navbar = () => {
 
           {/* Center: Navigation Links */}
           <ul className="flex space-x-10 text-black font-medium">
-            <li><Link href="/CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
-            <li><Link href="/InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
-            <li><Link href="/TrainingPage" className="hover:text-teal-500">Training</Link></li>
-            <li><Link href="/Courses" className="hover:text-teal-500">Courses</Link></li>
+            <li><Link href="./CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
+            <li><Link href="./InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
+            <li><Link href="./TrainingPage" className="hover:text-teal-500">Training</Link></li>
+            <li><Link href="./Courses" className="hover:text-teal-500">Courses</Link></li>
           </ul>
 
           {/* Right: "JOIN US" Button */}
