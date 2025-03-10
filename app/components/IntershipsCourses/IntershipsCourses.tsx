@@ -1,69 +1,78 @@
 'use client'
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, ExternalLink, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, ExternalLink, ArrowUpRight, Sparkles } from 'lucide-react';
 
-// Card Carousel Component
+// Card Carousel Component with Improved Animation
 const CardCarousel = ({ title, cards, viewAllLink }: {
   title: string;
   cards: React.ReactNode[];
   viewAllLink: string;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
 
+  // Refactor Auto-scroll behavior to be manual or use swipe gestures
   const handlePrev = () => {
     setCurrentIndex(prev => Math.max(prev - 1, 0));
   };
 
   const handleNext = () => {
-    setCurrentIndex(prev => Math.min(prev + 1, cards.length - 3));
+    setCurrentIndex(prev => Math.min(prev + 1, cards.length - 1)); // Fixed 1 card per slide
   };
 
   return (
-    <div className="w-full mb-16">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-4xl font-light">{title}</h2>
-        <a href={viewAllLink} className="text-emerald-500 hover:underline flex items-center gap-1 group">
+    <div className="w-full mb-16 py-10 px-4 md:px-8 overflow-hidden">
+      {/* Title Section */}
+      <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center">
+          {/* Change the animation, or perhaps use a different icon */}
+          <Sparkles className="text-teal-500 mr-3 animate-pulse" size={28} />
+          <h2 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">{title}</h2>
+        </div>
+        <a href={viewAllLink} className="text-blue-500 hover:underline flex items-center gap-1 group text-lg font-bold">
           View all
-          <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <ArrowUpRight size={20} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
         </a>
       </div>
-      
+
+      {/* Cards Section */}
       <div className="relative">
         <div className="flex overflow-hidden">
           <div 
-            className="flex transition-transform duration-500 ease-out" 
-            style={{ transform: `translateX(-${currentIndex * 320}px)` }}
+            className="flex transition-transform duration-500 ease-in-out" 
+            style={{ transform: `translateX(-${currentIndex * (320 + 16)}px)` }}
           >
             {cards.map((card, index) => (
-              <div key={index} className="w-72 mr-4 flex-shrink-0">
+              <div key={index} className="w-80 mr-4 flex-shrink-0 transform transition-all duration-500 hover:scale-110">
                 {card}
               </div>
             ))}
           </div>
         </div>
-        
-        <div className="absolute right-0 -bottom-10 flex gap-2">
+
+        {/* Change navigation to icons or new buttons */}
+        <div className="absolute right-0 -bottom-16 flex gap-3">
           <button 
             onClick={handlePrev} 
-            className={`rounded-full p-2 transition-all duration-300 ${
+            className={`rounded-full p-3 transition-all duration-300 ${
               currentIndex === 0 
                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                : 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg'
+                : 'bg-gradient-to-r from-blue-600 to-green-500 text-white hover:shadow-lg'
             }`}
             disabled={currentIndex === 0}
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={24} />
           </button>
           <button 
             onClick={handleNext} 
-            className={`rounded-full p-2 transition-all duration-300 ${
-              currentIndex >= cards.length - 3 
+            className={`rounded-full p-3 transition-all duration-300 ${
+              currentIndex === cards.length - 1 
                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                : 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg'
+                : 'bg-gradient-to-r from-blue-600 to-green-500 text-white hover:shadow-lg'
             }`}
-            disabled={currentIndex >= cards.length - 3}
+            disabled={currentIndex === cards.length - 1}
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={24} />
           </button>
         </div>
       </div>
@@ -71,13 +80,15 @@ const CardCarousel = ({ title, cards, viewAllLink }: {
   );
 };
 
-// Internship Card Component
+
+// Internship Card Component with Real Images
 interface InternshipCardProps {
   company: string;
   role: string;
   duration: string;
   location: string;
   salary: string;
+  imageSrc: string;
   logoColor: 'purple' | 'orange' | 'gray' | 'blue' | 'green' | 'red' | 'yellow';
 }
 
@@ -87,32 +98,23 @@ const InternshipCard = ({
   duration, 
   location, 
   salary, 
+  imageSrc,
   logoColor 
 }: InternshipCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   
-  const logoColors = {
-    purple: 'bg-purple-700',
-    orange: 'bg-orange-500',
-    gray: 'bg-gray-600',
-    blue: 'bg-blue-600',
-    green: 'bg-green-600',
-    red: 'bg-red-600',
-    yellow: 'bg-yellow-500'
-  };
-
-  const borderColors = {
-    purple: 'border-purple-700',
-    orange: 'border-orange-500',
-    gray: 'border-gray-600',
-    blue: 'border-blue-600',
-    green: 'border-green-600',
-    red: 'border-red-600',
-    yellow: 'border-yellow-500'
+  const gradients = {
+    purple: 'from-purple-600 to-indigo-600',
+    orange: 'from-orange-500 to-amber-500',
+    gray: 'from-gray-700 to-slate-800',
+    blue: 'from-blue-600 to-cyan-500',
+    green: 'from-green-500 to-emerald-500',
+    red: 'from-red-600 to-rose-500',
+    yellow: 'from-yellow-500 to-amber-500'
   };
 
   const textColors = {
-    purple: 'text-purple-700',
+    purple: 'text-purple-600',
     orange: 'text-orange-500',
     gray: 'text-gray-600',
     blue: 'text-blue-600',
@@ -123,111 +125,89 @@ const InternshipCard = ({
 
   return (
     <div 
-      className={`rounded-lg overflow-hidden shadow-md h-full bg-white border-2 border-transparent cursor-pointer transition-all duration-300 flex flex-col ${isHovered ? `${borderColors[logoColor]} shadow-xl translate-y-[-5px]` : 'hover:shadow-lg'}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="rounded-lg overflow-hidden bg-white shadow-lg cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
       onClick={() => console.log(`Selected ${company} internship`)}
     >
-      <div className={`relative p-5 flex-1 ${isHovered ? 'bg-white' : logoColors[logoColor]}`}>
-        <div className={`absolute top-0 left-0 w-full h-full ${logoColors[logoColor]} transition-all duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}></div>
-        
-        <div className="relative z-10 h-full flex flex-col">
-          <div className={`rounded-full ${isHovered ? logoColors[logoColor] : 'bg-white'} w-10 h-10 flex items-center justify-center transition-all duration-300`}>
-            <ExternalLink size={16} className={isHovered ? 'text-white' : 'text-black'} />
-          </div>
-          
-          <div className={`text-xs mt-4 mb-1 font-semibold tracking-wider transition-colors duration-300 ${isHovered ? `${textColors[logoColor]}` : 'text-white'}`}>
-            INTERNSHIP
-          </div>
-          
-          <div className={`font-bold text-lg transition-colors duration-300 ${isHovered ? 'text-gray-800' : 'text-white'}`}>
-            {company} - {role}
-          </div>
-          
-          <div className={`text-sm mt-2 transition-colors duration-300 ${isHovered ? 'text-gray-600' : 'text-white/90'}`}>
-            {duration} • {location} {salary && `• ${salary}/month`}
-          </div>
-          
-          <div className={`mt-auto pt-4 inline-flex items-center gap-1 font-medium text-sm transition-all duration-300 ${isHovered ? `${textColors[logoColor]} opacity-100` : 'opacity-0'}`}>
-            Apply now
-            <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1" />
-          </div>
+      <div className="relative w-full h-48 overflow-hidden">
+        <img 
+          src={imageSrc} 
+          alt={company}
+          className="w-full h-full object-cover transform transition-transform duration-700 ease-out"
+        />
+        <div className={`absolute inset-0 bg-gradient-to-t from-${logoColor}-500 to-transparent opacity-50`}></div>
+      </div>
+      
+      <div className="p-6">
+        <div className="font-bold text-lg text-gray-900 mb-2">{company}</div>
+        <div className="text-sm text-gray-600 mb-4">{role}</div>
+        <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
+          <div>{duration}</div>
+          <div>{location}</div>
         </div>
+        {salary && <div className="font-medium text-sm text-gray-800">{salary}/month</div>}
       </div>
     </div>
   );
 };
 
-// Course Card Component
+// Course Card Component with Real Images
 interface CourseCardProps {
   title: string;
   provider: string;
-  image: string;
+  imageSrc: string;
   logoColor: 'teal' | 'blue' | 'purple' | 'darkblue' | 'red' | 'green' | 'orange' | 'yellow';
 }
 
 const CourseCard = ({ 
   title, 
   provider, 
-  image, 
+  imageSrc, 
   logoColor 
 }: CourseCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   
-  const bgColors = {
-    teal: 'bg-teal-800',
-    blue: 'bg-blue-800',
-    purple: 'bg-purple-900',
-    darkblue: 'bg-blue-900',
-    red: 'bg-red-800',
-    green: 'bg-green-800',
-    orange: 'bg-orange-800',
-    yellow: 'bg-yellow-700'
+  const gradients = {
+    teal: 'from-teal-500 to-emerald-500',
+    blue: 'from-blue-600 to-indigo-600',
+    purple: 'from-purple-600 to-violet-600',
+    darkblue: 'from-blue-800 to-indigo-800',
+    red: 'from-red-500 to-rose-500',
+    green: 'from-green-500 to-teal-500',
+    orange: 'from-orange-500 to-amber-500',
+    yellow: 'from-yellow-500 to-amber-400'
   };
   
   const textColors = {
-    teal: 'text-teal-800',
-    blue: 'text-blue-800',
-    purple: 'text-purple-900',
-    darkblue: 'text-blue-900',
-    red: 'text-red-800',
-    green: 'text-green-800',
-    orange: 'text-orange-800',
-    yellow: 'text-yellow-700'
+    teal: 'text-teal-600',
+    blue: 'text-blue-600',
+    purple: 'text-purple-600',
+    darkblue: 'text-blue-800',
+    red: 'text-red-600',
+    green: 'text-green-600',
+    orange: 'text-orange-500',
+    yellow: 'text-yellow-600'
   };
   
   return (
     <div 
-      className={`rounded-lg overflow-hidden shadow-md h-full transition-all duration-300 ${isHovered ? 'shadow-xl translate-y-[-5px]' : 'hover:shadow-lg'}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="rounded-lg overflow-hidden bg-white shadow-lg cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
       onClick={() => console.log(`Selected ${title} course`)}
     >
-      <div className="relative h-full flex flex-col">
-        {/* Background image with color overlay */}
-        <div className={`h-36 relative ${bgColors[logoColor]} overflow-hidden flex-shrink-0`}>
-          <img 
-            src={image} 
-            alt={title} 
-            className={`w-full h-full object-cover transition-all duration-500 ${isHovered ? 'opacity-25 scale-110' : 'opacity-50'}`} 
-          />
-        </div>
-        
-        {/* Card info section that slides up on hover */}
-        <div 
-          className={`bg-white p-4 shadow-md transition-all duration-300 flex-grow flex flex-col`}
-        >
-          <div className="font-bold text-gray-800">{title}</div>
-          <div className="text-sm text-gray-500">by {provider}</div>
-          
-          {/* "View course" button that appears on hover */}
-          <div 
-            className={`mt-auto pt-2 inline-flex items-center gap-1 font-medium text-sm ${textColors[logoColor]} transition-all duration-300 ${
-              isHovered ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            View course <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1" />
-          </div>
+      <div className="relative w-full h-48 overflow-hidden">
+        <img 
+          src={imageSrc} 
+          alt={title}
+          className="w-full h-full object-cover transform transition-transform duration-700 ease-out"
+        />
+        <div className={`absolute inset-0 bg-gradient-to-t from-${logoColor}-500 to-transparent opacity-50`}></div>
+      </div>
+      
+      <div className="p-6">
+        <div className="font-bold text-lg text-gray-900 mb-2">{title}</div>
+        <div className="text-sm text-gray-600 mb-4">{provider}</div>
+        <div className="flex items-center justify-between text-xs text-gray-500">
+          <span className="text-gray-600">Learn more</span>
+          <ArrowUpRight size={16} className="text-gray-600" />
         </div>
       </div>
     </div>
@@ -236,7 +216,7 @@ const CourseCard = ({
 
 // Main IntershipsCourses Component
 const IntershipsCourses = () => {
-  // Internship data
+  // Internship data with image sources
   const internships = [
     {
       company: 'Infosys',
@@ -244,6 +224,7 @@ const IntershipsCourses = () => {
       duration: 'Full time • 7 months',
       location: 'USA',
       salary: '42k',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'purple' as const
     },
     {
@@ -252,6 +233,7 @@ const IntershipsCourses = () => {
       duration: 'Full time • 1 month',
       location: 'USA',
       salary: '40k',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'orange' as const
     },
     {
@@ -260,6 +242,7 @@ const IntershipsCourses = () => {
       duration: 'Full time • 3 months',
       location: 'Remote',
       salary: '',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'gray' as const
     },
     {
@@ -268,6 +251,7 @@ const IntershipsCourses = () => {
       duration: 'Part time • 4 months',
       location: 'USA',
       salary: '35k',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'blue' as const
     },
     {
@@ -276,6 +260,7 @@ const IntershipsCourses = () => {
       duration: 'Full time • 3 months',
       location: 'Remote',
       salary: '38k',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'green' as const
     },
     {
@@ -284,6 +269,7 @@ const IntershipsCourses = () => {
       duration: 'Full time • 6 months',
       location: 'USA',
       salary: '45k',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'red' as const
     },
     {
@@ -292,58 +278,59 @@ const IntershipsCourses = () => {
       duration: 'Full time • 5 months',
       location: 'Remote',
       salary: '37k',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'yellow' as const
     }
   ];
 
-  // Course data
+  // Course data with image sources
   const courses = [
     {
-      title: 'NVIDIA',
+      title: 'NVIDIA Deep Learning',
       provider: 'DeepLearning Institute',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'teal' as const
     },
     {
       title: 'Digital Marketing',
       provider: 'Marketing Mastery',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'blue' as const
     },
     {
       title: 'Introduction to ML',
       provider: 'AI Academy',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'purple' as const
     },
     {
       title: 'Java coding camp 21',
       provider: 'Koding K',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'darkblue' as const
     },
     {
       title: 'React Masterclass',
       provider: 'Frontend Experts',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'red' as const
     },
     {
       title: 'Python for Data Science',
       provider: 'Data Analytics Pro',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'green' as const
     },
     {
       title: 'UX/UI Design Principles',
       provider: 'Design School',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'orange' as const
     },
     {
       title: 'Blockchain Fundamentals',
       provider: 'Crypto Academy',
-      image: '/api/placeholder/300/200',
+      imageSrc: '/api/placeholder/400/320',
       logoColor: 'yellow' as const
     }
   ];
@@ -358,9 +345,11 @@ const IntershipsCourses = () => {
   ));
 
   return (
-    <section className="p-6 max-w-6xl mx-auto">
-      <CardCarousel title="Internships" cards={internshipCards} viewAllLink="InternshipsPage" />
-      <CardCarousel title="Courses" cards={courseCards} viewAllLink="CertificationsPage" />
+    <section className="py-10 w-full bg-gradient-to-b from-white to-purple-50">
+      <div className="max-w-7xl mx-auto">
+        <CardCarousel title="Internships" cards={internshipCards} viewAllLink="/internships" />
+        <CardCarousel title="Courses" cards={courseCards} viewAllLink="/courses" />
+      </div>
     </section>
   );
 };

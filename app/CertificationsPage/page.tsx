@@ -150,68 +150,76 @@ const CertificationsPage = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-gradient-to-r from-teal-50 via-teal-100 to-teal-300 min-h-screen">
       <Navbar />
 
-      <section className="py-10 px-4">
-        <h2 className="text-4xl font-bold text-teal-600 mb-2">Certifications</h2>
-        <p className="text-lg text-teal-600 mb-4">Unlock your potential and earn your certification!</p>
+      <section className="py-14 px-8 md:px-16">
+        <h2 className="text-5xl font-extrabold text-teal-800 mb-6 text-center">Certifications</h2>
+        <p className="text-xl text-teal-600 mb-12 text-center max-w-3xl mx-auto">Gain a competitive edge with industry-leading certifications in tech and business. Explore and unlock your next big opportunity!</p>
 
-        <div className="mb-6 flex items-center bg-gray-100 p-3 rounded-lg max-w-lg">
-          <span className="mr-2">🔍</span>
-          <input
-            type="text"
-            placeholder='Search for "Artificial Intelligence"'
-            className="flex-grow bg-transparent text-black outline-none"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <div className="flex justify-center mb-12">
+          <div className="relative w-full max-w-lg">
+            <input
+              type="text"
+              placeholder='Search for "AI, Cloud, etc."'
+              className="w-full py-4 px-6 text-xl text-black bg-white rounded-xl border-2 border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-200 transition-all duration-300 shadow-lg"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-teal-500 opacity-60 group-hover:opacity-100 transition duration-200">
+              <ArrowUpRight size={28} />
+            </div>
+          </div>
         </div>
 
-        {/* Moved pagination ABOVE the grid */}
-        <div className="flex justify-end items-center mb-4 gap-2 mr-2 text-sm">
-          <span className="text-gray-500">{totalPages} pages</span>
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-8 mb-12">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
-            className="px-2 py-1 border rounded-full text-teal-600 hover:bg-green-100"
+            className="px-8 py-4 bg-teal-600 text-white text-lg font-semibold rounded-full shadow-xl hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-110 disabled:bg-teal-300"
             disabled={currentPage === 1}
           >
-            &lt;
+            Prev
           </button>
-          <span className="px-3 py-1 border rounded-full bg-teal-600 text-white">{currentPage}</span>
+          <span className="text-lg text-teal-700 font-semibold">
+            Page {currentPage} of {totalPages}
+          </span>
           <button
             onClick={() => handlePageChange(currentPage + 1)}
-            className="px-2 py-1 border rounded-full text-teal-600 hover:bg-green-100"
+            className="px-8 py-4 bg-teal-600 text-white text-lg font-semibold rounded-full shadow-xl hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-110 disabled:bg-teal-300"
             disabled={currentPage === totalPages}
           >
-            &gt;
+            Next
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Certification Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
           {paginatedCertifications.map((cert, index) => (
             <div
               key={index}
-              className={`rounded-2xl p-6 text-white bg-gradient-to-r ${cert.color} shadow-lg flex flex-col justify-between`}
+              className={`relative rounded-2xl overflow-hidden transform transition-all duration-300 shadow-xl bg-gradient-to-r ${cert.color} group hover:scale-105 hover:shadow-2xl`}
             >
-              <div className="flex justify-between items-start mb-4">
-                <button className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center">
-                  <ArrowUpRight size={18} />
-                </button>
-                <img
-                  src={cert.image}
-                  alt={cert.company}
-                  className="w-20 h-12 object-contain rounded-md bg-white p-1"
-                />
-              </div>
-              <div>
-                <p className="inline-block px-3 py-1 border border-white text-sm rounded-full mb-2">{cert.level}</p>
-                <h3 className="text-xl font-bold">
-                  {cert.company} <span className="font-normal">- {cert.title}</span>
-                </h3>
-                <p className="text-sm mt-1">
-                  {cert.type} · {cert.duration} · {cert.salary}
-                </p>
+              <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-0 transition-all duration-500"></div>
+
+              <div className="p-8 relative z-10 flex flex-col justify-between h-full">
+                <div className="flex justify-between items-center mb-8">
+                  <button className="w-14 h-14 bg-white text-black rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg">
+                    <ArrowUpRight size={24} />
+                  </button>
+                  <img
+                    src={cert.image}
+                    alt={cert.company}
+                    className="w-28 h-16 object-contain rounded-md bg-white p-4"
+                  />
+                </div>
+
+                <div>
+                  <p className="inline-block px-5 py-2 bg-white text-teal-600 text-sm rounded-full mb-5">{cert.level}</p>
+                  <h3 className="text-2xl font-extrabold text-white mb-4">{cert.company}</h3>
+                  <h4 className="text-xl text-teal-100 mb-4">{cert.title}</h4>
+                  <p className="text-sm text-teal-200">{cert.type} · {cert.duration} · {cert.salary}</p>
+                </div>
               </div>
             </div>
           ))}
