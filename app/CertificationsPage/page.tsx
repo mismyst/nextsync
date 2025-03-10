@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import { ArrowUpRight } from 'lucide-react';
@@ -207,11 +208,18 @@ const CertificationsPage = () => {
                   <button className="w-14 h-14 bg-white text-black rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg">
                     <ArrowUpRight size={24} />
                   </button>
-                  <img
-                    src={cert.image}
-                    alt={cert.company}
-                    className="w-28 h-16 object-contain rounded-md bg-white p-4"
-                  />
+                  <div className="w-28 h-16 relative rounded-md bg-white p-4">
+                    <Image
+                      src={cert.image}
+                      alt={cert.company}
+                      fill
+                      sizes="112px"
+                      style={{
+                        objectFit: 'contain'
+                      }}
+                      priority={index < 4} // Load the first few images with priority
+                    />
+                  </div>
                 </div>
 
                 <div>
