@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { MessageCircle, Send, Sparkles, ThumbsUp, Zap } from 'lucide-react';
+import Image from 'next/image';
 
 const SuggestionCard = ({ icon: Icon, title, isSelected, onClick }) => {
   return (
@@ -193,11 +194,16 @@ const ContactForm = () => {
             {/* Illustration */}
             <div className="relative h-full flex flex-col items-center justify-center text-center p-6">
               <div className="w-48 h-48 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center mb-8 relative">
-                <img
-                  src="/api/placeholder/200/200"
-                  alt="Suggestion illustration"
-                  className="w-32 h-32 object-cover rounded-full"
-                />
+                <div className="relative w-32 h-32 rounded-full overflow-hidden">
+                  <Image
+                    src="/api/placeholder/200/200"
+                    alt="Suggestion illustration"
+                    fill
+                    sizes="128px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
                 <div className="absolute -top-4 -right-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
                   <MessageCircle size={20} />
                 </div>
@@ -264,4 +270,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm
+export default ContactForm;
