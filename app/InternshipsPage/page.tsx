@@ -4,7 +4,22 @@ import Image from 'next/image';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
-const internshipsData = [
+// Define TypeScript interfaces
+interface Internship {
+  name: string;
+  providers: string[];
+  duration: string;
+  bgColor: string;
+  category: string;
+  image: string;
+}
+
+// Define type for animation indices
+interface AnimateIndices {
+  [key: number]: number;
+}
+
+const internshipsData: Internship[] = [
   {
     name: 'AI Intern Program',
     providers: ['Google', 'Microsoft', 'OpenAI'],
@@ -41,13 +56,13 @@ const internshipsData = [
 
 const itemsPerPage = 8;
 
-const InternshipsPage = () => {
+const InternshipsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [animateIndex, setAnimateIndex] = useState({});
+  const [animateIndex, setAnimateIndex] = useState<AnimateIndices>({});
 
   useEffect(() => {
-    const intervals = {};
+    const intervals: { [key: number]: NodeJS.Timeout } = {};
     internshipsData.forEach((internship, index) => {
       intervals[index] = setInterval(() => {
         setAnimateIndex((prev) => ({
