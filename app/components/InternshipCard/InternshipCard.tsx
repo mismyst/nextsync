@@ -17,15 +17,14 @@ const defaultInternships = [
     duration: '3 Months',
     bgColor: 'bg-gradient-to-br from-teal-500 to-green-600',
     category: 'AI',
-    image: '/images/ai-internship.jpg', // Changed to local image path
-  },
+    
   {
     name: 'Data Science Intern',
     providers: ['Coursera', 'Stanford', 'IBM'],
     duration: '2 Months',
     bgColor: 'bg-gradient-to-br from-green-600 to-teal-500',
     category: 'Data Science',
-    image: '/images/data-science.jpg', // Changed to local image path
+    image: './images/data-science.jpg', // Changed to local image path
   },
   {
     name: 'Cybersecurity Intern',
@@ -33,7 +32,7 @@ const defaultInternships = [
     duration: '4 Months',
     bgColor: 'bg-gradient-to-br from-teal-600 to-green-700',
     category: 'Security',
-    image: '/images/cybersecurity.jpg', // Changed to local image path
+    image: './images/cybersecurity.jpg', // Changed to local image path
   },
   {
     name: 'Web Development Intern',
@@ -41,7 +40,7 @@ const defaultInternships = [
     duration: '2 Months',
     bgColor: 'bg-gradient-to-br from-teal-400 to-green-500',
     category: 'Web Development',
-    image: '/images/web-dev.jpg', // Changed to local image path
+    image: './images/web-dev.jpg', // Changed to local image path
   },
 ];
 
