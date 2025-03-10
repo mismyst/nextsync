@@ -3,9 +3,7 @@ import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import HeroSection from './components/HeroSection/HeroSection';
 import Footer from './components/Footer/Footer';
-
 import ContactForm from './components/ContactForm/ContactForm';
-
 import Partners from './components/Partners/Partners';
 import InternshipCard from './components/InternshipCard/InternshipCard';
 
@@ -48,12 +46,9 @@ const Page = () => {
             </div>
           </div>
           
-          {/* Socials section with refined glassmorphic effect */}
-
-          
           {/* Contact form with enhanced refined glassmorphic effect */}
           <div className="my-8 mx-4 sm:mx-8 md:mx-16 p-8 rounded-2xl bg-white/40 backdrop-blur-lg shadow-xl border border-white/40 hover:bg-white/45 transition-all duration-300">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 text-slate-800 drop-shadow-sm">What's your suggestion?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 text-slate-800 drop-shadow-sm">What&apos;s your suggestion?</h2>
             <ContactForm />
           </div>
         </main>
