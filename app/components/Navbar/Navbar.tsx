@@ -36,7 +36,7 @@ const Navbar = () => {
             <li><Link href="/CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
             <li><Link href="/InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
             <li><Link href="/TrainingPage" className="hover:text-teal-500">Training</Link></li>
-            <li><Link href="/CommunityPage" className="hover:text-teal-500">Community</Link></li>
+            <li><Link href="/Courses" className="hover:text-teal-500">Courses</Link></li>
           </ul>
 
           {/* Right: "JOIN US" Button */}
@@ -51,8 +51,8 @@ const Navbar = () => {
 
       {/* Pop-up Modal for Email Subscription */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-sm w-full text-center relative">
+        <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50">
+          <div className="bg-white/80 backdrop-filter backdrop-blur-md p-6 md:p-8 rounded-lg shadow-lg max-w-sm w-full text-center relative border border-white/20">
             {/* Close Button */}
             <button 
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl"
@@ -69,7 +69,7 @@ const Navbar = () => {
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="w-full p-3 border border-gray-300 rounded-lg mb-4 text-black"
+              className="w-full p-3 border border-gray-300 rounded-lg mb-4 text-black bg-white/70"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
