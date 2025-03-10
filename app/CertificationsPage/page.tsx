@@ -5,7 +5,18 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import { ArrowUpRight } from 'lucide-react';
 
-const certificationsData = [ {
+interface Certification {
+  title: string;
+  company: string;
+  level: string;
+  duration: string;
+  type: string;
+  salary: string;
+  color: string;
+  image: string;
+}
+
+const certificationsData: Certification[] = [ {
   title: 'Full Stack Developer',
   company: 'Infosys',
   level: 'Beginner',
@@ -143,7 +154,8 @@ const CertificationsPage = () => {
     currentPage * itemsPerPage
   );
 
-  const handlePageChange = (newPage) => {
+  // Fixed type error by adding explicit type for newPage parameter
+  const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
       window.scrollTo({ top: 0, behavior: 'smooth' });
