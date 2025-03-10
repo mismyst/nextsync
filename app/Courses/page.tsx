@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
@@ -306,11 +307,16 @@ const Courses = () => {
               <div key={index} className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 {/* Image section (60% of card) */}
                 <div className="relative h-60 overflow-hidden">
-                  <img 
-                    src={course.image} 
-                    alt={course.name} 
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image 
+                      src={course.image} 
+                      alt={course.name} 
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      priority={index < 4} // Prioritize loading the first 4 images
+                    />
+                  </div>
                   <div className={`absolute inset-0 ${course.bgColor} opacity-60 mix-blend-multiply`}></div>
                   
                   <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
