@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import HeroSection from './components/HeroSection/HeroSection';
 import Footer from './components/Footer/Footer';
-import Internship from './components/Internship/Internship';
+
 import ContactForm from './components/ContactForm/ContactForm';
 
 import Partners from './components/Partners/Partners';
