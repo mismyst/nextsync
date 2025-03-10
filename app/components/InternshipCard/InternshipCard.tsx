@@ -9,7 +9,7 @@ interface InternshipCardProps {
   image?: string;
 }
 
-// Default internship data
+// Default internship data with local images
 const defaultInternships = [
   {
     name: 'AI Intern Program',
@@ -17,7 +17,7 @@ const defaultInternships = [
     duration: '3 Months',
     bgColor: 'bg-gradient-to-br from-teal-500 to-green-600',
     category: 'AI',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
+    image: '/images/ai-internship.jpg', // Changed to local image path
   },
   {
     name: 'Data Science Intern',
@@ -25,7 +25,7 @@ const defaultInternships = [
     duration: '2 Months',
     bgColor: 'bg-gradient-to-br from-green-600 to-teal-500',
     category: 'Data Science',
-    image: 'https://images.unsplash.com/photo-1531279550271-23c2a77a765c?w=800&q=80',
+    image: '/images/data-science.jpg', // Changed to local image path
   },
   {
     name: 'Cybersecurity Intern',
@@ -33,7 +33,7 @@ const defaultInternships = [
     duration: '4 Months',
     bgColor: 'bg-gradient-to-br from-teal-600 to-green-700',
     category: 'Security',
-    image: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800&q=80',
+    image: '/images/cybersecurity.jpg', // Changed to local image path
   },
   {
     name: 'Web Development Intern',
@@ -41,7 +41,7 @@ const defaultInternships = [
     duration: '2 Months',
     bgColor: 'bg-gradient-to-br from-teal-400 to-green-500',
     category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
+    image: '/images/web-dev.jpg', // Changed to local image path
   },
 ];
 
