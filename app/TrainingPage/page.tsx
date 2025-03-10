@@ -75,7 +75,7 @@ const TrainingPage: React.FC = () => {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600">Training Programs</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Advance your career with our industry-leading training programs designed by experts to help you excel in today's competitive market.
+            Advance your career with our industry-leading training programs designed by experts to help you excel in today&apos;s competitive market.
           </p>
         </div>
         
