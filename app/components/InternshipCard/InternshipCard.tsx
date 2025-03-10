@@ -45,87 +45,6 @@ const defaultInternships = [
   },
 ];
 
-const InternshipCard: React.FC<InternshipCardProps> = (props) => {
-  // If individual props are provided, use them. Otherwise, use the default data for display
-  const [displayData, setDisplayData] = useState<Array<{
-    name: string;
-    providers: string[];
-    duration: string;
-    bgColor: string;
-    category: string;
-    image: string;
-  }>>(defaultInternships);
-
-  // Track the animated index for each card
-  const [animateIndices, setAnimateIndices] = useState<Record<number, number>>({});
-
-  useEffect(() => {
-    const intervals: Record<number, NodeJS.Timeout> = {};
-    
-    // Create interval for each card to animate provider names
-    displayData.forEach((_, index) => {
-      intervals[index] = setInterval(() => {
-        setAnimateIndices((prev) => ({
-          ...prev,
-          [index]: (prev[index] === undefined ? 0 : (prev[index] + 1) % displayData[index].providers.length),
-        }));
-      }, 2000);
-    });
-
-    // Clear intervals on unmount
-    return () => {
-      Object.values(intervals).forEach((interval) => clearInterval(interval));
-    };
-  }, [displayData]);
-
-  // If individual props are provided, render a single card
-  if (props.name && props.providers && props.duration && props.bgColor && props.category && props.image) {
-    const { name, providers, duration, bgColor, category, image } = props;
-    const [animateIndex, setAnimateIndex] = useState(0);
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setAnimateIndex((prev) => (prev + 1) % providers.length);
-      }, 2000);
-
-      return () => clearInterval(interval);
-    }, [providers]);
-
-    return (
-      <SingleInternshipCard 
-        name={name}
-        providers={providers}
-        duration={duration}
-        bgColor={bgColor}
-        category={category}
-        image={image}
-        animateIndex={animateIndex}
-      />
-    );
-  }
-
-  // Otherwise, render the default grid of cards
-  return (
-    <div className="py-8 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">Available Internships</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {displayData.map((internship, index) => (
-          <SingleInternshipCard
-            key={index}
-            name={internship.name}
-            providers={internship.providers}
-            duration={internship.duration}
-            bgColor={internship.bgColor}
-            category={internship.category}
-            image={internship.image}
-            animateIndex={animateIndices[index] || 0}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 // Helper component for a single card
 interface SingleCardProps {
   name: string;
@@ -209,6 +128,80 @@ const SingleInternshipCard: React.FC<SingleCardProps> = ({
             ></path>
           </svg>
         </a>
+      </div>
+    </div>
+  );
+};
+
+const InternshipCard: React.FC<InternshipCardProps> = (props) => {
+  // Setup states before any conditional returns
+  const [animateIndices, setAnimateIndices] = useState<Record<number, number>>({});
+  const [singleCardAnimateIndex, setSingleCardAnimateIndex] = useState(0);
+  const [displayData] = useState(defaultInternships);
+  
+  // Check if we should render a single card
+  const isSingleCard = props.name && props.providers && props.duration && 
+                      props.bgColor && props.category && props.image;
+
+  useEffect(() => {
+    if (isSingleCard && props.providers) {
+      // Single card animation
+      const interval = setInterval(() => {
+        setSingleCardAnimateIndex((prev) => (prev + 1) % props.providers!.length);
+      }, 2000);
+      
+      return () => clearInterval(interval);
+    } else {
+      // Multiple cards animation
+      const intervals: Record<number, NodeJS.Timeout> = {};
+      
+      displayData.forEach((_, index) => {
+        intervals[index] = setInterval(() => {
+          setAnimateIndices((prev) => ({
+            ...prev,
+            [index]: (prev[index] === undefined ? 0 : (prev[index] + 1) % displayData[index].providers.length),
+          }));
+        }, 2000);
+      });
+      
+      return () => {
+        Object.values(intervals).forEach((interval) => clearInterval(interval));
+      };
+    }
+  }, [displayData, isSingleCard, props.providers]);
+
+  // Render single card if props provided
+  if (isSingleCard) {
+    return (
+      <SingleInternshipCard 
+        name={props.name!}
+        providers={props.providers!}
+        duration={props.duration!}
+        bgColor={props.bgColor!}
+        category={props.category!}
+        image={props.image!}
+        animateIndex={singleCardAnimateIndex}
+      />
+    );
+  }
+
+  // Otherwise, render the default grid of cards
+  return (
+    <div className="py-8 px-4">
+      <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">Available Internships</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {displayData.map((internship, index) => (
+          <SingleInternshipCard
+            key={index}
+            name={internship.name}
+            providers={internship.providers}
+            duration={internship.duration}
+            bgColor={internship.bgColor}
+            category={internship.category}
+            image={internship.image}
+            animateIndex={animateIndices[index] || 0}
+          />
+        ))}
       </div>
     </div>
   );
