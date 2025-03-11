@@ -108,7 +108,6 @@ const SimpleBackground = React.memo(function SimpleBackground() {
 });
 
 const Page = function Page() {
-  const [currentProvider, setCurrentProvider] = useState<{[key: number]: number}>({});
   const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
