@@ -7,8 +7,29 @@ import Footer from './components/Footer/Footer';
 import ContactForm from './components/ContactForm/ContactForm';
 import Partners from './components/Partners/Partners';
 
+// Define TypeScript interfaces
+interface Internship {
+  name: string;
+  providers: string[];
+  duration: string;
+  stipend: boolean;
+  featured: boolean;
+  openings: number;
+  bgColor: string;
+  category: string;
+  image: string;
+}
+
+interface AnimateIndices {
+  [key: number]: number;
+}
+
+interface IntervalMap {
+  [key: number]: NodeJS.Timeout;
+}
+
 // Define internship data similar to the course data structure
-const internshipsData = [
+const internshipsData: Internship[] = [
   {
     name: 'AI Research Internship',
     providers: ['Google AI', 'DeepMind', 'Stanford'],
@@ -78,14 +99,14 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
 });
 
 const Page = function Page() {
-  const [animateIndex, setAnimateIndex] = useState({});
-  const [isClient, setIsClient] = useState(false);
+  const [animateIndex, setAnimateIndex] = useState<AnimateIndices>({});
+  const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     setIsClient(true);
     
     // Set up provider animation intervals for each internship
-    const intervals = {};
+    const intervals: IntervalMap = {};
     internshipsData.forEach((internship, index) => {
       intervals[index] = setInterval(() => {
         setAnimateIndex(prev => ({
@@ -102,11 +123,12 @@ const Page = function Page() {
       threshold: 0.1
     };
     
-    const handleIntersect = (entries, observer) => {
+    const handleIntersect = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.remove('translate-y-4', 'opacity-0');
+          const target = entry.target as HTMLElement;
+          target.classList.add('opacity-100');
+          target.classList.remove('translate-y-4', 'opacity-0');
           observer.unobserve(entry.target);
         }
       });
