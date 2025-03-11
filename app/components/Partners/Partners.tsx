@@ -5,12 +5,12 @@ import React from 'react';
 
 // Partner logo data
 const partnerLogos = [
-  { id: 1, name: 'Microsoft', image: '/logos/microsoft.png' },
-  { id: 2, name: 'Google', image: '/logos/google.png' },
-  { id: 3, name: 'IBM', image: '/logos/ibm.png' },
-  { id: 4, name: 'AWS', image: '/logos/aws.png' },
-  { id: 5, name: 'Adobe', image: '/logos/adobe.png' },
-  { id: 6, name: 'Coursera', image: '/logos/coursera.png' },
+  { id: 1, name: 'Microsoft', image: 'microsoft-logo.png' },
+  { id: 2, name: 'Google', image: 'vecteezy_google-logo-icon-symbol_28667072.png' },
+  { id: 3, name: 'IBM', image: 'ibmlogo.png' },
+  { id: 4, name: 'AWS', image: 'AWS-Logo.png' },
+  { id: 5, name: 'Adobe', image: 'kisspng-logo-adobe.png' },
+  { id: 6, name: 'Coursera', image: 'Coursera-Logo.png' },
 ];
 
 const Partners = () => {
