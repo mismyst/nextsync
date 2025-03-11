@@ -1,16 +1,16 @@
 'use client'
 import React from 'react';
-import image from 'Partners';
+import Image from 'next/image';
 
 const Partners = () => {
-  // Partner logo data with proper Next.js image imports
+  // Partner logo data
   const partnerLogos = [
-    { id: 1, name: 'Microsoft' },
-    { id: 2, name: 'Google' },
-    { id: 3, name: 'IBM' },
-    { id: 4, name: 'AWS' },
-    { id: 5, name: 'Adobe' },
-    { id: 6, name: 'Coursera' },
+    { id: 1, name: 'Microsoft', image: 'microsoft-logo.png' },
+    { id: 2, name: 'Google', image: 'vecteezy_google-logo-icon-symbol_28667072.png' },
+    { id: 3, name: 'IBM', image: 'ibmlogo.png' },
+    { id: 4, name: 'AWS', image: 'AWS-Logo.png' },
+    { id: 5, name: 'Adobe', image: 'kisspng-logo-adobe.png' },
+    { id: 6, name: 'Coursera', image: 'Coursera-Logo.png' },
   ];
 
   return (
@@ -24,10 +24,14 @@ const Partners = () => {
             className="w-36 h-36 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm hover:shadow-md transition-all duration-300"
           >
             <div className="w-full h-20 mb-2 flex items-center justify-center">
-              {/* Just display the logo name for now */}
-              <div className="flex items-center justify-center w-full h-full">
-                <div className="text-2xl font-bold text-gray-400">{logo.name[0]}</div>
-              </div>
+              <Image
+                src={logo.image}
+                alt={`${logo.name} logo`}
+                width={100}
+                height={60}
+                style={{ objectFit: 'contain' }}
+                priority
+              />
             </div>
             <span className="text-gray-800 font-semibold text-center">{logo.name}</span>
           </div>
