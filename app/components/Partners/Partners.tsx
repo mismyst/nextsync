@@ -4,12 +4,12 @@ import Image from 'next/image';
 
 // Partner logo data
 const partnerLogos = [
-  { id: 1, name: 'Microsoft', image: '/images/microsoft-logo.png' },
-  { id: 2, name: 'Google', image: '/images/vecteezy_google-logo-icon-symbol_28667072.png' },
-  { id: 3, name: 'IBM', image: '/images/ibmlogo.png' },
-  { id: 4, name: 'AWS', image: '/images/AWS-Logo.png' },
-  { id: 5, name: 'Adobe', image: '/images/kisspng-logo-adobe.png' },
-  { id: 6, name: 'Coursera', image: '/images/Coursera-Logo.png' },
+  { id: 1, name: 'Microsoft', image: '/logos/microsoft-logo.png' },
+  { id: 2, name: 'Google', image: '/logos/vecteezy_google-logo-icon-symbol_28667072.png' },
+  { id: 3, name: 'IBM', image: '/logos/ibmlogo.png' },
+  { id: 4, name: 'AWS', image: '/logos/AWS-Logo.png' },
+  { id: 5, name: 'Adobe', image: '/logos/kisspng-logo-adobe.png' },
+  { id: 6, name: 'Coursera', image: '/logos/Coursera-Logo.png' },
 ];
 
 const Partners = () => {
