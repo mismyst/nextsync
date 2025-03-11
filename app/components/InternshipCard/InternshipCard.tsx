@@ -9,7 +9,7 @@ interface InternshipCardProps {
   image?: string;
 }
 
-// Default internship data with local images
+// Default internship data with proper image paths
 const defaultInternships = [
   {
     name: 'AI Intern Program',
@@ -17,7 +17,7 @@ const defaultInternships = [
     duration: '3 Months',
     bgColor: 'bg-gradient-to-br from-teal-500 to-green-600',
     category: 'AI',
-    image: './images/ai-internship.jpg', // Using absolute path from public folder
+    image: '/images/ai-internship.jpg', // Note the leading slash
   },
   {
     name: 'Data Science Intern',
@@ -25,7 +25,7 @@ const defaultInternships = [
     duration: '2 Months',
     bgColor: 'bg-gradient-to-br from-green-600 to-teal-500',
     category: 'Data Science',
-    image: './images/data-science.jpg',
+    image: '/images/data-science.jpg',
   },
   {
     name: 'Cybersecurity Intern',
@@ -33,7 +33,7 @@ const defaultInternships = [
     duration: '4 Months',
     bgColor: 'bg-gradient-to-br from-teal-600 to-green-700',
     category: 'Security',
-    image: './images/cybersecurity.jpg',
+    image: '/images/cybersecurity.jpg',
   },
   {
     name: 'Web Development Intern',
@@ -41,7 +41,7 @@ const defaultInternships = [
     duration: '2 Months',
     bgColor: 'bg-gradient-to-br from-teal-400 to-green-500',
     category: 'Web Development',
-    image: './images/web-dev.jpg',
+    image: '/images/web-dev.jpg',
   },
 ];
 
@@ -75,6 +75,13 @@ const SingleInternshipCard: React.FC<SingleCardProps> = ({
           alt={name}
           className="w-full h-full object-cover transition-transform duration-700 transform group-hover:scale-110"
           loading="lazy"
+          onError={(e) => {
+            // Fallback for debugging image load errors
+            console.error(`Failed to load image: ${image}`);
+            const target = e.target as HTMLImageElement;
+            target.src = '/placeholder.jpg'; // Fallback image
+            target.onerror = null; // Prevent infinite error loop
+          }}
         />
         <div className={`${bgColor} absolute inset-0 opacity-80 mix-blend-multiply`}></div>
         <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
