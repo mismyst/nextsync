@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+
 interface InternshipCardProps {
   name?: string;
   providers?: string[];
