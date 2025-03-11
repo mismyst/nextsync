@@ -196,17 +196,17 @@ const InternshipsPage: React.FC = () => {
 
                 <div className="p-6">
                   <div className="mb-4">
-                    <p className="text-xs text-teal-500 font-semibold mb-1">DURATION</p>
-                    <p className="text-sm">{internship.duration}</p>
+                    <p className="text-sm text-teal-500 font-semibold mb-1">DURATION</p>
+                    <p className="text-base">{internship.duration}</p>
                   </div>
 
-                  <div className="relative h-6 overflow-hidden">
-                    <p className="text-xs text-teal-500 font-semibold absolute top-0 left-0">PARTNERS</p>
+                  <div className="relative h-8 overflow-hidden">
+                    <p className="text-sm text-teal-500 font-semibold absolute top-0 left-0">PARTNERS</p>
                     <div className="absolute top-0 left-0 w-full h-full flex items-center justify-start pl-20">
                       {internship.providers.map((provider, pIndex) => (
                         <span
                           key={pIndex}
-                          className={`text-sm font-medium transition-opacity duration-500 absolute ${
+                          className={`text-base font-medium transition-opacity duration-500 absolute ${
                             pIndex === (animateIndex[index] || 0) ? 'opacity-100' : 'opacity-0'
                           }`}
                         >
