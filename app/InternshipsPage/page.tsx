@@ -187,7 +187,7 @@ const InternshipsPage: React.FC = () => {
                       <div className="text-xs font-semibold text-white/90 mb-1 backdrop-blur-sm bg-black/30 inline-block px-3 py-1 rounded-full">
                         {internship.category}
                       </div>
-                      <h3 className="text-2xl font-semibold text-white mt-2 drop-shadow-md">
+                      <h3 className="text-3xl font-semibold text-white mt-2 drop-shadow-md">
                         {internship.name}
                       </h3>
                     </div>
