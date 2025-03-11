@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
@@ -7,47 +7,74 @@ import { Menu } from 'lucide-react';
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
-      {/* Navbar */}
-      <nav className="bg-white py-4 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          {/* Left: Menu Icon */}
-          <div className="flex items-center space-x-4">
-            <button className="p-2 border border-teal-500 rounded-lg hover:bg-teal-100">
-              <Menu size={24} className="text-black" />
+      {/* Floating Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-40 px-4 pt-4">
+        <nav className={`max-w-6xl mx-auto bg-white rounded-lg shadow-lg transition-all duration-300 ${
+          scrolled ? 'py-3' : 'py-4'
+        }`}>
+          <div className="px-6 flex justify-between items-center">
+            {/* Left: Menu Icon */}
+            <div className="flex items-center space-x-4">
+              <button className="p-2 border border-teal-500 rounded-lg hover:bg-teal-100">
+                <Menu size={24} className="text-black" />
+              </button>
+              
+              {/* Logo */}
+              <Link href="/" className="flex items-center">
+                <Image 
+                  src="/images/logowhite.jpg" 
+                  alt="Company Logo" 
+                  width={150} 
+                  height={50} 
+                  className="h-10 w-auto object-contain"
+                />
+              </Link>
+            </div>
+
+            {/* Center: Navigation Links */}
+            <ul className="hidden md:flex space-x-10 text-black font-medium">
+              <li><Link href="./CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
+              <li><Link href="./InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
+              <li><Link href="./TrainingPage" className="hover:text-teal-500">Training</Link></li>
+              <li><Link href="./Courses" className="hover:text-teal-500">Courses</Link></li>
+            </ul>
+
+            {/* Right: "JOIN US" Button */}
+            <button 
+              onClick={() => setIsModalOpen(true)} 
+              className="border border-teal-500 text-black px-4 py-2 rounded-lg hover:bg-teal-100 transition duration-300 font-medium"
+            >
+              JOIN US
             </button>
-            
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <Image 
-                src="/images/logowhite.jpg" 
-                alt="Company Logo" 
-                width={150} 
-                height={50} 
-                className="h-10 w-auto object-contain"
-              />
-            </Link>
           </div>
+        </nav>
+      </div>
 
-          {/* Center: Navigation Links */}
-          <ul className="flex space-x-10 text-black font-medium">
-            <li><Link href="./CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
-            <li><Link href="./InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
-            <li><Link href="./TrainingPage" className="hover:text-teal-500">Training</Link></li>
-            <li><Link href="./Courses" className="hover:text-teal-500">Courses</Link></li>
-          </ul>
-
-          {/* Right: "JOIN US" Button */}
-          <button 
-            onClick={() => setIsModalOpen(true)} 
-            className="border border-teal-500 text-black px-4 py-2 rounded-lg hover:bg-teal-100 transition duration-300 font-medium"
-          >
-            JOIN US
-          </button>
-        </div>
-      </nav>
+      {/* Space holder to prevent content from hiding behind the fixed navbar */}
+      <div className="h-24"></div>
 
       {/* Pop-up Modal for Email Subscription */}
       {isModalOpen && (
