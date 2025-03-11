@@ -32,7 +32,7 @@ const Navbar = () => {
     <>
       {/* Floating Navbar */}
       <div className="fixed top-0 left-0 right-0 z-40 px-4 pt-4">
-        <nav className={`max-w-6xl mx-auto bg-white rounded-lg shadow-lg transition-all duration-300 ${
+        <nav className={`max-w-6xl mx-auto bg-white rounded-3xl shadow-lg transition-all duration-300 ${
           scrolled ? 'py-3' : 'py-4'
         }`}>
           <div className="px-6 flex justify-between items-center">
