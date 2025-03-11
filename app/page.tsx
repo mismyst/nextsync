@@ -28,21 +28,21 @@ interface Training {
   bgColor: string;
 }
 
-// Define training data with pale green colors
+// Define training data with darker green colors
 const trainingsData: Training[] = [
   {
     title: "Reyansh college of Technical management",
     skills: ["HTML", "CSS", "JavaScript", "MongoDB", "Express.js", "React", "Node.js", "Flutter development"],
     originalPrice: 4500,
     discountedPrice: 2500,
-    bgColor: "bg-green-400/80",
+    bgColor: "bg-emerald-800",
   },
   {
     title: "Reyansh college of Technical management",
     skills: ["HTML", "CSS", "JavaScript", "MongoDB", "Express.js", "React", "Node.js", "Flutter development"],
     originalPrice: 4500,
     discountedPrice: 2500,
-    bgColor: "bg-emerald-400/80",
+    bgColor: "bg-green-900",
   }
 ];
 
@@ -209,7 +209,7 @@ const Page = function Page() {
             </div>
           </div>
           
-          {/* Training cards section - more elongated with pale green colors */}
+          {/* Training cards section - vertically elongated with dark green theme */}
           <div className="my-4 sm:my-6 md:my-8">
             <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
               <div className="flex justify-between items-center mb-6">
@@ -219,42 +219,38 @@ const Page = function Page() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 {trainingsData.map((training, index) => (
-                  <div key={index} className="relative rounded-xl overflow-hidden shadow-lg h-56">
-                    <div className={`${training.bgColor} p-5 h-full`}>
-                      <div className="flex flex-col md:flex-row h-full">
-                        {/* Left content */}
-                        <div className="flex-1 pr-0 md:pr-4">
-                          <h3 className="text-lg font-bold text-white mb-2">{training.title}</h3>
-                          
-                          <div className="text-white/90 text-sm">
-                            <p>Let&apos;s get better skills by mastering:</p>
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1 mt-2">
-                              {training.skills.slice(0, 6).map((skill, skillIndex) => (
-                                <li key={skillIndex} className="flex items-center text-xs">
-                                  <span className="w-1 h-1 bg-white rounded-full mr-1.5"></span>
-                                  {skill}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          
-                          {/* Price section */}
-                          <div className="mt-auto absolute bottom-14 left-5">
-                            <p className="text-xs font-bold text-orange-300 mb-1">LIMITED TIME OFFER!</p>
-                            <div className="flex items-baseline">
-                              <span className="line-through text-xs text-white/70 mr-2">₹{training.originalPrice}/-</span>
-                              <span className="text-xl font-bold text-white">INR.{training.discountedPrice}/-</span>
-                            </div>
-                          </div>
+                  <div key={index} className="relative rounded-xl overflow-hidden shadow-lg">
+                    <div className={`${training.bgColor} p-5 pb-16 min-h-80`}>
+                      {/* Circular element positioned at top right */}
+                      <div className="absolute top-5 right-5">
+                        <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
+                          <span className="text-white text-xl font-bold">R</span>
                         </div>
+                      </div>
+                      
+                      {/* Content with more vertical spacing */}
+                      <div className="pr-20">
+                        <h3 className="text-lg font-bold text-white mb-4">{training.title}</h3>
                         
-                        {/* Right circular element */}
-                        <div className="absolute top-4 right-4 md:static md:flex md:items-center md:justify-center md:w-24">
-                          <div className="relative">
-                            <div className="w-16 h-16 rounded-full bg-white/30 flex items-center justify-center">
-                              <span className="text-white text-2xl font-bold">R</span>
-                            </div>
-                          </div>
+                        <div className="text-white/90 text-sm space-y-3 mt-4">
+                          <p>Let&apos;s get better skills by mastering:</p>
+                          <ul className="space-y-2 mt-3">
+                            {training.skills.map((skill, skillIndex) => (
+                              <li key={skillIndex} className="flex items-center text-xs">
+                                <span className="w-1 h-1 bg-white rounded-full mr-1.5"></span>
+                                {skill}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      {/* Price section */}
+                      <div className="absolute bottom-16 left-5">
+                        <p className="text-xs font-bold text-orange-300 mb-1">LIMITED TIME OFFER!</p>
+                        <div className="flex items-baseline">
+                          <span className="line-through text-xs text-white/70 mr-2">₹{training.originalPrice}/-</span>
+                          <span className="text-xl font-bold text-white">INR.{training.discountedPrice}/-</span>
                         </div>
                       </div>
                       
