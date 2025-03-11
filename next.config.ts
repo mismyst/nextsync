@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
   },
   
   // Production optimizations
-  output: 'export', // Creates a standalone build that's easier to deploy
+  // output: 'export',  // commenting it out becuase creating a problem while runnning 
+  // Creates a standalone build that's easier to deploy
   
   poweredByHeader: false, // Removes the X-Powered-By header for security
   
