@@ -1,14 +1,15 @@
 'use client'
 import React from 'react';
+import Image from 'next/image';
 
 // Partner logo data
 const partnerLogos = [
-  { id: 1, name: 'Microsoft', image: 'microsoft-logo.png' },
-  { id: 2, name: 'Google', image: 'vecteezy_google-logo-icon-symbol_28667072.png' },
-  { id: 3, name: 'IBM', image: 'ibmlogo.png' },
-  { id: 4, name: 'AWS', image: 'AWS-Logo.png' },
-  { id: 5, name: 'Adobe', image: 'kisspng-logo-adobe.png' },
-  { id: 6, name: 'Coursera', image: 'Coursera-Logo.png' },
+  { id: 1, name: 'Microsoft', image: '/images/microsoft-logo.png' },
+  { id: 2, name: 'Google', image: '/images/vecteezy_google-logo-icon-symbol_28667072.png' },
+  { id: 3, name: 'IBM', image: '/images/ibmlogo.png' },
+  { id: 4, name: 'AWS', image: '/images/AWS-Logo.png' },
+  { id: 5, name: 'Adobe', image: '/images/kisspng-logo-adobe.png' },
+  { id: 6, name: 'Coursera', image: '/images/Coursera-Logo.png' },
 ];
 
 const Partners = () => {
@@ -20,14 +21,15 @@ const Partners = () => {
         {partnerLogos.map((logo) => (
           <div 
             key={logo.id} 
-            className="w-36 h-36 bg-white rounded-xl flex flex-col items-center justify-center p-4 shadow-sm hover:shadow-md transition-all duration-300"
+            className="w-36 h-36 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm hover:shadow-md transition-all duration-300"
           >
-            <div className="w-full h-20 mb-2 flex items-center justify-center">
-              <img
+            <div className="relative w-full h-20 mb-2">
+              <Image
                 src={logo.image}
                 alt={`${logo.name} logo`}
-                className="max-w-full max-h-full object-contain"
-                loading="lazy"
+                fill
+                style={{ objectFit: 'contain' }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <span className="text-gray-800 font-semibold text-center">{logo.name}</span>
