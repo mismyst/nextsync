@@ -208,64 +208,68 @@ const Page = function Page() {
               </div>
             </div>
           </div>
-          
-          {/* Training cards section - vertically elongated with dark green theme */}
-          <div className="my-4 sm:my-6 md:my-8">
-            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-500 to-pink-500 bg-clip-text text-transparent">Training</h2>
-                <a href="#" className="text-teal-500 hover:text-teal-600 text-sm hidden md:block">View all</a>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                {trainingsData.map((training, index) => (
-                  <div key={index} className="relative rounded-xl overflow-hidden shadow-lg">
-                    <div className={`${training.bgColor} p-5 pb-16 min-h-80`}>
-                      {/* Circular element positioned at top right */}
-                      <div className="absolute top-5 right-5">
-                        <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
-                          <span className="text-white text-xl font-bold">R</span>
-                        </div>
-                      </div>
-                      
-                      {/* Content with more vertical spacing */}
-                      <div className="pr-20">
-                        <h3 className="text-lg font-bold text-white mb-4">{training.title}</h3>
-                        
-                        <div className="text-white/90 text-sm space-y-3 mt-4">
-                          <p>Let&apos;s get better skills by mastering:</p>
-                          <ul className="space-y-2 mt-3">
-                            {training.skills.map((skill, skillIndex) => (
-                              <li key={skillIndex} className="flex items-center text-xs">
-                                <span className="w-1 h-1 bg-white rounded-full mr-1.5"></span>
-                                {skill}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                      
-                      {/* Price section */}
-                      <div className="absolute bottom-16 left-5">
-                        <p className="text-xs font-bold text-orange-300 mb-1">LIMITED TIME OFFER!</p>
-                        <div className="flex items-baseline">
-                          <span className="line-through text-xs text-white/70 mr-2">₹{training.originalPrice}/-</span>
-                          <span className="text-xl font-bold text-white">INR.{training.discountedPrice}/-</span>
-                        </div>
-                      </div>
-                      
-                      {/* Enroll button */}
-                      <div className="absolute bottom-0 left-0 right-0">
-                        <button className="w-full py-2 bg-black text-white text-sm font-bold uppercase tracking-wider">
-                          ENROLL NOW
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        {/* Training cards section - modern and deployment friendly */}
+<div className="my-4 sm:my-6 md:my-8">
+  <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
+    <div className="flex justify-between items-center mb-6">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-500 to-pink-500 bg-clip-text text-transparent">Training</h2>
+      <a href="#" className="text-teal-500 hover:text-teal-600 text-sm hidden md:block">View all</a>
+    </div>
+    
+    <div className="grid md:grid-cols-2 gap-6">
+      {trainingsData.map((training, index) => (
+        <div key={index} className="relative rounded-xl overflow-hidden shadow-lg">
+          <div className={`${training.bgColor} p-5 pb-20 min-h-96`}>
+            {/* Circular element positioned at top right with better spacing */}
+            <div className="absolute top-5 right-5">
+              <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
+                <span className="text-white text-xl font-bold">R</span>
               </div>
             </div>
+            
+            {/* Content with improved spacing and layout */}
+            <div className="pr-20 pb-16">
+              <h3 className="text-lg font-bold text-white mb-5 line-clamp-2">{training.title}</h3>
+              
+              <div className="text-white/90 text-sm space-y-4 mt-4">
+                <p className="text-white/90">Let&apos;s get better skills by mastering:</p>
+                <ul className="grid grid-cols-1 gap-y-2 mt-3">
+                  {training.skills.slice(0, 7).map((skill, skillIndex) => (
+                    <li key={skillIndex} className="flex items-start text-xs">
+                      <span className="w-1.5 h-1.5 bg-white rounded-full mr-2 mt-1 flex-shrink-0"></span>
+                      <span className="truncate">{skill}</span>
+                    </li>
+                  ))}
+                  {training.skills.length > 7 && (
+                    <li className="flex items-center text-xs pl-3.5">
+                      <span className="text-white/70">+{training.skills.length - 7} more...</span>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </div>
+            
+            {/* Price section with better positioning */}
+            <div className="absolute bottom-16 left-5">
+              <p className="text-xs font-bold text-orange-300 mb-1">LIMITED TIME OFFER!</p>
+              <div className="flex items-baseline">
+                <span className="line-through text-xs text-white/70 mr-2">₹{training.originalPrice}/-</span>
+                <span className="text-xl font-bold text-white">INR.{training.discountedPrice}/-</span>
+              </div>
+            </div>
+            
+            {/* Enroll button with improved styling */}
+            <div className="absolute bottom-0 left-0 right-0">
+              <button className="w-full py-2.5 bg-black text-white text-sm font-bold uppercase tracking-wider transition-colors hover:bg-black/90">
+                ENROLL NOW
+              </button>
+            </div>
           </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
           
           {/* Contact form */}
           <div className="my-4 sm:my-6 md:my-8">
