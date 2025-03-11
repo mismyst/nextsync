@@ -8,7 +8,7 @@ const partnerLogos = [
   { id: 2, name: 'Google', image: '/images/vecteezy_google-logo-icon-symbol_28667072.png' },
   { id: 3, name: 'IBM', image: '/images/ibmlogo.png' },
   { id: 4, name: 'AWS', image: '/images/AWS-Logo.png' },
-  { id: 5, name: 'Adobe', image: '/images/kisspng-logo-adobe.png' },
+  { id: 5, name: 'Adobe', image: '/images/Adobe-logo.png' },
   { id: 6, name: 'Coursera', image: '/images/Coursera-Logo.png' },
 ];
 
