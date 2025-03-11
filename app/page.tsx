@@ -56,26 +56,28 @@ const internshipsData = [
 ];
 
 // Optimized animated background component
-const AnimatedBackground = React.memo(() => (
-  <>
-    {/* Base gradient background - softer, more pale green colors */}
-    <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200 bg-[length:400%_400%] animate-gradient"></div>
-    
-    {/* More subtle floating animated shapes with very low opacity */}
-    <div className="fixed top-5 left-[5%] w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-    <div className="fixed top-1/4 right-[5%] w-80 h-80 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-    <div className="fixed bottom-1/3 left-1/4 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-    <div className="fixed bottom-10 right-1/4 w-72 h-72 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-6000"></div>
-    
-    {/* Enhanced glassmorphic noise texture overlay */}
-    <div className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[2px] bg-opacity-20"></div>
-    
-    {/* More subtle grid pattern for glass effect */}
-    <div className="fixed inset-0 -z-10 backdrop-blur-[1px] bg-grid-pattern opacity-20"></div>
-  </>
-));
+const AnimatedBackground = React.memo(function AnimatedBackground() {
+  return (
+    <>
+      {/* Base gradient background - softer, more pale green colors */}
+      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200 bg-[length:400%_400%] animate-gradient"></div>
+      
+      {/* More subtle floating animated shapes with very low opacity */}
+      <div className="fixed top-5 left-[5%] w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="fixed top-1/4 right-[5%] w-80 h-80 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="fixed bottom-1/3 left-1/4 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      <div className="fixed bottom-10 right-1/4 w-72 h-72 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-6000"></div>
+      
+      {/* Enhanced glassmorphic noise texture overlay */}
+      <div className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[2px] bg-opacity-20"></div>
+      
+      {/* More subtle grid pattern for glass effect */}
+      <div className="fixed inset-0 -z-10 backdrop-blur-[1px] bg-grid-pattern opacity-20"></div>
+    </>
+  );
+});
 
-const Page = () => {
+const Page = function Page() {
   const [animateIndex, setAnimateIndex] = useState({});
   const [isClient, setIsClient] = useState(false);
 
