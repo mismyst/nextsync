@@ -20,13 +20,31 @@ interface Internship {
   image: string;
 }
 
-interface AnimateIndices {
-  [key: number]: number;
+interface Training {
+  title: string;
+  skills: string[];
+  originalPrice: number;
+  discountedPrice: number;
+  bgColor: string;
 }
 
-interface IntervalMap {
-  [key: number]: NodeJS.Timeout;
-}
+// Define training data
+const trainingsData: Training[] = [
+  {
+    title: "Reyansh college of Technical management",
+    skills: ["HTML", "CSS", "JavaScript", "MongoDB", "Express.js", "React", "Node.js", "Flutter development"],
+    originalPrice: 4500,
+    discountedPrice: 2500,
+    bgColor: "bg-cyan-500",
+  },
+  {
+    title: "Reyansh college of Technical management",
+    skills: ["HTML", "CSS", "JavaScript", "MongoDB", "Express.js", "React", "Node.js", "Flutter development"],
+    originalPrice: 4500,
+    discountedPrice: 2500,
+    bgColor: "bg-cyan-500",
+  }
+];
 
 // Define internship data similar to the course data structure
 const internshipsData: Internship[] = [
@@ -76,105 +94,48 @@ const internshipsData: Internship[] = [
   }
 ];
 
-// Optimized animated background component
-const AnimatedBackground = React.memo(function AnimatedBackground() {
+// Simplified background component
+const SimpleBackground = React.memo(function SimpleBackground() {
   return (
     <>
-      {/* Base gradient background - softer, more pale green colors */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200 bg-[length:400%_400%] animate-gradient"></div>
+      {/* Simple gradient background */}
+      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200"></div>
       
-      {/* More subtle floating animated shapes with very low opacity */}
-      <div className="fixed top-5 left-[5%] w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="fixed top-1/4 right-[5%] w-80 h-80 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="fixed bottom-1/3 left-1/4 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-      <div className="fixed bottom-10 right-1/4 w-72 h-72 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-6000"></div>
-      
-      {/* Enhanced glassmorphic noise texture overlay */}
-      <div className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[2px] bg-opacity-20"></div>
-      
-      {/* More subtle grid pattern for glass effect */}
-      <div className="fixed inset-0 -z-10 backdrop-blur-[1px] bg-grid-pattern opacity-20"></div>
+      {/* Simple overlay */}
+      <div className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[1px]"></div>
     </>
   );
 });
 
 const Page = function Page() {
-  const [animateIndex, setAnimateIndex] = useState<AnimateIndices>({});
+  const [currentProvider, setCurrentProvider] = useState<{[key: number]: number}>({});
   const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     setIsClient(true);
-    
-    // Set up provider animation intervals for each internship
-    const intervals: IntervalMap = {};
-    internshipsData.forEach((internship, index) => {
-      intervals[index] = setInterval(() => {
-        setAnimateIndex(prev => ({
-          ...prev,
-          [index]: (prev[index] === undefined ? 0 : (prev[index] + 1) % internship.providers.length)
-        }));
-      }, 2000);
-    });
-
-    // Add intersection observer for lazy loading
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-    
-    const handleIntersect = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target as HTMLElement;
-          target.classList.add('opacity-100');
-          target.classList.remove('translate-y-4', 'opacity-0');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-    
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const sections = document.querySelectorAll('.lazy-section');
-    
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-    
-    return () => {
-      // Clean up intervals
-      Object.values(intervals).forEach(interval => clearInterval(interval));
-      
-      // Clean up observer
-      if (observer) {
-        sections.forEach(section => {
-          observer.unobserve(section);
-        });
-      }
-    };
   }, []);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      <AnimatedBackground />
+      <SimpleBackground />
 
       {/* Main Content Container */}
       <div className="relative z-10 min-h-screen flex flex-col">
         <Navbar />
         <main className="w-full max-w-none px-0 flex-grow">
-          {/* Main sections with improved glassmorphic cards */}
+          {/* Hero section */}
           <HeroSection />
           
-          {/* Partners section with refined glassmorphic effect */}
-          <div className="my-4 sm:my-6 md:my-8 lazy-section opacity-0 translate-y-4 transition-all duration-500">
-            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-xl border border-white/30 hover:bg-white/35 transition-all duration-300">
+          {/* Partners section */}
+          <div className="my-4 sm:my-6 md:my-8">
+            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
               <Partners />
             </div>
           </div>
           
-          {/* Internships section with course-like cards */}
-          <div className="my-4 sm:my-6 md:my-8 lazy-section opacity-0 translate-y-4 transition-all duration-500 delay-200">
-            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-xl border border-white/30 hover:bg-white/35 transition-all duration-300">
+          {/* Internships section */}
+          <div className="my-4 sm:my-6 md:my-8">
+            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
               <div className="mb-6">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-500 to-pink-500 bg-clip-text text-transparent">Hot Internships</h2>
                 <p className="text-sm sm:text-base text-gray-600">Launch your career with hands-on experience</p>
@@ -182,8 +143,8 @@ const Page = function Page() {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {internshipsData.map((internship, index) => (
-                  <div key={index} className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    {/* Image section (60% of card) */}
+                  <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg">
+                    {/* Image section */}
                     <div className="relative h-48 overflow-hidden">
                       {isClient && (
                         <div className="relative w-full h-full">
@@ -192,7 +153,7 @@ const Page = function Page() {
                             alt={internship.name} 
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                            className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            className="object-cover"
                             priority={index < 2}
                           />
                         </div>
@@ -204,14 +165,14 @@ const Page = function Page() {
                           <div className="text-xs font-semibold text-white/90 mb-1 backdrop-blur-sm bg-black/20 inline-block px-2 py-1 rounded">
                             {internship.featured ? 'FEATURED' : 'NEW'} · {internship.category}
                           </div>
-                          <h3 className="text-lg sm:text-xl font-bold text-white leading-tight mt-2 drop-shadow-md">
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-white leading-tight mt-2 drop-shadow-md tracking-tight">
                             {internship.name}
                           </h3>
                         </div>
                       </div>
                       
                       {internship.openings > 0 && (
-                        <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded text-xs font-bold border border-black shadow-md transform -rotate-3 hover:rotate-0 transition-transform">
+                        <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded text-xs font-bold border border-black shadow-md">
                           {internship.openings} spots left!
                         </div>
                       )}
@@ -231,25 +192,14 @@ const Page = function Page() {
                         </p>
                       </div>
                       
-                      <div className="relative h-6 overflow-hidden">
-                        <p className="text-xs text-gray-500 font-semibold absolute top-0 left-0">COMPANIES</p>
-                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-start pl-20">
-                          {internship.providers.map((provider, pIndex) => (
-                            <span 
-                              key={pIndex} 
-                              className={`text-sm font-medium transition-opacity duration-500 absolute ${
-                                pIndex === (animateIndex[index] || 0) ? 'opacity-100' : 'opacity-0'
-                              }`}
-                            >
-                              {provider}
-                            </span>
-                          ))}
-                        </div>
+                      <div className="h-6 mb-3">
+                        <p className="text-xs text-gray-500 font-semibold mb-1">COMPANIES</p>
+                        <p className="text-sm">{internship.providers.join(', ')}</p>
                       </div>
                       
-                      <a href="#" className="mt-3 flex items-center text-gray-500 text-sm hover:text-teal-600 group-hover:text-pink-500 transition-colors">
+                      <a href="#" className="mt-2 flex items-center text-gray-500 text-sm hover:text-teal-600">
                         Apply Now 
-                        <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                         </svg>
                       </a>
@@ -260,9 +210,66 @@ const Page = function Page() {
             </div>
           </div>
           
-          {/* Contact form with enhanced refined glassmorphic effect */}
-          <div className="my-4 sm:my-6 md:my-8 lazy-section opacity-0 translate-y-4 transition-all duration-500 delay-300">
-            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 lg:p-8 rounded-2xl bg-white/40 backdrop-blur-lg shadow-xl border border-white/40 hover:bg-white/45 transition-all duration-300">
+          {/* Training cards section */}
+          <div className="my-4 sm:my-6 md:my-8">
+            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-500 to-pink-500 bg-clip-text text-transparent">Training</h2>
+                <a href="#" className="text-teal-500 hover:text-teal-600 text-sm hidden md:block">View all</a>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {trainingsData.map((training, index) => (
+                  <div key={index} className="relative rounded-xl overflow-hidden shadow-lg">
+                    <div className={`${training.bgColor} p-5 pb-16`}>
+                      <h3 className="text-lg font-bold text-white mb-2">{training.title}</h3>
+                      
+                      <div className="text-white/90 text-sm space-y-1">
+                        <p>Let&apos;s get better skills by mastering:</p>
+                        <ul className="grid grid-cols-2 gap-x-2 gap-y-1 mt-2">
+                          {training.skills.map((skill, skillIndex) => (
+                            <li key={skillIndex} className="flex items-center text-xs">
+                              <span className="w-1 h-1 bg-white rounded-full mr-1.5"></span>
+                              {skill}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      {/* Circular element */}
+                      <div className="absolute top-6 right-6">
+                        <div className="relative">
+                          <div className="w-16 h-16 rounded-full bg-white/30 flex items-center justify-center">
+                            <span className="text-white text-2xl font-bold">R</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Price section */}
+                      <div className="absolute bottom-16 left-5">
+                        <p className="text-xs font-bold text-orange-300 mb-1">LIMITED TIME OFFER!</p>
+                        <div className="flex items-baseline">
+                          <span className="line-through text-xs text-white/70 mr-2">₹{training.originalPrice}/-</span>
+                          <span className="text-xl font-bold text-white">INR.{training.discountedPrice}/-</span>
+                        </div>
+                      </div>
+                      
+                      {/* Enroll button */}
+                      <div className="absolute bottom-0 left-0 right-0">
+                        <button className="w-full py-2 bg-black text-white text-sm font-bold uppercase tracking-wider">
+                          ENROLL NOW
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Contact form */}
+          <div className="my-4 sm:my-6 md:my-8">
+            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 lg:p-8 rounded-2xl bg-white/40 backdrop-blur-lg shadow-lg border border-white/40">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 sm:mb-10 text-slate-800 drop-shadow-sm">What&apos;s your suggestion?</h2>
               {isClient && <ContactForm />}
             </div>
@@ -270,44 +277,6 @@ const Page = function Page() {
         </main>
         <Footer />
       </div>
-      
-      {/* Add custom animation keyframes */}
-      <style jsx global>{`
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes blob {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        
-        .animate-gradient {
-          animation: gradient 15s ease infinite;
-        }
-        
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-        
-        .animation-delay-6000 {
-          animation-delay: 6s;
-        }
-        
-        .animate-blob {
-          animation: blob 12s infinite;
-        }
-        
-        .bg-grid-pattern {
-          background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDUgTCAyMCA1IE0gNSAwIEwgNSAyMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4wMyIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNncmlkKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
-        }
-      `}</style>
     </div>
   );
 };
