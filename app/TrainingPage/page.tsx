@@ -18,7 +18,7 @@ interface TrainingCardData {
   startDate?: string;
 }
 
-export default function TrainingPage() {
+const  TrainingPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [cardsPerPage] = useState<number>(6);
@@ -338,3 +338,4 @@ export default function TrainingPage() {
     </div>
   );
 }
+export default TrainingPage;
