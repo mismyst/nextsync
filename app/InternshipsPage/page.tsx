@@ -101,7 +101,7 @@ const InternshipsPage: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div className="text-center md:text-left">
               <h2 className="text-5xl font-semibold text-transparent bg-gradient-to-r from-teal-600 to-green-600 bg-clip-text mb-4">
-                Explore Top Internshipsssss
+                Explore Top Internships
               </h2>
               <p className="text-xl text-teal-700 leading-relaxed">
                 Accelerate your career by joining top tech companies for hands-on experience!
