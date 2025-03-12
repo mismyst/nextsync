@@ -12,13 +12,11 @@ const partnerLogos = [
   { id: 6, name: 'Coursera', image: '/images/Coursera-Logo.png' },
 ];
 
-// External CSS will be used for animation
 const Partners = () => {
   return (
     <div className="py-8">
       <h2 className="text-3xl font-bold text-center mb-10 text-slate-800">Our Trusted Partners</h2>
       
-      {/* Add a class that we'll target with external CSS */}
       <div className="partners-container overflow-hidden">
         <div className="partners-slider">
           {/* First set of logos */}
