@@ -22,7 +22,7 @@ const SupportCard: React.FC<SupportCardProps> = ({ icon: Icon, title, descriptio
       <div className="mt-auto">
         {ctaText && (
           <div 
-            className={${bgColor} rounded-lg flex items-center justify-center p-4 cursor-pointer hover:opacity-90 transition-all}
+            className={`${bgColor} rounded-lg flex items-center justify-center p-4 cursor-pointer hover:opacity-90 transition-all`}
             onClick={onClick}
           >
             <Icon size={24} className="mr-2" />
