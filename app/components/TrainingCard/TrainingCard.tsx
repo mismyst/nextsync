@@ -45,7 +45,7 @@ const TrainingCard: React.FC<TrainingCardProps> = ({
         <div className="mb-4">
           {features.slice(0, 3).map((feature, index) => (
             <div key={index} className="flex items-center mb-2">
-              <FaCheckCircle className="text-green-500 mr-2 flex-shrink-0" />
+              <FaCheckCircle className="text-green-600 mr-2 flex-shrink-0" />
               <span className="text-gray-700">{feature}</span>
             </div>
           ))}
