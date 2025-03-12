@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 // Partner logo data
@@ -13,54 +13,36 @@ const partnerLogos = [
 ];
 
 const Partners = () => {
-  const scrollRef = useRef(null);
-  
-  // Duplicate logos to create infinite scroll effect
-  const allLogos = [...partnerLogos, ...partnerLogos];
-  
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-    
-    let animationId;
-    let scrollPosition = 0;
-    
-    const scroll = () => {
-      if (!scrollContainer) return;
-      
-      // Move from right to left by incrementing scroll position
-      scrollPosition += 1;
-      
-      // Reset when we've scrolled through the first set of logos
-      if (scrollPosition >= scrollContainer.firstChild.offsetWidth * partnerLogos.length) {
-        scrollPosition = 0;
-      }
-      
-      scrollContainer.style.transform = `translateX(-${scrollPosition}px)`;
-      animationId = requestAnimationFrame(scroll);
-    };
-    
-    animationId = requestAnimationFrame(scroll);
-    
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-  
   return (
     <div className="py-8">
       <h2 className="text-3xl font-bold text-center mb-10 text-slate-800">Our Trusted Partners</h2>
       
       <div className="overflow-hidden">
-        <div 
-          ref={scrollRef}
-          className="flex transition-transform duration-300 ease-linear"
-          style={{ width: 'fit-content' }}
-        >
-          {allLogos.map((logo, index) => (
+        <div className="flex animate-marquee">
+          {/* First set of logos */}
+          {partnerLogos.map((logo) => (
             <div 
-              key={`${logo.id}-${index}`} 
-              className="w-36 h-36 mx-3 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
+              key={logo.id} 
+              className="w-36 h-36 mx-3 flex-shrink-0 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
+            >
+              <div className="relative w-full h-20 mb-2">
+                <Image
+                  src={logo.image}
+                  alt={`${logo.name} logo`}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              <span className="text-gray-800 font-semibold text-center">{logo.name}</span>
+            </div>
+          ))}
+          
+          {/* Duplicate logos for seamless loop */}
+          {partnerLogos.map((logo) => (
+            <div 
+              key={`${logo.id}-duplicate`} 
+              className="w-36 h-36 mx-3 flex-shrink-0 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
             >
               <div className="relative w-full h-20 mb-2">
                 <Image
