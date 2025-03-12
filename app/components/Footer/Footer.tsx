@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import { FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
+import Link from 'next/link'; // Import Link from next/link
 
 const Footer = () => {
   return (
@@ -43,7 +44,9 @@ const Footer = () => {
           <ul className="space-y-2">
             <li><a href="#faqs" className="text-gray-400 hover:text-yellow-400 transition">FAQs</a></li>
             <li><a href="#privacy" className="text-gray-400 hover:text-yellow-400 transition">Privacy Policy</a></li>
-            <li><a href="#terms" className="text-gray-400 hover:text-yellow-400 transition">Terms & Conditions</a></li>
+            <li>
+              <Link href="/TermsandCondition" className="text-gray-400 hover:text-yellow-400 transition">Terms & Conditions</Link>
+            </li>
           </ul>
         </div>
 
@@ -53,7 +56,7 @@ const Footer = () => {
           <ul className="space-y-3 text-gray-400">
             <li className="flex items-center space-x-3">
               <FaMapMarkerAlt className="text-yellow-400" />
-              <span> 1st floor, Divya diamonds building, Kavuri Hills Rd, CBI Colony, Madhapur, Hyderabad, Telangana 500033</span>
+              <span>1234 Street, City, Country</span>
             </li>
             <li className="flex items-center space-x-3">
               <FaEnvelope className="text-yellow-400" />
@@ -61,7 +64,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-3">
               <FaPhone className="text-yellow-400" />
-              <span>+91 6361136916</span>
+              <span>+123 456 7890</span>
             </li>
           </ul>
         </div>
