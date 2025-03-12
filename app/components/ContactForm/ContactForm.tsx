@@ -1,267 +1,273 @@
 'use client';
 import React, { useState } from 'react';
-import { MessageCircle, Send, Sparkles, ThumbsUp, Zap } from 'lucide-react';
+import { MessageCircle, Phone, Mail, FileDown, X } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
-const SuggestionCard = ({ icon: Icon, title, isSelected, onClick }) => {
+interface SupportCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  ctaText?: string;
+  bgColor: string;
+  onClick: () => void;
+}
+
+const SupportCard: React.FC<SupportCardProps> = ({ icon: Icon, title, description, ctaText, bgColor, onClick }) => {
   return (
-    <div 
-      className={`relative overflow-hidden rounded-xl p-4 cursor-pointer ${
-        isSelected 
-          ? 'bg-gradient-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/20 scale-105' 
-          : 'bg-white hover:bg-green-50 text-gray-700 hover:shadow-md'
-      }`}
-      onClick={onClick}
-    >
-      <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-          isSelected ? 'bg-white text-emerald-600' : 'bg-emerald-100 text-emerald-600'
-        }`}>
-          <Icon size={20} />
-        </div>
-        <span className="font-medium">{title}</span>
+    <div className="bg-white rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:transform hover:-translate-y-1 hover:shadow-xl">
+      <div className="uppercase text-sm font-semibold text-gray-600 mb-4">{title}</div>
+      
+      <h3 className="text-2xl font-bold mb-6">{description}</h3>
+      
+      <div className="mt-auto">
+        {ctaText && (
+          <div 
+            className={`${bgColor} rounded-lg flex items-center justify-center p-4 cursor-pointer hover:opacity-90 transition-all`}
+            onClick={onClick}
+          >
+            <Icon size={24} className="mr-2" />
+            <span className="font-medium">{ctaText}</span>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [suggestionType, setSuggestionType] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const handleSubmit = (e) => {
+// Modal component for the demo form
+const DemoFormModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      
-      // Reset form after a delay
-      setTimeout(() => {
-        setName('');
-        setEmail('');
-        setMessage('');
-        setSuggestionType('');
-        setIsSubmitted(false);
-      }, 3000);
-    }, 1500);
+    console.log('Demo form submitted');
+    // Add your form submission logic here
+    onClose();
   };
-  
-  const suggestionTypes = [
-    { id: 'course', title: 'Course Suggestion', icon: Sparkles },
-    { id: 'feature', title: 'Feature Request', icon: Zap },
-    { id: 'feedback', title: 'General Feedback', icon: ThumbsUp },
-    { id: 'question', title: 'Question', icon: MessageCircle }
-  ];
-  
+
   return (
-    <section id="contact-form-section" className="py-16 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-green-50 to-emerald-50"></div>
-      
-      {/* Shapes */}
-      <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-10 right-10 w-64 h-64 bg-green-200/20 rounded-full mix-blend-multiply filter blur-xl"></div>
-        <div className="absolute bottom-10 left-10 w-64 h-64 bg-emerald-200/20 rounded-full mix-blend-multiply filter blur-xl"></div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Help us improve by sharing your ideas, feedback, or questions
-          </p>
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-90vh overflow-y-auto animate-fadeIn">
+        <div className="flex justify-between items-center p-6 border-b">
+          <h3 className="text-2xl font-bold">Request Your Free Demo</h3>
+          <button 
+            onClick={onClose} 
+            className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <X size={24} />
+          </button>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 bg-white/70 backdrop-blur-sm p-6 md:p-10 rounded-3xl shadow-xl border border-green-100">
-          {/* Left column - Form */}
-          <div>
-            {isSubmitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                  <ThumbsUp size={32} className="text-green-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Thank You!</h3>
-                <p className="text-gray-600">
-                  Your suggestion has been submitted successfully. We appreciate your feedback and will review it soon!
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">
-                    What type of suggestion do you have?
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {suggestionTypes.map((type) => (
-                      <SuggestionCard
-                        key={type.id}
-                        icon={type.icon}
-                        title={type.title}
-                        isSelected={suggestionType === type.id}
-                        onClick={() => setSuggestionType(type.id)}
-                      />
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full p-4 border-2 border-green-200 rounded-lg focus:border-green-500 focus:ring focus:ring-green-200 transition-all"
-                    placeholder="Enter your name"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full p-4 border-2 border-green-200 rounded-lg focus:border-green-500 focus:ring focus:ring-green-200 transition-all"
-                    placeholder="Enter your email"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-                    Your Suggestion
-                  </label>
-                  <textarea
-                    id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full p-4 border-2 border-green-200 rounded-lg focus:border-green-500 focus:ring focus:ring-green-200 transition-all"
-                    placeholder="Share your thoughts..."
-                    rows={5}
-                    required
-                  />
-                </div>
-                
-                <button
-                  type="submit"
-                  className={`w-full py-4 rounded-lg font-semibold text-lg flex items-center justify-center ${
-                    isSubmitting 
-                      ? 'bg-green-400 text-white cursor-not-allowed'
-                      : 'bg-gradient-to-r from-emerald-600 to-green-600 text-white hover:shadow-lg hover:shadow-green-500/30'
-                  }`}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="mr-2" size={20} />
-                      Send Suggestion
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-          </div>
-          
-          {/* Right column - Illustrations and info */}
-          <div className="relative hidden md:block">
-            {/* Decorative elements */}
-            <div className="absolute inset-0">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-300/20 rounded-full"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-300/20 rounded-full"></div>
+        <form className="p-6 space-y-6" onSubmit={handleSubmit}>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+                placeholder="Your name"
+                required
+              />
             </div>
             
-            {/* Illustration */}
-            <div className="relative h-full flex flex-col items-center justify-center text-center p-6">
-              <div className="w-48 h-48 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center mb-8 relative">
-                <img
-                  src="/api/placeholder/200/200"
-                  alt="Suggestion illustration"
-                  className="w-32 h-32 object-cover rounded-full"
-                />
-                <div className="absolute -top-4 -right-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
-                  <MessageCircle size={20} />
-                </div>
-              </div>
-              
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">We Value Your Input</h3>
-              <p className="text-gray-600 mb-6">
-                Your suggestions help us create better learning experiences. We review each submission carefully.
+            <div>
+              <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+              placeholder="Your phone number"
+              required
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="course" className="block text-gray-700 font-medium mb-2">
+              Course Interested In
+            </label>
+            <select
+              id="course"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+              required
+            >
+              <option value="">Select a course</option>
+              <option value="course1">Academic Course 1</option>
+              <option value="course2">Academic Course 2</option>
+              <option value="course3">Academic Course 3</option>
+            </select>
+          </div>
+          
+          <button
+            type="submit"
+            className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          >
+            Submit Request
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const SupportForm: React.FC = () => {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState<boolean>(false);
+  
+  const handleOpenDemoModal = (): void => {
+    setIsDemoModalOpen(true);
+  };
+  
+  const handleCloseDemoModal = (): void => {
+    setIsDemoModalOpen(false);
+  };
+  
+  const handleCall = (): void => {
+    console.log('Call requested');
+    // Add your call logic here
+  };
+  
+  const handleMail = (): void => {
+    console.log('Mail requested');
+    // Add your mail logic here
+  };
+  
+  return (
+    <section className="py-16 bg-gradient-to-b from-blue-50 via-green-50 to-purple-100 min-h-screen">
+      {/* Header Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Left content */}
+            <div className="p-8 md:p-12">
+              <div className="uppercase text-sm font-semibold text-gray-600 mb-2">SUPPORT</div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">NxtSync Academic Support</h1>
+              <p className="text-gray-600 text-lg">
+                Get better help from our best support team of NxtSync
               </p>
-              
-              <div className="grid grid-cols-2 gap-4 w-full">
-                <div className="text-center p-4 bg-emerald-50 rounded-lg">
-                  <div className="text-emerald-600 font-bold text-3xl mb-1">98%</div>
-                  <div className="text-gray-500 text-sm">Implementation Rate</div>
+            </div>
+            
+            {/* Right image */}
+            <div className="relative overflow-hidden bg-green-100 rounded-l-full">
+              <div className="absolute -right-16 -bottom-16 w-64 h-64 bg-yellow-200 rounded-full opacity-40"></div>
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                <div className="absolute w-40 h-40 bg-green-200 rounded-full flex items-center justify-center">
+                  <MessageCircle size={40} className="text-green-800" />
                 </div>
-                <div className="text-center p-4 bg-green-50 rounded-lg">
-                  <div className="text-green-600 font-bold text-3xl mb-1">24h</div>
-                  <div className="text-gray-500 text-sm">Response Time</div>
-                </div>
+                {/* <img
+                  src="/api/placeholder/400/300"
+                  alt="Support Representative"
+                  className="relative z-10 h-full object-cover"
+                /> */}
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Extra details - feature highlights */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: Sparkles,
-              title: "New Features",
-              description: "We're constantly adding new features based on your feedback.",
-              color: "from-emerald-500 to-green-500"
-            },
-            {
-              icon: ThumbsUp,
-              title: "Community Driven",
-              description: "Our platform evolves with the needs of our learning community.",
-              color: "from-green-500 to-teal-500"
-            },
-            {
-              icon: Zap,
-              title: "Quick Response",
-              description: "We respond to all suggestions within 24 hours.",
-              color: "from-teal-500 to-emerald-500"
-            }
-          ].map((feature, index) => (
-            <div 
-              key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all"
-            >
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} text-white flex items-center justify-center mb-4`}>
-                <feature.icon size={24} />
-              </div>
-              
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
+      {/* Three Support Options */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* Demo Card */}
+          <SupportCard
+            title="DEMO"
+            description="Request a free demo"
+            ctaText="Request Demo"
+            icon={FileDown}
+            bgColor="bg-green-400 text-white"
+            onClick={handleOpenDemoModal}
+          />
+          
+          {/* Call Card */}
+          <SupportCard
+            title="CALL US"
+            description="Have doubt? Call Us"
+            ctaText="Call Now"
+            icon={Phone}
+            bgColor="bg-blue-400 text-white"
+            onClick={handleCall}
+          />
+          
+          {/* Query Card */}
+          <SupportCard
+            title="QUERY"
+            description="Have query? Mail Us"
+            ctaText="Send Mail"
+            icon={Mail}
+            bgColor="bg-blue-500 text-white"
+            onClick={handleMail}
+          />
         </div>
       </div>
+      
+      {/* Additional content section to ensure the background color extends */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h3 className="text-xl font-bold mb-4">Why Choose NxtSync Support?</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <div className="flex-shrink-0 mt-1 h-5 w-5 text-green-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="ml-3 text-gray-700">24/7 Expert Support</p>
+              </li>
+              <li className="flex items-start">
+                <div className="flex-shrink-0 mt-1 h-5 w-5 text-green-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="ml-3 text-gray-700">Personalized Learning Paths</p>
+              </li>
+              <li className="flex items-start">
+                <div className="flex-shrink-0 mt-1 h-5 w-5 text-green-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="ml-3 text-gray-700">Interactive Learning Materials</p>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h3 className="text-xl font-bold mb-4">Our Academic Excellence</h3>
+            <p className="text-gray-700 mb-4">
+              NxtSync provides industry-leading academic support services designed to help students achieve their academic goals.
+            </p>
+            <p className="text-gray-700">
+              Our team of expert educators and support staff are dedicated to providing personalized assistance tailored to your specific needs.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Demo Form Modal */}
+      <DemoFormModal isOpen={isDemoModalOpen} onClose={handleCloseDemoModal} />
     </section>
   );
 };
 
-export default ContactForm
+export default SupportForm;
+
+

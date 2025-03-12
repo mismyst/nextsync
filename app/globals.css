@@ -24,3 +24,324 @@
 .animate-gradient {
   animation: gradientBackground 12s ease infinite;
 }
+/* Global or Component-Specific Styles (e.g., globals.css or HeroSection.module.css) */
+
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(40px, 30px) scale(1.2);
+  }
+  50% {
+    transform: translate(-30px, -20px) scale(0.8);
+  }
+  75% {
+    transform: translate(20px, 10px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.bg-blob-animation::before,
+.bg-blob-animation::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.6), rgba(0, 0, 255, 0.6), rgba(0, 255, 0, 0.6));
+  border-radius: 50%;
+  animation: floatBlob 8s ease-in-out infinite;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.bg-blob-animation::after {
+  top: 50%;
+  left: 50%;
+  animation-delay: 4s;
+  background: radial-gradient(circle, rgba(255, 255, 0, 0.6), rgba(0, 255, 255, 0.6), rgba(255, 0, 255, 0.6));
+}
+
+
+/* Global or Component-Specific Styles (e.g., globals.css or HeroSection.module.css) */
+
+/* Keyframes for floating blobs */
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(40px, 20px) scale(1.1);
+  }
+  50% {
+    transform: translate(-30px, -40px) scale(0.9);
+  }
+  75% {
+    transform: translate(60px, 30px) scale(1.2);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Creating multiple tiny colorful blobs */
+.bg-blob-animation::before,
+.bg-blob-animation::after,
+.bg-blob-animation .blob {
+  content: "";
+  position: absolute;
+  background: rgb(255, 0, 0);
+  background: linear-gradient(45deg, rgba(255, 0, 0, 0.7), rgba(0, 255, 255, 0.7), rgba(0, 255, 0, 0.7), rgba(255, 255, 0, 0.7));
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatBlob 8s ease-in-out infinite;
+}
+
+.bg-blob-animation::before {
+  top: 10%;
+  left: 10%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 0s;
+}
+
+.bg-blob-animation::after {
+  top: 60%;
+  left: 30%;
+  width: 120px;
+  height: 120px;
+  animation-delay: 2s;
+}
+
+.bg-blob-animation .blob {
+  top: 40%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  animation-delay: 4s;
+}
+
+.bg-blob-animation .blob:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.6), rgba(0, 0, 255, 0.6));
+}
+
+.bg-blob-animation .blob:nth-child(2) {
+  top: 50%;
+  left: 70%;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 255, 0, 0.6), rgba(0, 255, 255, 0.6));
+}
+
+.bg-blob-animation .blob:nth-child(3) {
+  top: 70%;
+  left: 30%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.6), rgba(255, 0, 255, 0.6));
+}
+
+.bg-blob-animation .blob:nth-child(4) {
+  top: 10%;
+  left: 80%;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(0, 0, 255, 0.6), rgba(255, 0, 0, 0.6));
+}
+
+.bg-blob-animation .blob:nth-child(5) {
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 165, 0, 0.6), rgba(0, 255, 255, 0.6));
+}
+
+.bg-blob-animation .blob:nth-child(6) {
+  top: 80%;
+  left: 40%;
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.6), rgba(255, 0, 255, 0.6));
+}
+
+/* Adding the blobs dynamically */
+.bg-blob-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-blob-animation .blob {
+  position: absolute;
+  animation: floatBlob 10s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Global or Component-Specific Styles (e.g., globals.css or HeroSection.module.css) */
+
+/* Keyframes for fast, chaotic floating motion */
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(100px, 100px) scale(0.8);
+  }
+  40% {
+    transform: translate(-200px, 50px) scale(1.2);
+  }
+  60% {
+    transform: translate(300px, -100px) scale(1);
+  }
+  80% {
+    transform: translate(-150px, -300px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Create many colorful floating blobs with varied sizes and speeds */
+.bg-blob-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-blob-animation .blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatBlob 6s ease-in-out infinite;
+}
+
+.bg-blob-animation .blob:nth-child(1) {
+  width: 120px;
+  height: 120px;
+  top: 10%;
+  left: 5%;
+  background: linear-gradient(45deg, rgba(255, 0, 0, 0.7), rgba(0, 255, 255, 0.7));
+  animation-duration: 4s;
+}
+
+.bg-blob-animation .blob:nth-child(2) {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  left: 70%;
+  background: linear-gradient(45deg, rgba(0, 255, 0, 0.7), rgba(255, 0, 255, 0.7));
+  animation-duration: 5s;
+}
+
+.bg-blob-animation .blob:nth-child(3) {
+  width: 100px;
+  height: 100px;
+  top: 40%;
+  left: 30%;
+  background: linear-gradient(45deg, rgba(255, 255, 0, 0.7), rgba(0, 0, 255, 0.7));
+  animation-duration: 7s;
+}
+
+.bg-blob-animation .blob:nth-child(4) {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  left: 10%;
+  background: linear-gradient(45deg, rgba(255, 0, 255, 0.7), rgba(255, 255, 0, 0.7));
+  animation-duration: 6s;
+}
+
+.bg-blob-animation .blob:nth-child(5) {
+  width: 130px;
+  height: 130px;
+  top: 30%;
+  left: 80%;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.7), rgba(255, 0, 0, 0.7));
+  animation-duration: 8s;
+}
+
+.bg-blob-animation .blob:nth-child(6) {
+  width: 90px;
+  height: 90px;
+  top: 80%;
+  left: 40%;
+  background: linear-gradient(45deg, rgba(255, 165, 0, 0.7), rgba(0, 255, 0, 0.7));
+  animation-duration: 5s;
+}
+
+.bg-blob-animation .blob:nth-child(7) {
+  width: 70px;
+  height: 70px;
+  top: 50%;
+  left: 10%;
+  background: linear-gradient(45deg, rgba(255, 0, 0, 0.7), rgba(0, 255, 255, 0.7));
+  animation-duration: 9s;
+}
+
+.bg-blob-animation .blob:nth-child(8) {
+  width: 140px;
+  height: 140px;
+  top: 20%;
+  left: 50%;
+  background: linear-gradient(45deg, rgba(0, 255, 0, 0.7), rgba(0, 0, 255, 0.7));
+  animation-duration: 6s;
+}
+
+.bg-blob-animation .blob:nth-child(9) {
+  width: 110px;
+  height: 110px;
+  top: 70%;
+  left: 60%;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.7), rgba(255, 255, 0, 0.7));
+  animation-duration: 7s;
+}
+
+/* Repeat many more blobs with different delays */
+.bg-blob-animation .blob:nth-child(10) {
+  width: 130px;
+  height: 130px;
+  top: 40%;
+  left: 90%;
+  background: linear-gradient(45deg, rgba(255, 165, 0, 0.7), rgba(0, 255, 255, 0.7));
+  animation-duration: 5s;
+}
+
+/* Keyframes for Explosive, Chaotic Movement */
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(80px, 40px) scale(1.2);
+  }
+  40% {
+    transform: translate(-100px, 50px) scale(1.4);
+  }
+  60% {
+    transform: translate(300px, -200px) scale(1.5);
+  }
+  80% {
+    transform: translate(-200px, -250px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
