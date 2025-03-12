@@ -60,7 +60,7 @@ const TrainingCard: React.FC<TrainingCardProps> = ({
             </div>
             <div className="flex items-baseline">
               <p className="text-gray-500 text-sm line-through mr-2">₹{originalPrice.toLocaleString()}/-</p>
-              <p className="text-xl font-bold text-gray-800">₹{discountedPrice.toLocaleString()}/-</p>
+              <p className="text-xl font-bold text-gray-800">INR{discountedPrice.toLocaleString()}/-</p>
             </div>
           </div>
           <button className="flex items-center justify-center bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors">
