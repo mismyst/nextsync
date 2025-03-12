@@ -344,3 +344,28 @@
     transform: translate(0, 0) scale(1);
   }
 }
+
+/* for partners component */
+.partners-container {
+  position: relative;
+  width: 100%;
+}
+
+.partners-slider {
+  display: flex;
+  width: max-content;
+  animation: slide 25s linear infinite;
+}
+
+.partner-logo {
+  flex-shrink: 0;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
