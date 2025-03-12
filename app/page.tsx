@@ -208,7 +208,7 @@ const Page = function Page() {
               </div>
             </div>
           </div>
-   {/* Training cards section with just two categories */}
+ {/* Training cards section with just two categories */}
 <div className="my-6 sm:my-8 md:my-12">
   <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
     <div className="flex justify-between items-center mb-8">
