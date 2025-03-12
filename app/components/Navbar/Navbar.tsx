@@ -27,6 +27,14 @@ const Navbar = () => {
     };
   }, []);
 
+  // Navigation links data
+  const navLinks = [
+    { href: "./CertificationsPage", label: "Certificates" },
+    { href: "./InternshipsPage", label: "Internships" },
+    { href: "./TrainingPage", label: "Training" },
+    { href: "./Courses", label: "Courses" }
+  ];
+
   return (
     <>
       {/* Floating Navbar */}
@@ -46,13 +54,20 @@ const Navbar = () => {
               />
             </Link>
 
-            {/* Center: Navigation Links */}
-            <ul className="hidden md:flex space-x-10 text-black font-medium">
-              <li><Link href="./CertificationsPage" className="hover:text-teal-500">Certificates</Link></li>
-              <li><Link href="./InternshipsPage" className="hover:text-teal-500">Internships</Link></li>
-              <li><Link href="./TrainingPage" className="hover:text-teal-500">Training</Link></li>
-              <li><Link href="./Courses" className="hover:text-teal-500">Courses</Link></li>
-            </ul>
+            {/* Center: Navigation Links in a container box with individual boxes inside */}
+            <div className="hidden md:block bg-gray-50 rounded-xl px-3 py-2">
+              <div className="flex space-x-3">
+                {navLinks.map((link, index) => (
+                  <Link 
+                    key={index} 
+                    href={link.href} 
+                    className="px-4 py-2 bg-white border border-gray-100 rounded-lg hover:bg-teal-50 hover:border-teal-500 hover:text-teal-500 transition duration-300 font-medium text-black text-center shadow-sm"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             {/* Right: "JOIN US" Button */}
             <button 
