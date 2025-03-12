@@ -154,7 +154,7 @@ const TrainingPage = () => {
           onClick={handleBackdropClick}
         >
           <div className="bg-gray-900 text-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className={`${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative`}>
+            <div className={${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative}>
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-all"
