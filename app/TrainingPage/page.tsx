@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
@@ -16,7 +15,7 @@ interface TrainingCardData {
   startDate?: string;
 }
 
-const TrainingPage = () => {
+const TrainingPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [cardsPerPage] = useState<number>(6);
@@ -52,14 +51,15 @@ const TrainingPage = () => {
   const openModal = (course: TrainingCardData) => {
     setSelectedCourse(course);
     setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
   };
   
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
   };
 
+  // Close modal when clicking outside of it
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -75,7 +75,7 @@ const TrainingPage = () => {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600">Training Programs</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Advance your career with our industry-leading training programs designed by experts to help you excel in today's competitive market.
+            Advance your career with our industry-leading training programs designed by experts to help you excel in today&apos;s competitive market.
           </p>
         </div>
         
@@ -148,13 +148,14 @@ const TrainingPage = () => {
         )}
       </div>
       
+      {/* Registration Modal */}
       {isModalOpen && selectedCourse && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85 backdrop-blur-md transition-opacity duration-300"
           onClick={handleBackdropClick}
         >
           <div className="bg-gray-900 text-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className={${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative}>
+            <div className={`${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative`}>
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-all"
