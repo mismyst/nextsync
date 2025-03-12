@@ -17,13 +17,13 @@ interface TrainingCardData {
 }
 
 const TrainingPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(6);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [cardsPerPage] = useState<number>(6);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedCourse, setSelectedCourse] = useState<TrainingCardData | null>(null);
   
-  const cardDetails = [
+  const cardDetails: TrainingCardData[] = [
     { instituteName: "SKYLABS Institute", courseTitle: "Advanced Technical Management", price: 12500, backgroundGradient: "bg-gradient-to-br from-blue-600 to-purple-600", category: "technical", duration: "12 weeks", startDate: "April 15, 2025" },
     { instituteName: "Nayarth College of Technical Management", courseTitle: "Professional Technical Management", price: 2500, backgroundGradient: "bg-gradient-to-br from-green-500 to-teal-600", category: "technical", duration: "8 weeks", startDate: "May 1, 2025" },
     { instituteName: "Academy of Digital Marketing", courseTitle: "Digital Marketing Fundamentals", price: 1800, backgroundGradient: "bg-gradient-to-br from-red-500 to-orange-500", category: "marketing", duration: "6 weeks", startDate: "April 20, 2025" },
@@ -49,7 +49,7 @@ const TrainingPage = () => {
     setCurrentPage(1); 
   }, [selectedCategory]);
   
-  const openModal = (course) => {
+  const openModal = (course: TrainingCardData) => {
     setSelectedCourse(course);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
@@ -60,7 +60,7 @@ const TrainingPage = () => {
     document.body.style.overflow = 'auto';
   };
 
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
