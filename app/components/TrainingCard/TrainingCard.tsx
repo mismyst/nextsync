@@ -5,7 +5,7 @@ import { FaStar, FaArrowRight, FaUsers, FaCheckCircle, FaTag } from 'react-icons
 interface TrainingCardProps {
   instituteName: string;
   courseTitle: string;
-  price: number;
+  price: number; // Keeping in props for compatibility
   backgroundGradient: string;
 }
 
@@ -13,6 +13,7 @@ const TrainingCard: React.FC<TrainingCardProps> = ({
   instituteName, 
   courseTitle, 
   backgroundGradient 
+  // Removed price from destructuring since we're not using it
 }) => {
   // Generate random rating between 4.0 and 5.0
   const rating = (4 + Math.random()).toFixed(1);
