@@ -59,7 +59,7 @@ const Footer = () => {
           <ul className="space-y-3 text-gray-400">
             <li className="flex items-center space-x-3">
               <FaMapMarkerAlt className="text-yellow-400" />
-              <span>1234 Street, City, Country</span>
+              <span>1st floor, Divya diamonds building, Kavuri Hills Rd, CBI Colony, Madhapur, Hyderabad, Telangana 500033</span>
             </li>
             <li className="flex items-center space-x-3">
               <FaEnvelope className="text-yellow-400" />
@@ -67,7 +67,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-3">
               <FaPhone className="text-yellow-400" />
-              <span>+123 456 7890</span>
+              <span>+91 6361136916</span>
             </li>
           </ul>
         </div>
