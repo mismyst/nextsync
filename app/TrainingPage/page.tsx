@@ -16,14 +16,14 @@ interface TrainingCardData {
   startDate?: string;
 }
 
-const TrainingPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [cardsPerPage] = useState<number>(6);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedCourse, setSelectedCourse] = useState<TrainingCardData | null>(null);
+const TrainingPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(6);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   
-  const cardDetails: TrainingCardData[] = [
+  const cardDetails = [
     { instituteName: "SKYLABS Institute", courseTitle: "Advanced Technical Management", price: 12500, backgroundGradient: "bg-gradient-to-br from-blue-600 to-purple-600", category: "technical", duration: "12 weeks", startDate: "April 15, 2025" },
     { instituteName: "Nayarth College of Technical Management", courseTitle: "Professional Technical Management", price: 2500, backgroundGradient: "bg-gradient-to-br from-green-500 to-teal-600", category: "technical", duration: "8 weeks", startDate: "May 1, 2025" },
     { instituteName: "Academy of Digital Marketing", courseTitle: "Digital Marketing Fundamentals", price: 1800, backgroundGradient: "bg-gradient-to-br from-red-500 to-orange-500", category: "marketing", duration: "6 weeks", startDate: "April 20, 2025" },
@@ -49,19 +49,18 @@ const TrainingPage: React.FC = () => {
     setCurrentPage(1); 
   }, [selectedCategory]);
   
-  const openModal = (course: TrainingCardData) => {
+  const openModal = (course) => {
     setSelectedCourse(course);
     setIsModalOpen(true);
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden';
   };
   
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    document.body.style.overflow = 'auto';
   };
 
-  // Close modal when clicking outside of it
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
@@ -149,14 +148,13 @@ const TrainingPage: React.FC = () => {
         )}
       </div>
       
-      {/* Registration Modal */}
       {isModalOpen && selectedCourse && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85 backdrop-blur-md transition-opacity duration-300"
           onClick={handleBackdropClick}
         >
           <div className="bg-gray-900 text-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className={${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative}>
+            <div className={`${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative`}>
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-all"
