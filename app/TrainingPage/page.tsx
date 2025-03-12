@@ -18,7 +18,7 @@ interface TrainingCardData {
   startDate?: string;
 }
 
-const  TrainingPage() {
+const TrainingPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [cardsPerPage] = useState<number>(6);
@@ -149,7 +149,7 @@ const  TrainingPage() {
   };
   
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+    <div className="bg-gradient-to-b from-green-50 to-green-100 min-h-screen">
       <Navbar />
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-16">
@@ -337,5 +337,6 @@ const  TrainingPage() {
       <Footer />
     </div>
   );
-}
+};
+
 export default TrainingPage;
