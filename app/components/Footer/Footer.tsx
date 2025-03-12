@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="mt-5">
             <p className="font-semibold">Follow Us</p>
             <div className="flex space-x-4 mt-2">
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-yellow-400 transition">
+              <a href="https://www.instagram.com/nxt_sync?igsh=bGhyNm95d2I3emp5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-yellow-400 transition">
                 <FaInstagram size={24} />
               </a>
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-yellow-400 transition">
