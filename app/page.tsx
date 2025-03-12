@@ -46,53 +46,7 @@ const trainingsData: Training[] = [
   }
 ];
 
-// Define internship data similar to the course data structure
-const internshipsData: Internship[] = [
-  {
-    name: 'AI Research Internship',
-    providers: ['Google AI', 'DeepMind', 'Stanford'],
-    duration: '3 Months',
-    stipend: true,
-    featured: true,
-    openings: 5,
-    bgColor: 'bg-emerald-500',
-    category: 'RESEARCH',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
-  },
-  {
-    name: 'Full Stack Development',
-    providers: ['Meta', 'Netflix', 'Airbnb'],
-    duration: '6 Months',
-    stipend: true,
-    featured: true,
-    openings: 8,
-    bgColor: 'bg-blue-500',
-    category: 'DEV',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
-  },
-  {
-    name: 'Product Design',
-    providers: ['Apple', 'Figma', 'Adobe'],
-    duration: '4 Months',
-    stipend: true,
-    featured: false,
-    openings: 3,
-    bgColor: 'bg-pink-500',
-    category: 'DESIGN',
-    image: 'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=800&q=80',
-  },
-  {
-    name: 'Data Science',
-    providers: ['IBM', 'Microsoft', 'Kaggle'],
-    duration: '3 Months',
-    stipend: true,
-    featured: true,
-    openings: 6,
-    bgColor: 'bg-purple-500',
-    category: 'DATA',
-    image: 'https://images.unsplash.com/photo-1531279550271-23c2a77a765c?w=800&q=80',
-  }
-];
+
 
 // Simplified background component
 const SimpleBackground = React.memo(function SimpleBackground() {
