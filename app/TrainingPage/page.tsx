@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
@@ -9,14 +9,16 @@ import { FaPhoneAlt, FaComments, FaTimes, FaCalendarAlt, FaClock, FaUser, FaEnve
 interface TrainingCardData {
   instituteName: string;
   courseTitle: string;
+  originalPrice: number;
   price: number;
+  discountPercentage: number;
   backgroundGradient: string;
   category: string;
   duration?: string;
   startDate?: string;
 }
 
-const TrainingPage = () => {
+export default function TrainingPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [cardsPerPage] = useState<number>(6);
@@ -24,14 +26,94 @@ const TrainingPage = () => {
   const [selectedCourse, setSelectedCourse] = useState<TrainingCardData | null>(null);
   
   const cardDetails: TrainingCardData[] = [
-    { instituteName: "SKYLABS Institute", courseTitle: "Advanced Technical Management", price: 12500, backgroundGradient: "bg-gradient-to-br from-blue-600 to-purple-600", category: "technical", duration: "12 weeks", startDate: "April 15, 2025" },
-    { instituteName: "Nayarth College of Technical Management", courseTitle: "Professional Technical Management", price: 2500, backgroundGradient: "bg-gradient-to-br from-green-500 to-teal-600", category: "technical", duration: "8 weeks", startDate: "May 1, 2025" },
-    { instituteName: "Academy of Digital Marketing", courseTitle: "Digital Marketing Fundamentals", price: 1800, backgroundGradient: "bg-gradient-to-br from-red-500 to-orange-500", category: "marketing", duration: "6 weeks", startDate: "April 20, 2025" },
-    { instituteName: "Business Strategy Institute", courseTitle: "Strategic Business Management", price: 3500, backgroundGradient: "bg-gradient-to-br from-indigo-500 to-blue-500", category: "business", duration: "10 weeks", startDate: "May 10, 2025" },
-    { instituteName: "Tech Innovation Lab", courseTitle: "Cloud Architecture Masterclass", price: 4200, backgroundGradient: "bg-gradient-to-br from-purple-500 to-pink-500", category: "technical", duration: "8 weeks", startDate: "April 25, 2025" },
-    { instituteName: "Leadership Academy", courseTitle: "Executive Leadership Program", price: 5000, backgroundGradient: "bg-gradient-to-br from-yellow-400 to-orange-500", category: "leadership", duration: "16 weeks", startDate: "June 1, 2025" },
-    { instituteName: "Data Science Center", courseTitle: "Advanced Data Analytics", price: 3800, backgroundGradient: "bg-gradient-to-br from-cyan-500 to-blue-500", category: "technical", duration: "12 weeks", startDate: "May 5, 2025" },
-    { instituteName: "Global Marketing School", courseTitle: "International Marketing Strategies", price: 2900, backgroundGradient: "bg-gradient-to-br from-green-400 to-emerald-500", category: "marketing", duration: "8 weeks", startDate: "April 30, 2025" }
+    { 
+      instituteName: "SKYLABS Institute", 
+      courseTitle: "Advanced Technical Management", 
+      originalPrice: 22000, 
+      price: 11000, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-blue-600 to-purple-600", 
+      category: "technical", 
+      duration: "12 weeks", 
+      startDate: "April 15, 2025" 
+    },
+    { 
+      instituteName: "Nayarth College of Technical Management", 
+      courseTitle: "Professional Technical Management", 
+      originalPrice: 5000, 
+      price: 2500, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-green-500 to-teal-600", 
+      category: "technical", 
+      duration: "8 weeks", 
+      startDate: "May 1, 2025" 
+    },
+    { 
+      instituteName: "Academy of Digital Marketing", 
+      courseTitle: "Digital Marketing Fundamentals", 
+      originalPrice: 3600, 
+      price: 1800, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-red-500 to-orange-500", 
+      category: "marketing", 
+      duration: "6 weeks", 
+      startDate: "April 20, 2025" 
+    },
+    { 
+      instituteName: "Business Strategy Institute", 
+      courseTitle: "Strategic Business Management", 
+      originalPrice: 7000, 
+      price: 3500, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-indigo-500 to-blue-500", 
+      category: "business", 
+      duration: "10 weeks", 
+      startDate: "May 10, 2025" 
+    },
+    { 
+      instituteName: "Tech Innovation Lab", 
+      courseTitle: "Cloud Architecture Masterclass", 
+      originalPrice: 8400, 
+      price: 4200, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-purple-500 to-pink-500", 
+      category: "technical", 
+      duration: "8 weeks", 
+      startDate: "April 25, 2025" 
+    },
+    { 
+      instituteName: "Leadership Academy", 
+      courseTitle: "Executive Leadership Program", 
+      originalPrice: 10000, 
+      price: 5000, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-yellow-400 to-orange-500", 
+      category: "leadership", 
+      duration: "16 weeks", 
+      startDate: "June 1, 2025" 
+    },
+    { 
+      instituteName: "Data Science Center", 
+      courseTitle: "Advanced Data Analytics", 
+      originalPrice: 7600, 
+      price: 3800, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-cyan-500 to-blue-500", 
+      category: "technical", 
+      duration: "12 weeks", 
+      startDate: "May 5, 2025" 
+    },
+    { 
+      instituteName: "Global Marketing School", 
+      courseTitle: "International Marketing Strategies", 
+      originalPrice: 5800, 
+      price: 2900, 
+      discountPercentage: 50, 
+      backgroundGradient: "bg-gradient-to-br from-green-400 to-emerald-500", 
+      category: "marketing", 
+      duration: "8 weeks", 
+      startDate: "April 30, 2025" 
+    }
   ];
   
   const filteredCards = selectedCategory === "all" ? cardDetails : cardDetails.filter(card => card.category === selectedCategory);
@@ -154,7 +236,7 @@ const TrainingPage = () => {
           onClick={handleBackdropClick}
         >
           <div className="bg-gray-900 text-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className={${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative}>
+            <div className={`${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative`}>
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-all"
@@ -175,8 +257,14 @@ const TrainingPage = () => {
                   <FaClock className="text-green-400 mr-2" />
                   <span>Duration: {selectedCourse.duration}</span>
                 </div>
-                <div className="flex items-center font-bold text-lg">
-                  <span>₹{selectedCourse.price.toLocaleString()}</span>
+                <div className="flex flex-col items-end">
+                  <span className="text-gray-400 line-through text-sm">₹{selectedCourse.originalPrice.toLocaleString()}</span>
+                  <div className="flex items-center">
+                    <span className="font-bold text-lg text-green-400">₹{selectedCourse.price.toLocaleString()}</span>
+                    <span className="ml-2 bg-green-900 text-green-200 text-xs px-2 py-1 rounded-full">
+                      {selectedCourse.discountPercentage}% OFF
+                    </span>
+                  </div>
                 </div>
               </div>
               
@@ -249,6 +337,4 @@ const TrainingPage = () => {
       <Footer />
     </div>
   );
-};
-
-export default TrainingPage;
+}
