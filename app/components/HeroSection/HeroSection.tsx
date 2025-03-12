@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-teal-100 to-blue-100 rounded-2xl -rotate-3"></div>
           <div className="relative z-10 rounded-2xl shadow-2xl transform rotate-3 overflow-hidden h-96 w-full">
             <Image
-              src="/images/studying.jpg"
+              src="/images/imagge.jpg"
               alt="Learning community"
               width={600}
               height={400}
