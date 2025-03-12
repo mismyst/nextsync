@@ -17,9 +17,11 @@ const Partners = () => {
     <div className="py-8">
       <h2 className="text-3xl font-bold text-center mb-10 text-slate-800">Our Trusted Partners</h2>
       
+      {/* This container has the "partners-container" class which is styled in global.css */}
       <div className="partners-container overflow-hidden">
+        {/* This div has the "partners-slider" class which is animated in global.css */}
         <div className="partners-slider">
-          {/* First set of logos */}
+          {/* Each logo div has the "partner-logo" class */}
           {partnerLogos.map((logo) => (
             <div 
               key={logo.id} 
@@ -38,7 +40,7 @@ const Partners = () => {
             </div>
           ))}
           
-          {/* Duplicate logos for seamless loop */}
+          {/* Duplicated logos for seamless animation */}
           {partnerLogos.map((logo) => (
             <div 
               key={`${logo.id}-duplicate`} 
