@@ -6,34 +6,42 @@ interface TrainingCardProps {
   instituteName: string;
   courseTitle: string;
   price: number;
-  backgroundGradient: string;
+  discountedPrice?: number;
+  cardType: 'technical' | 'non-technical';
+  skills: string[];
 }
 
 const TrainingCard: React.FC<TrainingCardProps> = ({ 
   instituteName, 
   courseTitle, 
   price, 
-  backgroundGradient 
+  discountedPrice,
+  cardType,
+  skills
 }) => {
-  // Generate random rating between 4.0 and 5.0
-  const rating = (4 + Math.random()).toFixed(1);
+  // Card background colors based on type
+  const cardBackground = cardType === 'technical' 
+    ? 'bg-emerald-700 text-white' // Green background for technical courses (matching site)
+    : 'bg-blue-600 text-white';   // Blue background for non-technical courses
   
-  // Random number of students between 50 and 500
-  const students = Math.floor(Math.random() * 450) + 50;
+  // Generate random rating between 4.3 and 5.0
+  const rating = (4.3 + Math.random() * 0.7).toFixed(1);
   
-  // Random features
-  const features = [
-    "Certificate Included",
-    "Industry Expert Trainers",
-    "Hands-on Projects",
-    "24/7 Support"
-  ];
+  // Random number of students between 500 and 2000
+  const students = Math.floor(Math.random() * 1500) + 500;
   
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer">
-      <div className={`${backgroundGradient} p-6 text-white`}>
-        <p className="text-sm font-medium opacity-90">{instituteName}</p>
-        <h3 className="text-xl font-bold mt-1">{courseTitle}</h3>
+    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+      <div className={`${cardBackground} p-6`}>
+        <div className="flex justify-between items-start">
+          <div>
+            <p className="text-sm font-medium opacity-90">{instituteName}</p>
+            <h3 className="text-xl font-bold mt-1">{courseTitle}</h3>
+          </div>
+          <div className="flex items-center justify-center rounded-full bg-white text-gray-800 h-10 w-10 font-bold">
+            {cardType === 'technical' ? 'T' : 'NT'}
+          </div>
+        </div>
         
         <div className="flex items-center mt-3">
           <FaStar className="text-yellow-300" />
@@ -44,25 +52,28 @@ const TrainingCard: React.FC<TrainingCardProps> = ({
       </div>
       
       <div className="p-6">
+        <p className="font-medium text-gray-700 mb-2">Let's get better skills by mastering:</p>
         <div className="mb-4">
-          {features.slice(0, 3).map((feature, index) => (
+          {skills.map((skill, index) => (
             <div key={index} className="flex items-center mb-2">
-              <FaCheckCircle className="text-green-500 mr-2 flex-shrink-0" />
-              <span className="text-gray-700">{feature}</span>
+              <FaCheckCircle className={`${cardType === 'technical' ? 'text-emerald-500' : 'text-blue-500'} mr-2 flex-shrink-0`} />
+              <span className="text-gray-700">{skill}</span>
             </div>
           ))}
+          <p className="text-gray-500 mt-1">+1 more...</p>
         </div>
         
-        <div className="flex justify-between items-center mt-6">
-          <div>
-            <p className="text-gray-500 text-sm">Course Fee</p>
-            <p className="text-xl font-bold text-gray-800">₹{price.toLocaleString()}</p>
+        <div className="mt-4">
+          <p className="uppercase text-sm font-bold text-amber-600">LIMITED TIME OFFER!</p>
+          <div className="flex items-end mt-1">
+            <p className="text-xl font-bold">{discountedPrice ? `INR.${discountedPrice}/-` : `INR.${price}/-`}</p>
+            {discountedPrice && <p className="ml-2 text-gray-500 line-through text-sm">₹{price}</p>}
           </div>
-          
-          <button className="flex items-center justify-center bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors">
-            <FaArrowRight />
-          </button>
         </div>
+        
+        <button className="w-full bg-gray-900 text-white py-3 rounded text-center font-medium mt-4 hover:bg-black transition-colors">
+          ENROLL NOW
+        </button>
       </div>
     </div>
   );
