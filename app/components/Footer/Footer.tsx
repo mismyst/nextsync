@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import { FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
+import Link from 'next/link'; // Import Link from next/link
 
 const Footer = () => {
   return (
@@ -43,7 +44,9 @@ const Footer = () => {
           <ul className="space-y-2">
             <li><a href="#faqs" className="text-gray-400 hover:text-yellow-400 transition">FAQs</a></li>
             <li><a href="#privacy" className="text-gray-400 hover:text-yellow-400 transition">Privacy Policy</a></li>
-            <li><a href="#terms" className="text-gray-400 hover:text-yellow-400 transition">Terms & Conditions</a></li>
+            <li>
+              <Link href="/TermsandCondition" className="text-gray-400 hover:text-yellow-400 transition">Terms & Conditions</Link>
+            </li>
           </ul>
         </div>
 
