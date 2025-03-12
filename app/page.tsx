@@ -208,7 +208,7 @@ const Page = function Page() {
               </div>
             </div>
           </div>
-        {/* Training cards section - modern and deployment friendly */}
+      {/* Training cards section - modern and deployment friendly */}
 <div className="my-4 sm:my-6 md:my-8">
   <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
     <div className="flex justify-between items-center mb-6">
@@ -249,12 +249,12 @@ const Page = function Page() {
               </div>
             </div>
             
-            {/* Price section with better positioning */}
+            {/* Price section with uniform pricing */}
             <div className="absolute bottom-16 left-5">
               <p className="text-xs font-bold text-orange-300 mb-1">LIMITED TIME OFFER!</p>
               <div className="flex items-baseline">
-                <span className="line-through text-xs text-white/70 mr-2">₹{training.originalPrice}/-</span>
-                <span className="text-xl font-bold text-white">INR.{training.discountedPrice}/-</span>
+                <span className="line-through text-xs text-white/70 mr-2">INR 11,000/-</span>
+                <span className="text-xl font-bold text-white">INR 5,550/-</span>
               </div>
             </div>
             
@@ -270,7 +270,6 @@ const Page = function Page() {
     </div>
   </div>
 </div>
-          
           {/* Contact form */}
           <div className="my-4 sm:my-6 md:my-8">
             <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 lg:p-8 rounded-2xl bg-white/40 backdrop-blur-lg shadow-lg border border-white/40">
