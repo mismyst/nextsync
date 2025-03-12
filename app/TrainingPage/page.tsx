@@ -75,7 +75,7 @@ const TrainingPage: React.FC = () => {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600">Training Programs</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Advance your career with our industry-leading training programs designed by experts to help you excel in today&apos;s competitive market.
+            Advance your career with our industry-leading training programs designed by experts to help you excel in today's competitive market.
           </p>
         </div>
         
@@ -155,7 +155,7 @@ const TrainingPage: React.FC = () => {
           onClick={handleBackdropClick}
         >
           <div className="bg-gray-900 text-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className={`${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative`}>
+            <div className={${selectedCourse.backgroundGradient} p-6 rounded-t-2xl relative}>
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-all"
