@@ -15,6 +15,7 @@ interface TrainingCardData {
   startDate?: string;
 }
 
+
 const TrainingPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
