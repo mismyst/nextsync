@@ -30,7 +30,7 @@ const TermsConditionsPage: React.FC = () => {
             <li>Your use of our Services and the website is solely at your own risk and discretion. You are required to independently assess and ensure that the Services meet your requirements.</li>
             <li>The contents of the Website and the Services are proprietary to Us and you will not have any authority to claim any intellectual property rights, title, or interest in its contents.</li>
             <li>You acknowledge that unauthorized use of the Website or the Services may lead to action against you as per these Terms or applicable laws.</li>
-            <li>You agree to pay us the charges associated with availing the Services.</li>
+            <li>You agree to pay us the charges associated with availing the Services</li>
             <li>You agree not to use the website and/ or Services for any purpose that is unlawful, illegal or forbidden by these Terms, or Indian or local laws that might apply to you.</li>
             <li>You agree and acknowledge that website and the Services may contain links to other third party websites. On accessing these links, you will be governed by the terms of use, privacy policy and such other policies of such third party websites.</li>
             <li>You understand that upon initiating a transaction for availing the Services you are entering into a legally binding and enforceable contract with the us for the Services.</li>
@@ -42,7 +42,6 @@ const TermsConditionsPage: React.FC = () => {
           </ul>
         </div>
       </div>
-
       <Footer />
     </div>
   );
