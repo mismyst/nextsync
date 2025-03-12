@@ -17,13 +17,33 @@ const Partners = () => {
     <div className="py-8">
       <h2 className="text-3xl font-bold text-center mb-10 text-slate-800">Our Trusted Partners</h2>
       
-      <div className="overflow-hidden">
-        <div className="flex animate-marquee">
+      <div className="overflow-hidden" style={{ position: 'relative' }}>
+        {/* CSS for the animation defined inline to avoid tailwind config changes */}
+        <style jsx>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          
+          .marquee-container {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+          }
+          
+          /* Optional: Pause animation on hover */
+          .marquee-container:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        
+        <div className="marquee-container">
           {/* First set of logos */}
           {partnerLogos.map((logo) => (
             <div 
               key={logo.id} 
-              className="w-36 h-36 mx-3 flex-shrink-0 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
+              className="w-36 h-36 mx-3 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
+              style={{ flexShrink: 0 }}
             >
               <div className="relative w-full h-20 mb-2">
                 <Image
@@ -42,7 +62,8 @@ const Partners = () => {
           {partnerLogos.map((logo) => (
             <div 
               key={`${logo.id}-duplicate`} 
-              className="w-36 h-36 mx-3 flex-shrink-0 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
+              className="w-36 h-36 mx-3 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
+              style={{ flexShrink: 0 }}
             >
               <div className="relative w-full h-20 mb-2">
                 <Image
@@ -63,6 +84,7 @@ const Partners = () => {
 };
 
 export default Partners;
+ 
 
 // 'use client'
 // import React from 'react';
