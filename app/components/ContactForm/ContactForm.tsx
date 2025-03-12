@@ -13,17 +13,56 @@ interface SupportCardProps {
 }
 
 const SupportCard: React.FC<SupportCardProps> = ({ icon: Icon, title, description, ctaText, bgColor, onClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:transform hover:-translate-y-1 hover:shadow-xl">
+    <div 
+      className="bg-white rounded-lg shadow-lg p-8 h-full flex flex-col transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl"
+      style={{ 
+        minHeight: '320px', // Increased card size
+        transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Icon with animation */}
+      <div className="mb-4">
+        <div 
+          className={`${bgColor} w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300`}
+          style={{
+            transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)'
+          }}
+        >
+          <Icon size={28} className="text-white" />
+        </div>
+      </div>
+      
       <div className="uppercase text-sm font-semibold text-gray-600 mb-4">{title}</div>
       
       <h3 className="text-2xl font-bold mb-6">{description}</h3>
+      
+      {/* Popup content that appears on hover */}
+      <div 
+        className="text-gray-600 mb-4 transition-all duration-300 overflow-hidden"
+        style={{ 
+          maxHeight: isHovered ? '100px' : '0',
+          opacity: isHovered ? 1 : 0,
+          margin: isHovered ? '1rem 0' : '0'
+        }}
+      >
+        <p>Get expert assistance from our dedicated team of professionals.</p>
+      </div>
       
       <div className="mt-auto">
         {ctaText && (
           <div 
             className={`${bgColor} rounded-lg flex items-center justify-center p-4 cursor-pointer hover:opacity-90 transition-all`}
             onClick={onClick}
+            style={{
+              transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+              boxShadow: isHovered ? '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' : 'none'
+            }}
           >
             <Icon size={24} className="mr-2" />
             <span className="font-medium">{ctaText}</span>
@@ -184,7 +223,7 @@ const ContactForm: React.FC = () => {
       
       {/* Three Support Options */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Demo Card */}
           <SupportCard
             title="DEMO"
@@ -269,3 +308,5 @@ const ContactForm: React.FC = () => {
 };
 
 export default ContactForm;
+    
+              
