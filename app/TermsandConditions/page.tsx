@@ -1,10 +1,13 @@
 'use client'
 
+import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
 const TermsConditionsPage: React.FC = () => {
-
+  // Use a constant for the last updated date to make future updates easier
+  const LAST_UPDATED_DATE = "12-03-2025";
+  
   return (
     <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
       <Navbar />
@@ -14,7 +17,7 @@ const TermsConditionsPage: React.FC = () => {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600">Terms & Conditions</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Last updated on 12-03-2025
+            Last updated on {LAST_UPDATED_DATE}
           </p>
         </div>
 
