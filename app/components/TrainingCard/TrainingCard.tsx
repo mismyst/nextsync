@@ -12,7 +12,6 @@ interface TrainingCardProps {
 const TrainingCard: React.FC<TrainingCardProps> = ({ 
   instituteName, 
   courseTitle, 
-  price, // we'll keep this parameter for compatibility, but won't use it
   backgroundGradient 
 }) => {
   // Generate random rating between 4.0 and 5.0
