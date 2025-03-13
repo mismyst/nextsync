@@ -28,15 +28,68 @@ const trainingsData: Training[] = [
   }
 ];
 
-// Simplified background component
-const SimpleBackground = React.memo(function SimpleBackground() {
+// Dynamic animated background component
+const AnimatedBackground = React.memo(function AnimatedBackground() {
   return (
     <>
-      {/* Simple gradient background */}
+      {/* Gradient background */}
       <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200"></div>
       
-      {/* Simple overlay */}
+      {/* Animated circles */}
+      <div className="fixed inset-0 -z-19 overflow-hidden">
+        <div className="circle-1 w-64 h-64 rounded-full bg-teal-300/20 absolute -top-10 -left-10 animate-float"></div>
+        <div className="circle-2 w-96 h-96 rounded-full bg-green-300/20 absolute top-1/4 right-1/4 animate-float-slow"></div>
+        <div className="circle-3 w-48 h-48 rounded-full bg-blue-300/20 absolute bottom-1/4 left-1/3 animate-float-reverse"></div>
+        <div className="circle-4 w-72 h-72 rounded-full bg-emerald-300/20 absolute -bottom-20 -right-20 animate-pulse-slow"></div>
+      </div>
+      
+      {/* Blur overlay */}
       <div className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[1px]"></div>
+      
+      <style jsx global>{`
+        @keyframes float {
+          0% { transform: translate(0, 0) rotate(0deg); }
+          33% { transform: translate(15px, -15px) rotate(5deg); }
+          66% { transform: translate(-10px, 20px) rotate(-5deg); }
+          100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        @keyframes float-slow {
+          0% { transform: translate(0, 0) rotate(0deg); }
+          33% { transform: translate(-20px, 10px) rotate(-3deg); }
+          66% { transform: translate(15px, -15px) rotate(3deg); }
+          100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        @keyframes float-reverse {
+          0% { transform: translate(0, 0) rotate(0deg); }
+          33% { transform: translate(20px, 15px) rotate(3deg); }
+          66% { transform: translate(-15px, -10px) rotate(-5deg); }
+          100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        @keyframes pulse-slow {
+          0% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.05); }
+          100% { opacity: 0.5; transform: scale(1); }
+        }
+        
+        .animate-float {
+          animation: float 15s ease-in-out infinite;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 20s ease-in-out infinite;
+        }
+        
+        .animate-float-reverse {
+          animation: float-reverse 18s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+          animation: pulse-slow 10s infinite;
+        }
+      `}</style>
     </>
   );
 });
@@ -50,7 +103,7 @@ const Page = function Page() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      <SimpleBackground />
+      <AnimatedBackground />
 
       {/* Main Content Container */}
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -77,7 +130,7 @@ const Page = function Page() {
               <div className="grid md:grid-cols-2 gap-8">
                 {trainingsData.map((training, index) => (
                   <div key={index} className="relative rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                    <div className={`bg-gradient-to-br from-teal-600 to-blue-600 p-5 pb-24 min-h-120`}>
+                    <div className={`bg-gradient-to-br from-teal-600 to-blue-600 p-5 pb-0 min-h-120 flex flex-col`}>
                       {/* Premium badge */}
                       <div className="absolute top-5 right-5">
                         <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm border border-white/40">
@@ -114,7 +167,7 @@ const Page = function Page() {
                       </div>
                       
                       {/* Enhanced call-to-action button */}
-                      <div className="absolute bottom-0 left-0 right-0">
+                      <div className="mt-auto">
                         <button className="w-full py-4 bg-black text-white text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-teal-900 flex items-center justify-center">
                           <span>ENROLL NOW</span>
                           <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +198,7 @@ const Page = function Page() {
                       src="/images/community.jpg" 
                       alt="Our Learning Community" 
                       fill
-                      className="object-cover" 
+                      className="object-contain" 
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
