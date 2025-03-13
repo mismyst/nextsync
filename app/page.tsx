@@ -35,7 +35,7 @@ const trainingsData: Training[] = [
   }
 ];
 
-// Dynamic animated background component with cursor tracking
+// Enhanced AnimatedBackground component with liquid flow and orange elements
 const AnimatedBackground = React.memo(function AnimatedBackground() {
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -64,7 +64,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
     };
   }, []);
   
-  // Calculate distance from mouse for each ball
+  // Calculate distance from mouse for liquid elements
   const getDistanceStyle = (baseX: number, baseY: number, intensity = 1, maxDistance = 100): React.CSSProperties => {
     if (!isMoving) return {};
     
@@ -72,149 +72,189 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
     const dy = mousePosition.y / window.innerHeight - baseY;
     const distance = Math.sqrt(dx * dx + dy * dy);
     
-    // Create repulsion effect - balls move away from cursor
+    // Create repulsion effect with more fluidity
     const factor = Math.min(maxDistance / (distance * 1000 + 1), maxDistance) * intensity;
     const translateX = -dx * factor;
     const translateY = -dy * factor;
     
     return {
       transform: `translate(${translateX}px, ${translateY}px) scale(${isMoving ? 1.05 : 1})`,
-      transition: 'transform 0.2s ease-out'
+      transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)'
     };
   };
   
   return (
     <>
-      {/* Gradient background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200"></div>
+      {/* Gradient background - warmer tones with hint of orange */}
+      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-amber-50 via-emerald-50 to-orange-50"></div>
       
-      {/* Animated gradient balls */}
+      {/* Liquid flow elements container */}
       <div className="fixed inset-0 -z-19 overflow-hidden">
-        {/* Green family balls */}
+        {/* Orange flow elements */}
         <div 
-          className="ball-1 w-20 h-20 rounded-full absolute top-1/5 left-1/4 animate-wave-1 blur-sm" 
+          className="liquid-flow-1 absolute -left-20 top-0 h-full w-40 opacity-40 animate-flow-1" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(167,243,208,0.9) 0%, rgba(16,185,129,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(167,243,208,0.5) 0%, rgba(16,185,129,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '4px'})`,
-            ...getDistanceStyle(0.25, 0.2, 1.5)
+              ? 'linear-gradient(90deg, transparent, rgba(249,115,22,0.6), rgba(234,88,12,0.5), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(249,115,22,0.4), rgba(234,88,12,0.3), transparent)',
+            filter: `blur(${isMoving ? '8px' : '12px'})`,
+            borderRadius: '40% 60% 60% 40% / 70% 30% 70% 30%',
+            ...getDistanceStyle(0.1, 0.5, 2)
           }}>
         </div>
         
         <div 
-          className="ball-2 w-16 h-16 rounded-full absolute top-1/3 left-1/6 animate-wave-2 blur-sm" 
+          className="liquid-flow-2 absolute -right-20 top-1/4 h-full w-60 opacity-30 animate-flow-2" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(209,250,229,0.9) 0%, rgba(52,211,153,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(209,250,229,0.5) 0%, rgba(52,211,153,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '4px'})`,
-            ...getDistanceStyle(0.16, 0.33, 1.2)
+              ? 'linear-gradient(90deg, transparent, rgba(251,146,60,0.5), rgba(251,191,36,0.4), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(251,146,60,0.3), rgba(251,191,36,0.2), transparent)',
+            filter: `blur(${isMoving ? '10px' : '15px'})`,
+            borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+            ...getDistanceStyle(0.9, 0.25, 1.8)
           }}>
         </div>
         
         <div 
-          className="ball-3 w-32 h-32 rounded-full absolute top-2/3 left-1/2 animate-wave-3 blur-sm" 
+          className="liquid-flow-3 absolute left-1/3 -top-20 h-40 w-2/3 opacity-40 animate-flow-3" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(167,243,208,0.9) 0%, rgba(5,150,105,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(167,243,208,0.5) 0%, rgba(5,150,105,0.3) 70%)',
-            filter: `blur(${isMoving ? '3px' : '5px'})`,
-            ...getDistanceStyle(0.5, 0.66, 2)
+              ? 'linear-gradient(180deg, transparent, rgba(249,115,22,0.5), rgba(252,211,77,0.4), transparent)'
+              : 'linear-gradient(180deg, transparent, rgba(249,115,22,0.3), rgba(252,211,77,0.2), transparent)',
+            filter: `blur(${isMoving ? '8px' : '12px'})`,
+            borderRadius: '40% 60% 30% 70% / 40% 50% 50% 60%',
+            ...getDistanceStyle(0.5, 0.1, 1.5)
           }}>
         </div>
         
-        {/* Blue-purple balls */}
+        {/* Liquid blob elements */}
         <div 
-          className="ball-4 w-24 h-24 rounded-full absolute top-1/4 right-1/4 animate-wave-4 blur-sm" 
+          className="liquid-blob-1 w-80 h-80 rounded-full absolute top-1/4 left-1/4 animate-blob-1" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(191,219,254,0.9) 0%, rgba(79,70,229,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(191,219,254,0.5) 0%, rgba(129,140,248,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '4px'})`,
-            ...getDistanceStyle(0.75, 0.25, 1.8)
+              ? 'radial-gradient(circle, rgba(251,146,60,0.5) 0%, rgba(249,115,22,0.3) 50%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(251,146,60,0.3) 0%, rgba(249,115,22,0.2) 50%, transparent 70%)',
+            filter: `blur(${isMoving ? '15px' : '20px'})`,
+            ...getDistanceStyle(0.25, 0.25, 1.2)
           }}>
         </div>
         
         <div 
-          className="ball-5 w-28 h-28 rounded-full absolute bottom-1/3 right-1/3 animate-wave-5 blur-sm" 
+          className="liquid-blob-2 w-96 h-96 rounded-full absolute bottom-1/4 right-1/3 animate-blob-2" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(199,210,254,0.9) 0%, rgba(124,58,237,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(199,210,254,0.5) 0%, rgba(139,92,246,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '4px'})`,
-            ...getDistanceStyle(0.66, 0.66, 1.6)
+              ? 'radial-gradient(circle, rgba(254,215,170,0.5) 0%, rgba(251,146,60,0.3) 50%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(254,215,170,0.3) 0%, rgba(251,146,60,0.2) 50%, transparent 70%)',
+            filter: `blur(${isMoving ? '18px' : '25px'})`,
+            ...getDistanceStyle(0.66, 0.75, 1.5)
           }}>
         </div>
         
-        {/* Yellow balls */}
+        {/* Maintain some of the original ball elements with new colors */}
         <div 
-          className="ball-6 w-14 h-14 rounded-full absolute bottom-1/4 left-1/4 animate-wave-6 blur-sm" 
+          className="ball-1 w-20 h-20 rounded-full absolute top-1/5 left-1/5 animate-wave-1" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(251,191,36,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(254,240,138,0.5) 0%, rgba(251,191,36,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '3px'})`,
-            ...getDistanceStyle(0.25, 0.75, 1.1)
+              ? 'radial-gradient(circle, rgba(254,240,138,0.7) 0%, rgba(234,88,12,0.5) 70%)'
+              : 'radial-gradient(circle, rgba(254,240,138,0.4) 0%, rgba(234,88,12,0.3) 70%)',
+            filter: `blur(${isMoving ? '5px' : '8px'})`,
+            ...getDistanceStyle(0.2, 0.2, 1.3)
           }}>
         </div>
         
         <div 
-          className="ball-7 w-12 h-12 rounded-full absolute top-2/5 right-1/5 animate-wave-1 blur-sm" 
+          className="ball-2 w-32 h-32 rounded-full absolute top-2/3 right-1/4 animate-wave-3" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(245,158,11,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(254,240,138,0.5) 0%, rgba(245,158,11,0.3) 70%)',
-            filter: `blur(${isMoving ? '1px' : '3px'})`,
-            ...getDistanceStyle(0.8, 0.4, 1.3)
-          }}>
-        </div>
-        
-        {/* Extra balls for fuller effect */}
-        <div 
-          className="ball-8 w-18 h-18 rounded-full absolute top-1/2 left-1/10 animate-wave-3 blur-sm" 
-          style={{
-            background: isMoving
-              ? 'radial-gradient(circle, rgba(186,230,253,0.9) 0%, rgba(56,189,248,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(186,230,253,0.5) 0%, rgba(56,189,248,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '4px'})`,
-            ...getDistanceStyle(0.1, 0.5, 1.2)
+              ? 'radial-gradient(circle, rgba(252,211,77,0.7) 0%, rgba(249,115,22,0.5) 70%)'
+              : 'radial-gradient(circle, rgba(252,211,77,0.4) 0%, rgba(249,115,22,0.3) 70%)',
+            filter: `blur(${isMoving ? '6px' : '10px'})`,
+            ...getDistanceStyle(0.75, 0.66, 1.6)
           }}>
         </div>
         
         <div 
-          className="ball-9 w-10 h-10 rounded-full absolute bottom-1/5 right-1/6 animate-wave-4 blur-sm" 
+          className="ball-3 w-24 h-24 rounded-full absolute top-1/3 right-1/6 animate-wave-2" 
           style={{
-            background: isMoving
-              ? 'radial-gradient(circle, rgba(221,214,254,0.9) 0%, rgba(167,139,250,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(221,214,254,0.5) 0%, rgba(167,139,250,0.3) 70%)',
-            filter: `blur(${isMoving ? '1px' : '3px'})`,
-            ...getDistanceStyle(0.83, 0.8, 0.9)
+            background: isMoving 
+              ? 'radial-gradient(circle, rgba(254,215,170,0.7) 0%, rgba(251,146,60,0.5) 70%)'
+              : 'radial-gradient(circle, rgba(254,215,170,0.4) 0%, rgba(251,146,60,0.3) 70%)',
+            filter: `blur(${isMoving ? '4px' : '7px'})`,
+            ...getDistanceStyle(0.83, 0.33, 1.4)
+          }}>
+        </div>
+        
+        {/* Add some small glow points for accent */}
+        <div 
+          className="glow-point-1 w-6 h-6 rounded-full absolute top-1/3 left-2/3 animate-pulse-1" 
+          style={{
+            background: isMoving 
+              ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(254,240,138,0) 70%)'
+              : 'radial-gradient(circle, rgba(254,240,138,0.6) 0%, rgba(254,240,138,0) 70%)',
+            boxShadow: isMoving ? '0 0 15px 5px rgba(234,88,12,0.3)' : '0 0 10px 2px rgba(234,88,12,0.2)',
+            ...getDistanceStyle(0.66, 0.33, 0.8)
           }}>
         </div>
         
         <div 
-          className="ball-10 w-22 h-22 rounded-full absolute top-1/10 right-1/3 animate-wave-2 blur-sm" 
+          className="glow-point-2 w-4 h-4 rounded-full absolute bottom-1/4 left-1/4 animate-pulse-2" 
           style={{
-            background: isMoving
-              ? 'radial-gradient(circle, rgba(254,215,170,0.9) 0%, rgba(249,115,22,0.7) 70%)'
-              : 'radial-gradient(circle, rgba(254,215,170,0.5) 0%, rgba(249,115,22,0.3) 70%)',
-            filter: `blur(${isMoving ? '2px' : '4px'})`,
-            ...getDistanceStyle(0.66, 0.1, 1.5)
+            background: isMoving 
+              ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(254,240,138,0) 70%)'
+              : 'radial-gradient(circle, rgba(254,240,138,0.6) 0%, rgba(254,240,138,0) 70%)',
+            boxShadow: isMoving ? '0 0 15px 5px rgba(234,88,12,0.3)' : '0 0 10px 2px rgba(234,88,12,0.2)',
+            ...getDistanceStyle(0.25, 0.75, 0.6)
           }}>
         </div>
       </div>
       
-      {/* Blur overlay - less blur when moving */}
+      {/* Lighter blur overlay for better visibility of content */}
       <div 
-        className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[1px]"
+        className="fixed inset-0 -z-10 bg-white/30 backdrop-blur-sm"
         style={{
-          backdropFilter: `blur(${isMoving ? '0.5px' : '1.5px'})`,
+          backdropFilter: `blur(${isMoving ? '1px' : '2px'})`,
           transition: 'backdrop-filter 0.3s ease-out'
         }}
       ></div>
       
       <style jsx global>{`
+        @keyframes flow-1 {
+          0% { transform: translateX(0) translateY(0) scale(1); }
+          25% { transform: translateX(20vw) translateY(3vh) scale(1.1); }
+          50% { transform: translateX(35vw) translateY(-2vh) scale(1); }
+          75% { transform: translateX(15vw) translateY(-4vh) scale(0.9); }
+          100% { transform: translateX(0) translateY(0) scale(1); }
+        }
+        
+        @keyframes flow-2 {
+          0% { transform: translateX(0) translateY(0) scale(1); }
+          33% { transform: translateX(-20vw) translateY(5vh) scale(1.05); }
+          66% { transform: translateX(-35vw) translateY(-3vh) scale(0.95); }
+          100% { transform: translateX(0) translateY(0) scale(1); }
+        }
+        
+        @keyframes flow-3 {
+          0% { transform: translateX(0) translateY(0) scale(1); }
+          30% { transform: translateX(-5vw) translateY(20vh) scale(1.1); }
+          60% { transform: translateX(8vw) translateY(35vh) scale(0.9); }
+          100% { transform: translateX(0) translateY(0) scale(1); }
+        }
+        
+        @keyframes blob-1 {
+          0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+          25% { transform: translate(2vw, -1vh) scale(1.03) rotate(5deg); border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%; }
+          50% { transform: translate(4vw, 2vh) scale(1) rotate(10deg); border-radius: 30% 70% 70% 30% / 50% 40% 60% 50%; }
+          75% { transform: translate(1vw, 3vh) scale(0.97) rotate(5deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+          100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+        }
+        
+        @keyframes blob-2 {
+          0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+          33% { transform: translate(-3vw, 2vh) scale(1.05) rotate(-8deg); border-radius: 40% 60% 50% 50% / 30% 60% 40% 70%; }
+          66% { transform: translate(-1vw, -3vh) scale(0.95) rotate(-15deg); border-radius: 70% 30% 40% 60% / 40% 50% 50% 60%; }
+          100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+        }
+        
         @keyframes wave-1 {
           0% { transform: translate(0, 0) scale(1); }
           25% { transform: translate(8px, -12px) scale(1.05); }
@@ -240,27 +280,36 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           100% { transform: translate(0, 0) scale(1); }
         }
         
-        @keyframes wave-4 {
-          0% { transform: translate(0, 0) scale(1); }
-          20% { transform: translate(-8px, -10px) scale(1.02); }
-          40% { transform: translate(-14px, 0) scale(1); }
-          60% { transform: translate(-6px, 10px) scale(0.98); }
-          80% { transform: translate(8px, 14px) scale(0.96); }
-          100% { transform: translate(0, 0) scale(1); }
+        @keyframes pulse-1 {
+          0% { opacity: 0.7; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.3); }
+          100% { opacity: 0.7; transform: scale(1); }
         }
         
-        @keyframes wave-5 {
-          0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(10px, -14px) scale(1.04); }
-          66% { transform: translate(-10px, 14px) scale(0.96); }
-          100% { transform: translate(0, 0) scale(1); }
+        @keyframes pulse-2 {
+          0% { opacity: 0.6; transform: scale(1); }
+          50% { opacity: 0.9; transform: scale(1.2); }
+          100% { opacity: 0.6; transform: scale(1); }
         }
         
-        @keyframes wave-6 {
-          0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(-12px, -6px) scale(1.04); }
-          66% { transform: translate(12px, 6px) scale(0.96); }
-          100% { transform: translate(0, 0) scale(1); }
+        .animate-flow-1 {
+          animation: flow-1 25s ease-in-out infinite;
+        }
+        
+        .animate-flow-2 {
+          animation: flow-2 32s ease-in-out infinite;
+        }
+        
+        .animate-flow-3 {
+          animation: flow-3 28s ease-in-out infinite;
+        }
+        
+        .animate-blob-1 {
+          animation: blob-1 20s ease-in-out infinite;
+        }
+        
+        .animate-blob-2 {
+          animation: blob-2 25s ease-in-out infinite;
         }
         
         .animate-wave-1 {
@@ -275,16 +324,12 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           animation: wave-3 16s ease-in-out infinite;
         }
         
-        .animate-wave-4 {
-          animation: wave-4 18s ease-in-out infinite;
+        .animate-pulse-1 {
+          animation: pulse-1 4s ease-in-out infinite;
         }
         
-        .animate-wave-5 {
-          animation: wave-5 20s ease-in-out infinite;
-        }
-        
-        .animate-wave-6 {
-          animation: wave-6 15s ease-in-out infinite;
+        .animate-pulse-2 {
+          animation: pulse-2 5s ease-in-out infinite;
         }
       `}</style>
     </>
