@@ -7,6 +7,13 @@ import Footer from './components/Footer/Footer';
 import ContactForm from './components/ContactForm/ContactForm';
 import Partners from './components/Partners/Partners';
 
+// For TypeScript - extend Window interface
+declare global {
+  interface Window {
+    mouseMoveTimeout: number;
+  }
+}
+
 // Define TypeScript interfaces
 interface Training {
   title: string;
@@ -28,13 +35,7 @@ const trainingsData: Training[] = [
   }
 ];
 
-// Enhanced AnimatedBackground component with cursor tracking
-// Define the Window interface extension for TypeScript
-declare global {
-  interface Window {
-    mouseMoveTimeout: number;
-  }
-}
+// Dynamic animated background component with cursor tracking
 const AnimatedBackground = React.memo(function AnimatedBackground() {
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -47,16 +48,19 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
       
       // Reset the "moving" state after mouse stops
       if (window.mouseMoveTimeout) {
-        clearTimeout(window.mouseMoveTimeout as number);
+        clearTimeout(window.mouseMoveTimeout);
       }
       window.mouseMoveTimeout = window.setTimeout(() => {
         setIsMoving(false);
-      }, 500) as unknown as number;
+      }, 500);
+    };
     
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(window.mouseMoveTimeout);
+      if (window.mouseMoveTimeout) {
+        clearTimeout(window.mouseMoveTimeout);
+      }
     };
   }, []);
   
@@ -81,14 +85,14 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
   
   return (
     <>
-      {/* Brighter gradient background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-100 via-green-50 to-teal-100"></div>
+      {/* Gradient background */}
+      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200"></div>
       
       {/* Animated gradient balls */}
       <div className="fixed inset-0 -z-19 overflow-hidden">
-        {/* Brighter colors for balls */}
+        {/* Green family balls */}
         <div 
-          className="ball-1 w-20 h-20 rounded-full absolute top-1/5 left-1/4 animate-wave-1" 
+          className="ball-1 w-20 h-20 rounded-full absolute top-1/5 left-1/4 animate-wave-1 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(167,243,208,0.9) 0%, rgba(16,185,129,0.7) 70%)'
@@ -99,7 +103,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
         </div>
         
         <div 
-          className="ball-2 w-16 h-16 rounded-full absolute top-1/3 left-1/6 animate-wave-2" 
+          className="ball-2 w-16 h-16 rounded-full absolute top-1/3 left-1/6 animate-wave-2 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(209,250,229,0.9) 0%, rgba(52,211,153,0.7) 70%)'
@@ -110,7 +114,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
         </div>
         
         <div 
-          className="ball-3 w-32 h-32 rounded-full absolute top-2/3 left-1/2 animate-wave-3" 
+          className="ball-3 w-32 h-32 rounded-full absolute top-2/3 left-1/2 animate-wave-3 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(167,243,208,0.9) 0%, rgba(5,150,105,0.7) 70%)'
@@ -120,9 +124,9 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           }}>
         </div>
         
-        {/* Blue-purple balls with bright colors when moving */}
+        {/* Blue-purple balls */}
         <div 
-          className="ball-4 w-24 h-24 rounded-full absolute top-1/4 right-1/4 animate-wave-4" 
+          className="ball-4 w-24 h-24 rounded-full absolute top-1/4 right-1/4 animate-wave-4 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(191,219,254,0.9) 0%, rgba(79,70,229,0.7) 70%)'
@@ -133,7 +137,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
         </div>
         
         <div 
-          className="ball-5 w-28 h-28 rounded-full absolute bottom-1/3 right-1/3 animate-wave-5" 
+          className="ball-5 w-28 h-28 rounded-full absolute bottom-1/3 right-1/3 animate-wave-5 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(199,210,254,0.9) 0%, rgba(124,58,237,0.7) 70%)'
@@ -143,9 +147,9 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           }}>
         </div>
         
-        {/* Yellow balls with bright colors when moving */}
+        {/* Yellow balls */}
         <div 
-          className="ball-6 w-14 h-14 rounded-full absolute bottom-1/4 left-1/4 animate-wave-6" 
+          className="ball-6 w-14 h-14 rounded-full absolute bottom-1/4 left-1/4 animate-wave-6 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(251,191,36,0.7) 70%)'
@@ -156,7 +160,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
         </div>
         
         <div 
-          className="ball-7 w-12 h-12 rounded-full absolute top-2/5 right-1/5 animate-wave-1" 
+          className="ball-7 w-12 h-12 rounded-full absolute top-2/5 right-1/5 animate-wave-1 blur-sm" 
           style={{
             background: isMoving 
               ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(245,158,11,0.7) 70%)'
@@ -166,42 +170,44 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           }}>
         </div>
         
-        {/* Additional bright balls that only appear during movement */}
-        {isMoving && (
-          <>
-            <div 
-              className="ball-8 w-18 h-18 rounded-full absolute top-1/6 right-1/2 animate-wave-2" 
-              style={{
-                background: 'radial-gradient(circle, rgba(255,228,230,0.9) 0%, rgba(244,63,94,0.7) 70%)',
-                filter: 'blur(2px)',
-                ...getDistanceStyle(0.5, 0.16, 1.7)
-              }}>
-            </div>
-            
-            <div 
-              className="ball-9 w-16 h-16 rounded-full absolute bottom-1/6 left-2/3 animate-wave-3" 
-              style={{
-                background: 'radial-gradient(circle, rgba(255,241,242,0.9) 0%, rgba(236,72,153,0.7) 70%)',
-                filter: 'blur(2px)',
-                ...getDistanceStyle(0.66, 0.83, 1.4)
-              }}>
-            </div>
-            
-            <div 
-              className="ball-10 w-22 h-22 rounded-full absolute top-1/2 left-1/8 animate-wave-5" 
-              style={{
-                background: 'radial-gradient(circle, rgba(186,230,253,0.9) 0%, rgba(2,132,199,0.7) 70%)',
-                filter: 'blur(3px)',
-                ...getDistanceStyle(0.12, 0.5, 1.9)
-              }}>
-            </div>
-          </>
-        )}
+        {/* Extra balls for fuller effect */}
+        <div 
+          className="ball-8 w-18 h-18 rounded-full absolute top-1/2 left-1/10 animate-wave-3 blur-sm" 
+          style={{
+            background: isMoving
+              ? 'radial-gradient(circle, rgba(186,230,253,0.9) 0%, rgba(56,189,248,0.7) 70%)'
+              : 'radial-gradient(circle, rgba(186,230,253,0.5) 0%, rgba(56,189,248,0.3) 70%)',
+            filter: `blur(${isMoving ? '2px' : '4px'})`,
+            ...getDistanceStyle(0.1, 0.5, 1.2)
+          }}>
+        </div>
+        
+        <div 
+          className="ball-9 w-10 h-10 rounded-full absolute bottom-1/5 right-1/6 animate-wave-4 blur-sm" 
+          style={{
+            background: isMoving
+              ? 'radial-gradient(circle, rgba(221,214,254,0.9) 0%, rgba(167,139,250,0.7) 70%)'
+              : 'radial-gradient(circle, rgba(221,214,254,0.5) 0%, rgba(167,139,250,0.3) 70%)',
+            filter: `blur(${isMoving ? '1px' : '3px'})`,
+            ...getDistanceStyle(0.83, 0.8, 0.9)
+          }}>
+        </div>
+        
+        <div 
+          className="ball-10 w-22 h-22 rounded-full absolute top-1/10 right-1/3 animate-wave-2 blur-sm" 
+          style={{
+            background: isMoving
+              ? 'radial-gradient(circle, rgba(254,215,170,0.9) 0%, rgba(249,115,22,0.7) 70%)'
+              : 'radial-gradient(circle, rgba(254,215,170,0.5) 0%, rgba(249,115,22,0.3) 70%)',
+            filter: `blur(${isMoving ? '2px' : '4px'})`,
+            ...getDistanceStyle(0.66, 0.1, 1.5)
+          }}>
+        </div>
       </div>
       
-      {/* Dynamic blur overlay - less blur when moving */}
+      {/* Blur overlay - less blur when moving */}
       <div 
-        className="fixed inset-0 -z-10 bg-white/30 backdrop-blur-sm"
+        className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[1px]"
         style={{
           backdropFilter: `blur(${isMoving ? '0.5px' : '1.5px'})`,
           transition: 'backdrop-filter 0.3s ease-out'
@@ -284,6 +290,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
     </>
   );
 });
+
 const Page = function Page() {
   const [isClient, setIsClient] = useState<boolean>(false);
 
