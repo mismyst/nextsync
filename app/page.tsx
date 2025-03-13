@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Navbar from './components/Navbar/Navbar';
 import HeroSection from './components/HeroSection/HeroSection';
 import Footer from './components/Footer/Footer';
@@ -129,6 +130,76 @@ const Page = function Page() {
               {/* Added bonus banner */}
               <div className="mt-8 bg-gradient-to-r from-teal-600/90 to-blue-600/90 rounded-xl p-4 sm:p-6 text-white text-center">
                 <p className="font-bold">🎁 BONUS: Enroll in any course today and get access to our exclusive mentorship program!</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Community Section with Image */}
+          <div className="my-6 sm:my-8 md:my-12">
+            <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                {/* Image side */}
+                <div className="w-full md:w-1/2 relative">
+                  <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
+                    <Image 
+                      src="/images/community.jpg" 
+                      alt="Our Learning Community" 
+                      fill
+                      className="object-cover" 
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
+                </div>
+                
+                {/* Content side */}
+                <div className="w-full md:w-1/2">
+                  <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent mb-4">
+                    Join Our Learning Community
+                  </h2>
+                  <p className="text-gray-700 mb-6">
+                    Connect with like-minded professionals, participate in workshops, 
+                    and accelerate your career growth through peer learning and networking opportunities.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <div className="bg-teal-100 p-2 rounded-full mr-4">
+                        <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-800">Networking Events</h3>
+                        <p className="text-sm text-gray-600">Connect with professionals and industry experts</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="bg-teal-100 p-2 rounded-full mr-4">
+                        <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-800">Mentorship Programs</h3>
+                        <p className="text-sm text-gray-600">Learn from industry leaders who guide your career</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="bg-teal-100 p-2 rounded-full mr-4">
+                        <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-800">Job Opportunities</h3>
+                        <p className="text-sm text-gray-600">Access exclusive career opportunities and placements</p>
+                      </div>
+                    </div>
+                  </div>
+                  <button className="mt-8 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-md">
+                    Join Community
+                  </button>
+                </div>
               </div>
             </div>
           </div>
