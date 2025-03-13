@@ -29,22 +29,29 @@ const trainingsData: Training[] = [
 ];
 
 // Enhanced AnimatedBackground component with cursor tracking
+// Define the Window interface extension for TypeScript
+declare global {
+  interface Window {
+    mouseMoveTimeout: number;
+  }
+}
 const AnimatedBackground = React.memo(function AnimatedBackground() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isMoving, setIsMoving] = useState(false);
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isMoving, setIsMoving] = useState<boolean>(false);
   
   // Track mouse position
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent): void => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setIsMoving(true);
       
       // Reset the "moving" state after mouse stops
-      clearTimeout(window.mouseMoveTimeout);
-      window.mouseMoveTimeout = setTimeout(() => {
+      if (window.mouseMoveTimeout) {
+        clearTimeout(window.mouseMoveTimeout as number);
+      }
+      window.mouseMoveTimeout = window.setTimeout(() => {
         setIsMoving(false);
-      }, 500);
-    };
+      }, 500) as unknown as number;
     
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
@@ -54,7 +61,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
   }, []);
   
   // Calculate distance from mouse for each ball
-  const getDistanceStyle = (baseX, baseY, intensity = 1, maxDistance = 100) => {
+  const getDistanceStyle = (baseX: number, baseY: number, intensity = 1, maxDistance = 100): React.CSSProperties => {
     if (!isMoving) return {};
     
     const dx = mousePosition.x / window.innerWidth - baseX;
