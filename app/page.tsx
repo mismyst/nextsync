@@ -129,8 +129,8 @@ const Page = function Page() {
               
               <div className="grid md:grid-cols-2 gap-8">
                 {trainingsData.map((training, index) => (
-                  <div key={index} className="relative rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                    <div className={`bg-gradient-to-br from-teal-600 to-blue-600 p-5 pb-0 min-h-120 flex flex-col`}>
+                  <div key={index} className="relative rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
+                    <div className={`bg-gradient-to-br from-teal-600 to-blue-600 p-5 pt-5 px-5 pb-0 min-h-120 flex flex-col h-full`}>
                       {/* Premium badge */}
                       <div className="absolute top-5 right-5">
                         <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm border border-white/40">
@@ -167,7 +167,7 @@ const Page = function Page() {
                       </div>
                       
                       {/* Enhanced call-to-action button */}
-                      <div className="mt-auto">
+                      <div className="mt-auto -mx-5 -mb-px">
                         <button className="w-full py-4 bg-black text-white text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-teal-900 flex items-center justify-center">
                           <span>ENROLL NOW</span>
                           <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
