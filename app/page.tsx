@@ -35,59 +35,121 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
       {/* Gradient background */}
       <div className="fixed inset-0 -z-20 bg-gradient-to-r from-emerald-50 via-green-100 to-teal-200"></div>
       
-      {/* Animated circles */}
+      {/* Animated gradient balls */}
       <div className="fixed inset-0 -z-19 overflow-hidden">
-        <div className="circle-1 w-64 h-64 rounded-full bg-teal-300/20 absolute -top-10 -left-10 animate-float"></div>
-        <div className="circle-2 w-96 h-96 rounded-full bg-green-300/20 absolute top-1/4 right-1/4 animate-float-slow"></div>
-        <div className="circle-3 w-48 h-48 rounded-full bg-blue-300/20 absolute bottom-1/4 left-1/3 animate-float-reverse"></div>
-        <div className="circle-4 w-72 h-72 rounded-full bg-emerald-300/20 absolute -bottom-20 -right-20 animate-pulse-slow"></div>
+        {/* Green family balls */}
+        <div className="ball-1 w-20 h-20 rounded-full absolute top-1/5 left-1/4 animate-wave-1 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(167,243,208,0.5) 0%, rgba(16,185,129,0.3) 70%)'}}>
+        </div>
+        <div className="ball-2 w-16 h-16 rounded-full absolute top-1/3 left-1/6 animate-wave-2 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(209,250,229,0.5) 0%, rgba(52,211,153,0.3) 70%)'}}>
+        </div>
+        <div className="ball-3 w-32 h-32 rounded-full absolute top-2/3 left-1/2 animate-wave-3 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(167,243,208,0.5) 0%, rgba(5,150,105,0.3) 70%)'}}>
+        </div>
+        
+        {/* Blue-purple balls */}
+        <div className="ball-4 w-24 h-24 rounded-full absolute top-1/4 right-1/4 animate-wave-4 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(191,219,254,0.5) 0%, rgba(129,140,248,0.3) 70%)'}}>
+        </div>
+        <div className="ball-5 w-28 h-28 rounded-full absolute bottom-1/3 right-1/3 animate-wave-5 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(199,210,254,0.5) 0%, rgba(139,92,246,0.3) 70%)'}}>
+        </div>
+        
+        {/* Yellow balls */}
+        <div className="ball-6 w-14 h-14 rounded-full absolute bottom-1/4 left-1/4 animate-wave-6 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(254,240,138,0.5) 0%, rgba(251,191,36,0.3) 70%)'}}>
+        </div>
+        <div className="ball-7 w-12 h-12 rounded-full absolute top-2/5 right-1/5 animate-wave-1 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(254,240,138,0.5) 0%, rgba(245,158,11,0.3) 70%)'}}>
+        </div>
+        
+        {/* Extra balls for fuller effect */}
+        <div className="ball-8 w-18 h-18 rounded-full absolute top-1/2 left-1/10 animate-wave-3 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(186,230,253,0.5) 0%, rgba(56,189,248,0.3) 70%)'}}>
+        </div>
+        <div className="ball-9 w-10 h-10 rounded-full absolute bottom-1/5 right-1/6 animate-wave-4 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(221,214,254,0.5) 0%, rgba(167,139,250,0.3) 70%)'}}>
+        </div>
+        <div className="ball-10 w-22 h-22 rounded-full absolute top-1/10 right-1/3 animate-wave-2 blur-sm" 
+             style={{background: 'radial-gradient(circle, rgba(254,215,170,0.5) 0%, rgba(249,115,22,0.3) 70%)'}}>
+        </div>
       </div>
       
       {/* Blur overlay */}
       <div className="fixed inset-0 -z-10 bg-white/40 backdrop-blur-[1px]"></div>
       
       <style jsx global>{`
-        @keyframes float {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          33% { transform: translate(15px, -15px) rotate(5deg); }
-          66% { transform: translate(-10px, 20px) rotate(-5deg); }
-          100% { transform: translate(0, 0) rotate(0deg); }
+        @keyframes wave-1 {
+          0% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(8px, -12px) scale(1.05); }
+          50% { transform: translate(16px, 0) scale(1); }
+          75% { transform: translate(8px, 12px) scale(0.95); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         
-        @keyframes float-slow {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          33% { transform: translate(-20px, 10px) rotate(-3deg); }
-          66% { transform: translate(15px, -15px) rotate(3deg); }
-          100% { transform: translate(0, 0) rotate(0deg); }
+        @keyframes wave-2 {
+          0% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(-10px, 8px) scale(1.05); }
+          50% { transform: translate(-16px, 0) scale(1); }
+          75% { transform: translate(-8px, -10px) scale(0.95); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         
-        @keyframes float-reverse {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          33% { transform: translate(20px, 15px) rotate(3deg); }
-          66% { transform: translate(-15px, -10px) rotate(-5deg); }
-          100% { transform: translate(0, 0) rotate(0deg); }
+        @keyframes wave-3 {
+          0% { transform: translate(0, 0) scale(1); }
+          20% { transform: translate(12px, 8px) scale(1.03); }
+          40% { transform: translate(18px, 0) scale(1); }
+          60% { transform: translate(12px, -8px) scale(0.97); }
+          80% { transform: translate(0, -12px) scale(0.95); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         
-        @keyframes pulse-slow {
-          0% { opacity: 0.5; transform: scale(1); }
-          50% { opacity: 0.7; transform: scale(1.05); }
-          100% { opacity: 0.5; transform: scale(1); }
+        @keyframes wave-4 {
+          0% { transform: translate(0, 0) scale(1); }
+          20% { transform: translate(-8px, -10px) scale(1.02); }
+          40% { transform: translate(-14px, 0) scale(1); }
+          60% { transform: translate(-6px, 10px) scale(0.98); }
+          80% { transform: translate(8px, 14px) scale(0.96); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         
-        .animate-float {
-          animation: float 15s ease-in-out infinite;
+        @keyframes wave-5 {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(10px, -14px) scale(1.04); }
+          66% { transform: translate(-10px, 14px) scale(0.96); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         
-        .animate-float-slow {
-          animation: float-slow 20s ease-in-out infinite;
+        @keyframes wave-6 {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-12px, -6px) scale(1.04); }
+          66% { transform: translate(12px, 6px) scale(0.96); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         
-        .animate-float-reverse {
-          animation: float-reverse 18s ease-in-out infinite;
+        .animate-wave-1 {
+          animation: wave-1 12s ease-in-out infinite;
         }
         
-        .animate-pulse-slow {
-          animation: pulse-slow 10s infinite;
+        .animate-wave-2 {
+          animation: wave-2 14s ease-in-out infinite;
+        }
+        
+        .animate-wave-3 {
+          animation: wave-3 16s ease-in-out infinite;
+        }
+        
+        .animate-wave-4 {
+          animation: wave-4 18s ease-in-out infinite;
+        }
+        
+        .animate-wave-5 {
+          animation: wave-5 20s ease-in-out infinite;
+        }
+        
+        .animate-wave-6 {
+          animation: wave-6 15s ease-in-out infinite;
         }
       `}</style>
     </>
