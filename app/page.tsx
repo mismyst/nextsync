@@ -433,14 +433,14 @@ const Page = function Page() {
           <div className="my-6 sm:my-8 md:my-12">
             <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                {/* Image side - FIXED */}
+                {/* Image side - INCREASED SIZE */}
                 <div className="w-full md:w-1/2 relative">
-                  <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
+                  <div className="relative h-80 sm:h-96 md:h-120 lg:h-140 w-full rounded-xl overflow-hidden shadow-lg">
                     <Image 
                       src="/images/community.jpg" 
                       alt="Our Learning Community" 
                       fill
-                      className="object-cover" 
+                      className="object-contain" 
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
