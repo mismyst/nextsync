@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
         <div className="hidden md:block relative animate__animated animate__fadeInRight animate__delay-1s">
           <div className="absolute inset-0 bg-gradient-to-r from-green-900/40 to-blue-900/40 rounded-2xl -rotate-3 animate__animated animate__zoomIn backdrop-blur-sm border border-green-500/20"></div>
           <Image
-            src="/images/studying.jpg"
+            src="/images/imagge.jpg"
             alt="Learning community"
             width={600}
             height={400}
