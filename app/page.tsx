@@ -524,7 +524,8 @@ return (
 
                   Join Our Learning Community
                 </h2>
-                <p className="text-white mb-6">
+                <p className="text-lg sm:text-xl text-white mb-6">
+
 
 
                   Connect with like-minded professionals, participate in workshops, 
