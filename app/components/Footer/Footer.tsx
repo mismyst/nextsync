@@ -23,7 +23,7 @@ const Footer = () => {
                 <FaInstagram size={70} />
               </a>
               <a href="https://www.linkedin.com/company/106385726/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-400 transition"> {/* Changed icon color to green */}
-                <FaLinkedin size={60} />
+                <FaLinkedin size={70} />
               </a>
             </div>
           </div>
