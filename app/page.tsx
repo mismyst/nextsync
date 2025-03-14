@@ -176,7 +176,7 @@ export default function Home() {
         {/* Partners Section */}
         <Partners />
         
-       {/* Contact Section */}
+      {/* Contact Section */}
 <section id="contact" className="py-24 bg-gradient-to-br from-black to-gray-900">
   <div className="container mx-auto px-4 md:px-6">
     <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
@@ -187,25 +187,67 @@ export default function Home() {
     </h2>
     
     <div className="flex flex-col lg:flex-row gap-8">
-      {/* Image container with rounded corners */}
-<div className="lg:w-1/2 relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-  <div className="aspect-[4/3] w-full h-[400px] lg:h-[500px] relative">
-    <Image 
-      src="/images/community.jpg" 
-      alt="Community of developers and learners" 
-      fill
-      style={{ objectFit: 'cover' }}
-      sizes="(max-width: 1024px) 100vw, 50vw"
-      priority
-      className="transition-all duration-500 hover:scale-105"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-    <div className="absolute bottom-0 left-0 p-6 lg:p-8">
-      <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
-      <p className="text-cyan-300">Connect with experts and fellow learners in our supportive environment.</p>
+      {/* Image container with rounded corners - shorter height */}
+      <div className="lg:w-1/2 relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+        <div className="aspect-[16/9] w-full h-[300px] lg:h-[400px] relative">
+          <Image 
+            src="/images/community.jpg" 
+            alt="Community of developers and learners" 
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+            className="transition-all duration-500 hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 p-6 lg:p-8">
+            <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
+            <p className="text-cyan-300">Connect with experts and fellow learners in our supportive environment.</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Right side - Contact form container */}
+      <div className="lg:w-1/2 backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
+        <div className="max-w-xl mx-auto">
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-cyan-300 text-sm font-medium mb-2">Full Name</label>
+                <input 
+                  type="text" 
+                  className="w-full bg-gray-800/70 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-lg"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label className="block text-cyan-300 text-sm font-medium mb-2">Email Address</label>
+                <input 
+                  type="email" 
+                  className="w-full bg-gray-800/70 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-lg"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-cyan-300 text-sm font-medium mb-2">Message</label>
+              <textarea 
+                className="w-full bg-gray-800/70 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-lg"
+                placeholder="How can we help you?"
+                rows={4}
+              ></textarea>
+            </div>
+            <div>
+              <button className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 text-lg shadow-lg">
+                Send Message
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
       {/* Contact form container */}
       <div className="lg:w-1/2 backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
         <ContactForm />
