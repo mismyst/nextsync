@@ -150,7 +150,7 @@ export default function Home() {
         
         {/* Contact Section */}
         <section id="contact" className="py-24 bg-gradient-to-br from-black to-gray-900">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
               <span className="relative inline-block">
                 Contact Us
@@ -158,10 +158,8 @@ export default function Home() {
               </span>
             </h2>
             
-            <div className="max-w-4xl mx-auto">
-              <div className="w-full backdrop-blur-sm bg-white/5 rounded-xl p-8 md:p-10 border border-gray-800 shadow-2xl">
-                <ContactForm />
-              </div>
+            <div className="w-full backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
+              <ContactForm />
             </div>
           </div>
         </section>
