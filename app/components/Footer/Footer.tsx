@@ -5,7 +5,7 @@ import Link from 'next/link'; // Import Link from next/link
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-300 text-white py-12"> {/* Change to a lighter gray (bg-gray-300) */}
+    <footer className="bg-gray-500 text-white py-12"> {/* Change to a lighter gray (bg-gray-300) */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Branding Section */}
         <div>
