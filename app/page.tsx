@@ -177,7 +177,7 @@ export default function Home() {
         {/* Partners Section */}
         <Partners />
         
-       {/* Contact Section */}
+      {/* Contact Section */}
 <section id="contact" className="py-12 bg-gradient-to-br from-black to-gray-900">
   <div className="container mx-auto px-4 md:px-6">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-white">
@@ -187,10 +187,10 @@ export default function Home() {
       </span>
     </h2>
     
-    <div className="flex flex-col gap-6 max-w-3xl mx-auto">
+    <div className="flex flex-col gap-6 max-w-2xl mx-auto">
       {/* Image container */}
       <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-        <div className="aspect-[16/9] w-full h-[300px] relative">
+        <div className="aspect-[16/9] w-full h-[250px] relative">
           <Image 
             src="/images/community.jpg" 
             alt="Community of developers and learners" 
@@ -201,13 +201,21 @@ export default function Home() {
             className="transition-all duration-500 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 p-5">
-            <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
-            <p className="text-blue-300">Connect with experts and fellow learners in our supportive environment.</p>
+          <div className="absolute bottom-0 left-0 p-4">
+            <h3 className="text-xl font-bold text-white mb-1">Join Our Community</h3>
+            <p className="text-blue-300 text-sm">Connect with experts and fellow learners.</p>
           </div>
         </div>
       </div>
       
+      {/* Compact contact form container */}
+      <div className="backdrop-blur-sm bg-white/5 rounded-xl p-4 border border-gray-800 shadow-2xl">
+        {/* You might need to modify your ContactForm component to be more compact */}
+        <ContactForm />
+      </div>
+    </div>
+  </div>
+</section>
       {/* Contact form container - now below the image */}
       <div className="backdrop-blur-sm bg-white/5 rounded-xl p-5 md:p-6 border border-gray-800 shadow-2xl">
         <ContactForm />
