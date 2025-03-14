@@ -35,7 +35,7 @@ const trainingsData: Training[] = [
   }
 ];
 
-// Enhanced AnimatedBackground component with liquid flow and orange elements
+// Enhanced AnimatedBackground component with circuit theme
 const AnimatedBackground = React.memo(function AnimatedBackground() {
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -64,7 +64,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
     };
   }, []);
   
-  // Calculate distance from mouse for liquid elements
+  // Calculate distance from mouse for circuit elements
   const getDistanceStyle = (baseX: number, baseY: number, intensity = 1, maxDistance = 100): React.CSSProperties => {
     if (!isMoving) return {};
     
@@ -72,31 +72,41 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
     const dy = mousePosition.y / window.innerHeight - baseY;
     const distance = Math.sqrt(dx * dx + dy * dy);
     
-    // Create repulsion effect with more fluidity
+    // Create attraction effect for circuit elements
     const factor = Math.min(maxDistance / (distance * 1000 + 1), maxDistance) * intensity;
-    const translateX = -dx * factor;
-    const translateY = -dy * factor;
+    const translateX = dx * factor;
+    const translateY = dy * factor;
     
     return {
       transform: `translate(${translateX}px, ${translateY}px) scale(${isMoving ? 1.05 : 1})`,
-      transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)'
+      transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)',
+      opacity: isMoving ? 0.8 : 0.5
     };
   };
   
   return (
     <>
-      {/* Gradient background - warmer tones with hint of orange */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-r from-amber-50 via-emerald-50 to-orange-50"></div>
+      {/* Dark gradient background with circuit theme */}
+      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-black via-gray-900 to-slate-900"></div>
       
-      {/* Liquid flow elements container */}
-      <div className="fixed inset-0 -z-19 overflow-hidden">
-        {/* Orange flow elements */}
+      {/* Circuit pattern overlay */}
+      <div 
+        className="fixed inset-0 -z-19 opacity-20"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%2303a9f4' stroke-width='0.5'/%3E%3Cpath d='M30 10v80M50 10v80M70 10v80M10 30h80M10 50h80M10 70h80' stroke='%2303a9f4' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%230d47a1'/%3E%3Ccircle cx='30' cy='10' r='2' fill='%230d47a1'/%3E%3Ccircle cx='50' cy='10' r='2' fill='%230d47a1'/%3E%3Ccircle cx='70' cy='10' r='2' fill='%230d47a1'/%3E%3Ccircle cx='90' cy='10' r='2' fill='%230d47a1'/%3E%3Ccircle cx='10' cy='30' r='2' fill='%230d47a1'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%230d47a1'/%3E%3Ccircle cx='50' cy='30' r='2' fill='%230d47a1'/%3E%3Ccircle cx='70' cy='30' r='2' fill='%230d47a1'/%3E%3Ccircle cx='90' cy='30' r='2' fill='%230d47a1'/%3E%3Ccircle cx='10' cy='50' r='2' fill='%230d47a1'/%3E%3Ccircle cx='30' cy='50' r='2' fill='%230d47a1'/%3E%3Ccircle cx='50' cy='50' r='2' fill='%230d47a1'/%3E%3Ccircle cx='70' cy='50' r='2' fill='%230d47a1'/%3E%3Ccircle cx='90' cy='50' r='2' fill='%230d47a1'/%3E%3Ccircle cx='10' cy='70' r='2' fill='%230d47a1'/%3E%3Ccircle cx='30' cy='70' r='2' fill='%230d47a1'/%3E%3Ccircle cx='50' cy='70' r='2' fill='%230d47a1'/%3E%3Ccircle cx='70' cy='70' r='2' fill='%230d47a1'/%3E%3Ccircle cx='90' cy='70' r='2' fill='%230d47a1'/%3E%3Ccircle cx='10' cy='90' r='2' fill='%230d47a1'/%3E%3Ccircle cx='30' cy='90' r='2' fill='%230d47a1'/%3E%3Ccircle cx='50' cy='90' r='2' fill='%230d47a1'/%3E%3Ccircle cx='70' cy='90' r='2' fill='%230d47a1'/%3E%3Ccircle cx='90' cy='90' r='2' fill='%230d47a1'/%3E%3C/svg%3E")`,
+          backgroundSize: '100px 100px'
+        }}
+      />
+      
+      {/* Circuit flow elements container */}
+      <div className="fixed inset-0 -z-18 overflow-hidden">
+        {/* Green circuit flow elements */}
         <div 
-          className="liquid-flow-1 absolute -left-20 top-0 h-full w-40 opacity-40 animate-flow-1" 
+          className="circuit-flow-1 absolute -left-20 top-0 h-full w-40 opacity-30 animate-flow-1" 
           style={{
             background: isMoving 
-              ? 'linear-gradient(90deg, transparent, rgba(249,115,22,0.6), rgba(234,88,12,0.5), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(249,115,22,0.4), rgba(234,88,12,0.3), transparent)',
+              ? 'linear-gradient(90deg, transparent, rgba(0,128,128,0.4), rgba(0,100,100,0.3), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(0,128,128,0.2), rgba(0,100,100,0.1), transparent)',
             filter: `blur(${isMoving ? '8px' : '12px'})`,
             borderRadius: '40% 60% 60% 40% / 70% 30% 70% 30%',
             ...getDistanceStyle(0.1, 0.5, 2)
@@ -104,11 +114,11 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
         </div>
         
         <div 
-          className="liquid-flow-2 absolute -right-20 top-1/4 h-full w-60 opacity-30 animate-flow-2" 
+          className="circuit-flow-2 absolute -right-20 top-1/4 h-full w-60 opacity-20 animate-flow-2" 
           style={{
             background: isMoving 
-              ? 'linear-gradient(90deg, transparent, rgba(251,146,60,0.5), rgba(251,191,36,0.4), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(251,146,60,0.3), rgba(251,191,36,0.2), transparent)',
+              ? 'linear-gradient(90deg, transparent, rgba(0,0,120,0.4), rgba(0,50,150,0.3), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(0,0,120,0.2), rgba(0,50,150,0.1), transparent)',
             filter: `blur(${isMoving ? '10px' : '15px'})`,
             borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
             ...getDistanceStyle(0.9, 0.25, 1.8)
@@ -116,103 +126,133 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
         </div>
         
         <div 
-          className="liquid-flow-3 absolute left-1/3 -top-20 h-40 w-2/3 opacity-40 animate-flow-3" 
+          className="circuit-flow-3 absolute left-1/3 -top-20 h-40 w-2/3 opacity-30 animate-flow-3" 
           style={{
             background: isMoving 
-              ? 'linear-gradient(180deg, transparent, rgba(249,115,22,0.5), rgba(252,211,77,0.4), transparent)'
-              : 'linear-gradient(180deg, transparent, rgba(249,115,22,0.3), rgba(252,211,77,0.2), transparent)',
+              ? 'linear-gradient(180deg, transparent, rgba(0,100,100,0.4), rgba(0,150,150,0.3), transparent)'
+              : 'linear-gradient(180deg, transparent, rgba(0,100,100,0.2), rgba(0,150,150,0.1), transparent)',
             filter: `blur(${isMoving ? '8px' : '12px'})`,
             borderRadius: '40% 60% 30% 70% / 40% 50% 50% 60%',
             ...getDistanceStyle(0.5, 0.1, 1.5)
           }}>
         </div>
         
-        {/* Liquid blob elements */}
+        {/* Circuit node elements */}
         <div 
-          className="liquid-blob-1 w-80 h-80 rounded-full absolute top-1/4 left-1/4 animate-blob-1" 
+          className="circuit-node-1 w-80 h-80 rounded-full absolute top-1/4 left-1/4 animate-blob-1" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(251,146,60,0.5) 0%, rgba(249,115,22,0.3) 50%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(251,146,60,0.3) 0%, rgba(249,115,22,0.2) 50%, transparent 70%)',
+              ? 'radial-gradient(circle, rgba(0,150,150,0.4) 0%, rgba(0,100,100,0.2) 50%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(0,150,150,0.2) 0%, rgba(0,100,100,0.1) 50%, transparent 70%)',
             filter: `blur(${isMoving ? '15px' : '20px'})`,
             ...getDistanceStyle(0.25, 0.25, 1.2)
           }}>
         </div>
         
         <div 
-          className="liquid-blob-2 w-96 h-96 rounded-full absolute bottom-1/4 right-1/3 animate-blob-2" 
+          className="circuit-node-2 w-96 h-96 rounded-full absolute bottom-1/4 right-1/3 animate-blob-2" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,215,170,0.5) 0%, rgba(251,146,60,0.3) 50%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(254,215,170,0.3) 0%, rgba(251,146,60,0.2) 50%, transparent 70%)',
+              ? 'radial-gradient(circle, rgba(0,50,150,0.4) 0%, rgba(0,0,120,0.2) 50%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(0,50,150,0.2) 0%, rgba(0,0,120,0.1) 50%, transparent 70%)',
             filter: `blur(${isMoving ? '18px' : '25px'})`,
             ...getDistanceStyle(0.66, 0.75, 1.5)
           }}>
         </div>
         
-        {/* Maintain some of the original ball elements with new colors */}
+        {/* Circuit pulse sparks */}
         <div 
-          className="ball-1 w-20 h-20 rounded-full absolute top-1/5 left-1/5 animate-wave-1" 
+          className="spark-1 w-3 h-3 rounded-full absolute top-1/5 left-1/5 animate-spark-1" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,240,138,0.7) 0%, rgba(234,88,12,0.5) 70%)'
-              : 'radial-gradient(circle, rgba(254,240,138,0.4) 0%, rgba(234,88,12,0.3) 70%)',
-            filter: `blur(${isMoving ? '5px' : '8px'})`,
-            ...getDistanceStyle(0.2, 0.2, 1.3)
+              ? 'radial-gradient(circle, rgba(0,255,255,0.9) 0%, rgba(0,150,150,0.1) 70%)'
+              : 'radial-gradient(circle, rgba(0,255,255,0.6) 0%, rgba(0,150,150,0.1) 70%)',
+            boxShadow: isMoving ? '0 0 15px 5px rgba(0,255,255,0.6)' : '0 0 10px 2px rgba(0,255,255,0.3)',
+            ...getDistanceStyle(0.2, 0.2, 1.8)
           }}>
         </div>
         
         <div 
-          className="ball-2 w-32 h-32 rounded-full absolute top-2/3 right-1/4 animate-wave-3" 
+          className="spark-2 w-4 h-4 rounded-full absolute top-2/3 right-1/4 animate-spark-2" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(252,211,77,0.7) 0%, rgba(249,115,22,0.5) 70%)'
-              : 'radial-gradient(circle, rgba(252,211,77,0.4) 0%, rgba(249,115,22,0.3) 70%)',
-            filter: `blur(${isMoving ? '6px' : '10px'})`,
-            ...getDistanceStyle(0.75, 0.66, 1.6)
+              ? 'radial-gradient(circle, rgba(0,150,255,0.9) 0%, rgba(0,100,200,0.1) 70%)'
+              : 'radial-gradient(circle, rgba(0,150,255,0.6) 0%, rgba(0,100,200,0.1) 70%)',
+            boxShadow: isMoving ? '0 0 15px 5px rgba(0,150,255,0.6)' : '0 0 10px 2px rgba(0,150,255,0.3)',
+            ...getDistanceStyle(0.75, 0.66, 2)
           }}>
         </div>
         
         <div 
-          className="ball-3 w-24 h-24 rounded-full absolute top-1/3 right-1/6 animate-wave-2" 
+          className="spark-3 w-2 h-2 rounded-full absolute top-1/3 right-1/6 animate-spark-3" 
           style={{
             background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,215,170,0.7) 0%, rgba(251,146,60,0.5) 70%)'
-              : 'radial-gradient(circle, rgba(254,215,170,0.4) 0%, rgba(251,146,60,0.3) 70%)',
-            filter: `blur(${isMoving ? '4px' : '7px'})`,
-            ...getDistanceStyle(0.83, 0.33, 1.4)
+              ? 'radial-gradient(circle, rgba(0,200,200,0.9) 0%, rgba(0,100,100,0.1) 70%)'
+              : 'radial-gradient(circle, rgba(0,200,200,0.6) 0%, rgba(0,100,100,0.1) 70%)',
+            boxShadow: isMoving ? '0 0 10px 3px rgba(0,200,200,0.6)' : '0 0 8px 2px rgba(0,200,200,0.3)',
+            ...getDistanceStyle(0.83, 0.33, 1.6)
           }}>
         </div>
         
-        {/* Add some small glow points for accent */}
-        <div 
-          className="glow-point-1 w-6 h-6 rounded-full absolute top-1/3 left-2/3 animate-pulse-1" 
-          style={{
-            background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(254,240,138,0) 70%)'
-              : 'radial-gradient(circle, rgba(254,240,138,0.6) 0%, rgba(254,240,138,0) 70%)',
-            boxShadow: isMoving ? '0 0 15px 5px rgba(234,88,12,0.3)' : '0 0 10px 2px rgba(234,88,12,0.2)',
-            ...getDistanceStyle(0.66, 0.33, 0.8)
-          }}>
-        </div>
+        {/* Add more circuit sparks */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const randomX = Math.random();
+          const randomY = Math.random();
+          const size = Math.random() * 2 + 1;
+          
+          return (
+            <div 
+              key={`spark-extra-${i}`}
+              className={`spark-extra-${i} rounded-full absolute animate-spark-${i % 3 + 1}`} 
+              style={{
+                width: `${size}px`,
+                height: `${size}px`,
+                left: `${randomX * 100}%`,
+                top: `${randomY * 100}%`,
+                background: isMoving 
+                  ? `radial-gradient(circle, rgba(${i % 2 ? 0 : 50},${150 + i * 10},${200 - i * 10},0.9) 0%, rgba(0,100,150,0.1) 70%)`
+                  : `radial-gradient(circle, rgba(${i % 2 ? 0 : 50},${150 + i * 10},${200 - i * 10},0.6) 0%, rgba(0,100,150,0.1) 70%)`,
+                boxShadow: isMoving ? `0 0 ${7 + i % 5}px ${2 + i % 3}px rgba(0,${150 + i * 10},${200 - i * 10},0.6)` : `0 0 ${5 + i % 3}px ${1 + i % 2}px rgba(0,${150 + i * 10},${200 - i * 10},0.3)`,
+                ...getDistanceStyle(randomX, randomY, 1 + Math.random())
+              }}>
+            </div>
+          );
+        })}
         
-        <div 
-          className="glow-point-2 w-4 h-4 rounded-full absolute bottom-1/4 left-1/4 animate-pulse-2" 
-          style={{
-            background: isMoving 
-              ? 'radial-gradient(circle, rgba(254,240,138,0.9) 0%, rgba(254,240,138,0) 70%)'
-              : 'radial-gradient(circle, rgba(254,240,138,0.6) 0%, rgba(254,240,138,0) 70%)',
-            boxShadow: isMoving ? '0 0 15px 5px rgba(234,88,12,0.3)' : '0 0 10px 2px rgba(234,88,12,0.2)',
-            ...getDistanceStyle(0.25, 0.75, 0.6)
-          }}>
+        {/* Circuit lines that move with cursor */}
+        <div className="circuit-lines">
+          {Array.from({ length: 8 }).map((_, i) => {
+            const startX = i % 2 ? 0 : 100;
+            const startY = Math.random() * 100;
+            const isHorizontal = i % 3 === 0;
+            const length = 30 + Math.random() * 40;
+            
+            return (
+              <div 
+                key={`line-${i}`}
+                className={`circuit-line-${i} absolute opacity-30 animate-line-${i % 4 + 1}`}
+                style={{
+                  left: `${startX}%`,
+                  top: `${startY}%`,
+                  width: isHorizontal ? `${length}%` : '1px',
+                  height: isHorizontal ? '1px' : `${length}%`,
+                  background: isMoving 
+                    ? `linear-gradient(${isHorizontal ? '90deg' : '180deg'}, transparent, rgba(0,${150 + i * 10},${200 - i * 10},0.8), transparent)`
+                    : `linear-gradient(${isHorizontal ? '90deg' : '180deg'}, transparent, rgba(0,${150 + i * 10},${200 - i * 10},0.5), transparent)`,
+                  boxShadow: isMoving ? `0 0 5px rgba(0,${150 + i * 10},${200 - i * 10},0.8)` : `0 0 3px rgba(0,${150 + i * 10},${200 - i * 10},0.5)`,
+                  ...getDistanceStyle(startX/100, startY/100, 0.8)
+                }}>
+              </div>
+            );
+          })}
         </div>
       </div>
       
-      {/* Lighter blur overlay for better visibility of content */}
+      {/* Dark glass overlay for content */}
       <div 
-        className="fixed inset-0 -z-10 bg-white/30 backdrop-blur-sm"
+        className="fixed inset-0 -z-10 bg-black/20 backdrop-blur-sm"
         style={{
-          backdropFilter: `blur(${isMoving ? '1px' : '2px'})`,
+          backdropFilter: `blur(${isMoving ? '2px' : '3px'})`,
           transition: 'backdrop-filter 0.3s ease-out'
         }}
       ></div>
@@ -255,41 +295,55 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
         }
         
-        @keyframes wave-1 {
-          0% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(8px, -12px) scale(1.05); }
-          50% { transform: translate(16px, 0) scale(1); }
-          75% { transform: translate(8px, 12px) scale(0.95); }
-          100% { transform: translate(0, 0) scale(1); }
+        @keyframes spark-1 {
+          0% { opacity: 0.4; transform: scale(0.8); }
+          20% { opacity: 1; transform: scale(1.8); }
+          40% { opacity: 0.6; transform: scale(0.9); }
+          60% { opacity: 0.8; transform: scale(1.2); }
+          80% { opacity: 0.3; transform: scale(0.6); }
+          100% { opacity: 0.4; transform: scale(0.8); }
         }
         
-        @keyframes wave-2 {
-          0% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(-10px, 8px) scale(1.05); }
-          50% { transform: translate(-16px, 0) scale(1); }
-          75% { transform: translate(-8px, -10px) scale(0.95); }
-          100% { transform: translate(0, 0) scale(1); }
+        @keyframes spark-2 {
+          0% { opacity: 0.5; transform: scale(1); }
+          30% { opacity: 0.9; transform: scale(1.5); }
+          60% { opacity: 0.3; transform: scale(0.7); }
+          100% { opacity: 0.5; transform: scale(1); }
         }
         
-        @keyframes wave-3 {
-          0% { transform: translate(0, 0) scale(1); }
-          20% { transform: translate(12px, 8px) scale(1.03); }
-          40% { transform: translate(18px, 0) scale(1); }
-          60% { transform: translate(12px, -8px) scale(0.97); }
-          80% { transform: translate(0, -12px) scale(0.95); }
-          100% { transform: translate(0, 0) scale(1); }
+        @keyframes spark-3 {
+          0% { opacity: 0.3; transform: scale(0.6); }
+          40% { opacity: 1; transform: scale(1.4); }
+          80% { opacity: 0.5; transform: scale(0.8); }
+          100% { opacity: 0.3; transform: scale(0.6); }
         }
         
-        @keyframes pulse-1 {
-          0% { opacity: 0.7; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-          100% { opacity: 0.7; transform: scale(1); }
+        @keyframes line-1 {
+          0% { opacity: 0.1; }
+          30% { opacity: 0.5; }
+          60% { opacity: 0.3; }
+          100% { opacity: 0.1; }
         }
         
-        @keyframes pulse-2 {
-          0% { opacity: 0.6; transform: scale(1); }
-          50% { opacity: 0.9; transform: scale(1.2); }
-          100% { opacity: 0.6; transform: scale(1); }
+        @keyframes line-2 {
+          0% { opacity: 0.2; }
+          25% { opacity: 0.6; }
+          50% { opacity: 0.3; }
+          75% { opacity: 0.5; }
+          100% { opacity: 0.2; }
+        }
+        
+        @keyframes line-3 {
+          0% { opacity: 0.1; }
+          40% { opacity: 0.4; }
+          80% { opacity: 0.2; }
+          100% { opacity: 0.1; }
+        }
+        
+        @keyframes line-4 {
+          0% { opacity: 0.3; }
+          50% { opacity: 0.7; }
+          100% { opacity: 0.3; }
         }
         
         .animate-flow-1 {
@@ -312,30 +366,37 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           animation: blob-2 25s ease-in-out infinite;
         }
         
-        .animate-wave-1 {
-          animation: wave-1 12s ease-in-out infinite;
+        .animate-spark-1 {
+          animation: spark-1 3s ease-in-out infinite;
         }
         
-        .animate-wave-2 {
-          animation: wave-2 14s ease-in-out infinite;
+        .animate-spark-2 {
+          animation: spark-2 4s ease-in-out infinite;
         }
         
-        .animate-wave-3 {
-          animation: wave-3 16s ease-in-out infinite;
+        .animate-spark-3 {
+          animation: spark-3 3.5s ease-in-out infinite;
         }
         
-        .animate-pulse-1 {
-          animation: pulse-1 4s ease-in-out infinite;
+        .animate-line-1 {
+          animation: line-1 8s ease-in-out infinite;
         }
         
-        .animate-pulse-2 {
-          animation: pulse-2 5s ease-in-out infinite;
+        .animate-line-2 {
+          animation: line-2 10s ease-in-out infinite;
+        }
+        
+        .animate-line-3 {
+          animation: line-3 9s ease-in-out infinite;
+        }
+        
+        .animate-line-4 {
+          animation: line-4 7s ease-in-out infinite;
         }
       `}</style>
     </>
   );
 });
-
 const Page = function Page() {
   const [isClient, setIsClient] = useState<boolean>(false);
 
