@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import ContactForm from './components/ContactForm/ContactForm';
 import Partners from './components/Partners/Partners';
 import VideoBackground from './components/VideoBackground/VideoBackground';
+import Image from 'next/image';
 
 // Define TypeScript interfaces
 interface Training {
