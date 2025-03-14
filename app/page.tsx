@@ -177,7 +177,7 @@ export default function Home() {
         {/* Partners Section */}
         <Partners />
         
-   {/* Contact Section */}
+  {/* Contact Section */}
 <section id="contact" className="py-12 bg-gradient-to-br from-black to-gray-900">
   <div className="container mx-auto px-4 md:px-6">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-white">
@@ -188,9 +188,9 @@ export default function Home() {
     </h2>
     
     <div className="flex flex-col gap-6">
-      {/* Full-width image container */}
+      {/* Larger image container without cropping */}
       <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-800 w-full">
-        <div className="w-full h-[300px] relative">
+        <div className="w-full h-[400px] md:h-[500px] relative">
           <Image 
             src="/images/community.jpg" 
             alt="Community of developers and learners" 
@@ -200,7 +200,7 @@ export default function Home() {
             priority
             className="transition-all duration-500 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 p-4">
             <h3 className="text-xl font-bold text-white mb-1">Join Our Community</h3>
             <p className="text-blue-300 text-sm">Connect with experts and fellow learners.</p>
@@ -208,7 +208,7 @@ export default function Home() {
         </div>
       </div>
       
-      {/* Wider contact form container */}
+      {/* Full-width contact form container */}
       <div className="backdrop-blur-sm bg-white/5 rounded-xl p-5 md:p-6 border border-gray-800 shadow-2xl w-full">
         <ContactForm />
       </div>
