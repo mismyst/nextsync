@@ -14,7 +14,7 @@ const Footer = () => {
             <span role="img" aria-label="graduation">🎓</span>
             <span>Nxt Sync</span>
           </h2>
-          <p className="mt-3 text-white text-sm leading-relaxed"> {/* Changed text to white */}
+          <p className="mt-3 text-white text-base leading-relaxed">
             Learn over <span className="text-green-400 font-medium">25+ skills</span> from industry professionals and get ready for your dream career.
           </p>
           <div className="mt-5">
