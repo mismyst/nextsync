@@ -512,7 +512,7 @@ return (
                 <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent mb-4">
                   Join Our Learning Community
                 </h2>
-                <p className="text-gray-700 mb-6">
+                <p className="text-white-700 mb-6">
                   Connect with like-minded professionals, participate in workshops, 
                   and accelerate your career growth through peer learning and networking opportunities.
                 </p>
@@ -524,8 +524,8 @@ return (
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Networking Events</h3>
-                      <p className="text-sm text-gray-600">Connect with professionals and industry experts</p>
+                      <h3 className="font-semibold text-white-800">Networking Events</h3>
+                      <p className="text-sm text-white-600">Connect with professionals and industry experts</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -535,8 +535,8 @@ return (
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Mentorship Programs</h3>
-                      <p className="text-sm text-gray-600">Learn from industry leaders who guide your career</p>
+                      <h3 className="font-semibold text-white-800">Mentorship Programs</h3>
+                      <p className="text-sm text-white-600">Learn from industry leaders who guide your career</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -546,8 +546,8 @@ return (
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Job Opportunities</h3>
-                      <p className="text-sm text-gray-600">Access exclusive career opportunities and placements</p>
+                      <h3 className="font-semibold text-white-800">Job Opportunities</h3>
+                      <p className="text-sm text-white-600">Access exclusive career opportunities and placements</p>
                     </div>
                   </div>
                 </div>
