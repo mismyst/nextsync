@@ -210,41 +210,7 @@ export default function Home() {
               
               {/* Right side - Contact form container */}
               <div className="lg:w-1/2 backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
-                <div className="max-w-xl mx-auto">
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-blue-300 text-sm font-medium mb-2">Full Name</label>
-                        <input 
-                          type="text" 
-                          className="w-full bg-gray-800/70 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
-                          placeholder="John Doe"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-blue-300 text-sm font-medium mb-2">Email Address</label>
-                        <input 
-                          type="email" 
-                          className="w-full bg-gray-800/70 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
-                          placeholder="john@example.com"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-blue-300 text-sm font-medium mb-2">Message</label>
-                      <textarea 
-                        className="w-full bg-gray-800/70 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
-                        placeholder="How can we help you?"
-                        rows={4}
-                      ></textarea>
-                    </div>
-                    <div>
-                      <button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 text-lg shadow-lg">
-                        Send Message
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <ContactForm />
               </div>
             </div>
           </div>
