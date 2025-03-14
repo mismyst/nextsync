@@ -191,7 +191,7 @@ export default function Home() {
 <div className="lg:w-1/2 relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
   <div className="aspect-[4/3] w-full h-[400px] lg:h-[500px] relative">
     <Image 
-      src="/community.jpg" 
+      src="/images/community.jpg" 
       alt="Community of developers and learners" 
       fill
       style={{ objectFit: 'cover' }}
