@@ -71,7 +71,7 @@ const Footer = () => {
           <ul className="space-y-3 text-white"> {/* Changed text to white */}
             <li className="flex items-center space-x-3">
               <FaMapMarkerAlt className="text-green-400" size={50} /> {/* Changed icon color to green */}
-              <span className="text-base">1st floor, Divya diamonds building, Kavuri Hills Rd, CBI Colony, Madhapur, Hyderabad, Telangana 500033</span>
+              <span className="text-lg">1st floor, Divya diamonds building, Kavuri Hills Rd, CBI Colony, Madhapur, Hyderabad, Telangana 500033</span>
 
             </li>
             <li className="flex items-center space-x-3">
