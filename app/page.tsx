@@ -149,8 +149,8 @@ export default function Home() {
         <Partners />
         
         {/* Contact Section */}
-        <section id="contact" className="py-20 bg-gradient-to-br from-black to-gray-900">
-          <div className="container mx-auto px-4">
+        <section id="contact" className="py-24 bg-gradient-to-br from-black to-gray-900">
+          <div className="container mx-auto px-6 lg:px-8">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
               <span className="relative inline-block">
                 Contact Us
@@ -158,8 +158,8 @@ export default function Home() {
               </span>
             </h2>
             
-            <div className="flex justify-center">
-              <div className="max-w-md w-full">
+            <div className="max-w-4xl mx-auto">
+              <div className="w-full backdrop-blur-sm bg-white/5 rounded-xl p-8 md:p-10 border border-gray-800 shadow-2xl">
                 <ContactForm />
               </div>
             </div>
