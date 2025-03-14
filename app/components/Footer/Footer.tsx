@@ -67,7 +67,7 @@ const Footer = () => {
 
         {/* Contact Us */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+          <h3 className="text-2xl font-semibold mb-4">Contact Us</h3>
           <ul className="space-y-3 text-white"> {/* Changed text to white */}
             <li className="flex items-center space-x-3">
               <FaMapMarkerAlt className="text-green-400" size={50} /> {/* Changed icon color to green */}
