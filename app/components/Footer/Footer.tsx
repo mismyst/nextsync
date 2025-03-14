@@ -85,7 +85,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <p className="text-center text-white text-base mt-12 border-t border-gray-700 pt-6">
+      <p className="text-center text-white text-lg mt-12 border-t border-gray-700 pt-6">
         &copy; 2025 Nxt sync. All rights reserved.
       </p>
     </footer>
