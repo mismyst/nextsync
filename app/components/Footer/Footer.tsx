@@ -14,7 +14,7 @@ const Footer = () => {
             <span>Nxt Sync</span>
           </h2>
           <p className="mt-3 text-white text-sm leading-relaxed"> {/* Changed text to white */}
-            Learn over <span className="text-yellow-400 font-medium">25+ skills</span> from industry professionals and get ready for your dream career.
+            Learn over <span className="text-green-400 font-medium">25+ skills</span> from industry professionals and get ready for your dream career.
           </p>
           <div className="mt-5">
             <p className="font-semibold">Follow Us</p>
