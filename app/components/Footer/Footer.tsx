@@ -24,7 +24,7 @@ const Footer = () => {
                 <FaInstagram size={60} />
               </a>
               <a href="https://www.linkedin.com/company/106385726/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-400 transition"> {/* Changed icon color to green */}
-                <FaLinkedin size={30} />
+                <FaLinkedin size={60} />
               </a>
             </div>
           </div>
