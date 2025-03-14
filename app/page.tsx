@@ -526,6 +526,7 @@ return (
                 </h2>
                 <p className="text-white mb-6">
 
+
                   Connect with like-minded professionals, participate in workshops, 
                   and accelerate your career growth through peer learning and networking opportunities.
                 </p>
