@@ -188,25 +188,24 @@ export default function Home() {
     
     <div className="flex flex-col lg:flex-row gap-8">
       {/* Image container with rounded corners */}
-      <div className="lg:w-1/2 h-full relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-        <div className="aspect-[4/3] lg:aspect-auto lg:h-full relative">
-          <Image 
-            src="/community.jpg" 
-            alt="Community of developers and learners" 
-            fill
-            style={{ objectFit: 'cover' }}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-            className="transition-all duration-500 hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 p-6 lg:p-8">
-            <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
-            <p className="text-cyan-300">Connect with experts and fellow learners in our supportive environment.</p>
-          </div>
-        </div>
-      </div>
-      
+<div className="lg:w-1/2 relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+  <div className="aspect-[4/3] w-full h-[400px] lg:h-[500px] relative">
+    <Image 
+      src="/community.jpg" 
+      alt="Community of developers and learners" 
+      fill
+      style={{ objectFit: 'cover' }}
+      sizes="(max-width: 1024px) 100vw, 50vw"
+      priority
+      className="transition-all duration-500 hover:scale-105"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+    <div className="absolute bottom-0 left-0 p-6 lg:p-8">
+      <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
+      <p className="text-cyan-300">Connect with experts and fellow learners in our supportive environment.</p>
+    </div>
+  </div>
+</div>
       {/* Contact form container */}
       <div className="lg:w-1/2 backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
         <ContactForm />
