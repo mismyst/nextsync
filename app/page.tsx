@@ -59,44 +59,72 @@ export default function Home() {
         <Navbar />
         <HeroSection />
         
-        {/* Trainings Section */}
-        <section id="trainings-section" className="py-24 relative overflow-hidden">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
-              <span className="relative inline-block">
-                Our Training Programs
-                <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
-              </span>
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {trainingsData.map((training, index) => (
-                <div 
-                  key={training.title}
-                  className={`${training.bgColor} rounded-lg p-8 shadow-xl transform transition-all duration-700 ${
-                    showTrainings 
-                      ? 'translate-y-0 opacity-100' 
-                      : index % 2 === 0 
-                        ? 'translate-y-24 opacity-0' 
-                        : '-translate-y-24 opacity-0'
-                  }`}
+       {/* Trainings Section */}
+<section id="trainings-section" className="py-24 relative overflow-hidden">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+      <span className="relative inline-block">
+        Our Training Programs
+        <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
+      </span>
+    </h2>
+    
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {trainingsData.map((training, index) => (
+        <div 
+          key={training.title}
+          className={`${training.bgColor} rounded-lg shadow-xl transform transition-all duration-700 overflow-hidden ${
+            showTrainings 
+              ? 'translate-y-0 opacity-100' 
+              : index % 2 === 0 
+                ? 'translate-y-24 opacity-0' 
+                : '-translate-y-24 opacity-0'
+          }`}
+        >
+          <div className="p-6 border-b border-white/20">
+            <h3 className="text-2xl md:text-3xl font-bold text-white">{training.title}</h3>
+          </div>
+          
+          <div className="p-6">
+            <h4 className="text-lg font-semibold text-white/90 mb-4">Key Skills Covered:</h4>
+            <ul className="space-y-3">
+              {training.skills.map((skill) => (
+                <li 
+                  key={skill} 
+                  className="flex items-start"
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">{training.title}</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {training.skills.map((skill) => (
-                      <span 
-                        key={skill} 
-                        className="inline-block bg-white/10 rounded-full px-4 py-2 text-sm text-white backdrop-blur-sm"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-white mr-3 mt-0.5 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </span>
+                  <span className="text-white">{skill}</span>
+                </li>
               ))}
+            </ul>
+          </div>
+          
+          <div className="p-6 bg-black/20">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="flex-1 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center">
+                Learn More
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </button>
+              <button className="flex-1 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg shadow-lg transition-all duration-300 font-medium flex items-center justify-center">
+                Enroll Now
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+              </button>
             </div>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
         
         {/* Features Section */}
         <section className="py-20 relative">
