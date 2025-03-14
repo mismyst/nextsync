@@ -574,6 +574,7 @@ const Page = function Page() {
         <Footer />
       </div>
     </div>
+   </div>
   );
 };
 
