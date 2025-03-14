@@ -440,7 +440,7 @@ const Page = function Page() {
                       src="/images/community.jpg" 
                       alt="Our Learning Community" 
                       fill
-                      className="object-contain p-0 w-full h-full" 
+                      className="object-cover" 
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
