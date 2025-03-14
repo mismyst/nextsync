@@ -522,7 +522,8 @@ return (
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                   Join Our Learning Community
                 </h2>
-                <p className="text-white-700 mb-6">
+                <p className="text-white mb-6">
+
                   Connect with like-minded professionals, participate in workshops, 
                   and accelerate your career growth through peer learning and networking opportunities.
                 </p>
