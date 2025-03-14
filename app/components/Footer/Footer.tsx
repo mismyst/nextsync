@@ -22,7 +22,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/nxt_sync?igsh=bGhyNm95d2I3emp5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-400 transition"> {/* Changed icon color to green */}
                 <FaInstagram size={24} />
               </a>
-              <a href="https://www.linkedin.com/company/106385726/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-yellow-400 transition"> {/* Changed icon color to green */}
+              <a href="https://www.linkedin.com/company/106385726/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-400 transition"> {/* Changed icon color to green */}
                 <FaLinkedin size={24} />
               </a>
             </div>
