@@ -524,13 +524,7 @@ return (
 
                   Join Our Learning Community
                 </h2>
-                <p className="text-lg sm:text-xl text-white mb-6">
-
-
-
-                  Connect with like-minded professionals, participate in workshops, 
-                  and accelerate your career growth through peer learning and networking opportunities.
-                </p>
+                <p className="text-base sm:text-lg text-white">Connect with professionals and industry experts</p>
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <div className="bg-teal-100 p-2 rounded-full mr-4">
