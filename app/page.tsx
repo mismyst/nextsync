@@ -24,12 +24,12 @@ interface Training {
 // Define training data
 const trainingsData: Training[] = [
   {
-    title: "Technical management",
+    title: "Technical Management",
     skills: ["Artificial Intelligence", "Machine Learning", "Data Science", "Cybersecurity", "Full Stack", "Web Dev", "UI/UX Design", "VLSI"],
     bgColor: "bg-emerald-800",
   },
   {
-    title: "Non Technical management",
+    title: "Non Technical Management",
     skills: ["Finance", "Student Abroad Program", "Digital Marketing", "Business Development Associate", "Human Resource"],
     bgColor: "bg-green-900",
   }
@@ -222,41 +222,26 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
                 width: `${size}px`,
                 height: `${size}px`,
                 background: isMoving 
-                  ? `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.9) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`
-                  : `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.6) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`,
-                boxShadow: isMoving 
-                  ? `0 0 ${8 + size}px ${2 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.5)` 
-                  : `0 0 ${5 + size}px ${1 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.3)`,
-                ...getDistanceStyle(randomX, randomY, 1 + Math.random())
-              }}>
-            </div>
-          );
-        })}
+          ? `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.9) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`
+          : `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.6) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`,
+        boxShadow: isMoving 
+          ? `0 0 ${8 + size}px ${2 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.5)` 
+          : `0 0 ${5 + size}px ${1 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.3)`,
+        ...getDistanceStyle(randomX, randomY, 1 + Math.random())
+      }}>
+    </div>
+  );
+})}
       </div>
     </>
   );
 });
 
-// Dynamic import for heavy components with loading state
-const AnimatedBackgroundWithSuspense = React.lazy(() => 
-  import('./components/AnimatedBackground').catch(() => ({ 
-    default: AnimatedBackground 
-  }))
-);
-
 export default function Home() {
   const [showTrainings, setShowTrainings] = useState<boolean>(false);
-  const [isClient, setIsClient] = useState<boolean>(false);
-  
-  // Set isClient to true once component mounts - for hydration safety
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   
   // Trigger animation when scrolled to the trainings section
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const trainingsSection = document.getElementById('trainings-section');
@@ -275,12 +260,8 @@ export default function Home() {
   
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Only render animation on client-side */}
-      {isClient && (
-        <React.Suspense fallback={<div className="fixed inset-0 bg-slate-900"></div>}>
-          <AnimatedBackgroundWithSuspense />
-        </React.Suspense>
-      )}
+      {/* Animated background */}
+      <AnimatedBackground />
       
       {/* Main content */}
       <div className="relative z-10">
