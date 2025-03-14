@@ -545,7 +545,7 @@ return (
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white">Mentorship Programs</h3>
+                      <h3 className="font-semibold text-xl text-white">Mentorship Programs</h3>
 
                       <p className="text-sm text-white">Learn from industry leaders who guide your career</p>
                     </div>
