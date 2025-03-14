@@ -1,4 +1,4 @@
- 'use client'
+'use client'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from './components/Navbar/Navbar';
@@ -10,7 +10,7 @@ import Partners from './components/Partners/Partners';
 // For TypeScript - extend Window interface
 declare global {
   interface Window {
-    mouseMoveTimeout: number;
+    mouseMoveTimeout: NodeJS.Timeout;
   }
 }
 
@@ -25,12 +25,12 @@ interface Training {
 const trainingsData: Training[] = [
   {
     title: "Technical management",
-    skills: ["Artificial Intelligience ", "Machine Learning", "data science", "cybersecurity ", "full stack ", "web dev", "ui/UX design ", "VLSI"],
+    skills: ["Artificial Intelligence", "Machine Learning", "Data Science", "Cybersecurity", "Full Stack", "Web Dev", "UI/UX Design", "VLSI"],
     bgColor: "bg-emerald-800",
   },
   {
     title: "Non Technical management",
-    skills: ["finance", "Student Abroad Program ", "digital marketing ", "business development associate", "Human Resource"],
+    skills: ["Finance", "Student Abroad Program", "Digital Marketing", "Business Development Associate", "Human Resource"],
     bgColor: "bg-green-900",
   }
 ];
@@ -43,6 +43,8 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
   
   // Track mouse position
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Guard for SSR
+    
     const handleMouseMove = (e: MouseEvent): void => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setIsMoving(true);
@@ -51,7 +53,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
       if (window.mouseMoveTimeout) {
         clearTimeout(window.mouseMoveTimeout);
       }
-      window.mouseMoveTimeout = window.setTimeout(() => {
+      window.mouseMoveTimeout = setTimeout(() => {
         setIsMoving(false);
       }, 500);
     };
@@ -67,7 +69,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
   
   // Calculate distance from mouse for circuit elements
   const getDistanceStyle = (baseX: number, baseY: number, intensity = 1, maxDistance = 100): React.CSSProperties => {
-    if (!isMoving) return {};
+    if (!isMoving || typeof window === 'undefined') return {};
     
     const dx = mousePosition.x / window.innerWidth - baseX;
     const dy = mousePosition.y / window.innerHeight - baseY;
@@ -181,7 +183,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           }}>
         </div>
         
-        {/* Circuit pulse sparks */}
+        {/* Circuit pulse sparks - Limited for better performance */}
         <div 
           className="spark-1 w-3 h-3 rounded-full absolute top-1/5 left-1/5 animate-spark-1" 
           style={{
@@ -204,53 +206,57 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           }}>
         </div>
         
-        <div 
-          className="spark-3 w-2 h-2 rounded-full absolute top-1/3 right-1/6 animate-spark-3" 
-          style={{
-            background: isMoving 
-              ? 'radial-gradient(circle, rgba(0,200,200,0.9) 0%, rgba(0,100,100,0.1) 70%)'
-              : 'radial-gradient(circle, rgba(0,200,200,0.6) 0%, rgba(0,100,100,0.1) 70%)',
-            boxShadow: isMoving ? '0 0 10px 3px rgba(0,200,200,0.6)' : '0 0 8px 2px rgba(0,200,200,0.3)',
-            ...getDistanceStyle(0.83, 0.33, 1.6)
-          }}>
-        </div>
-        
-        {/* Add more circuit sparks */}
-        {Array.from({ length: 12 }).map((_, i) => {
+        {/* Reduced number of extra sparks for better performance */}
+        {Array.from({ length: 6 }).map((_, i) => {
           const randomX = Math.random();
           const randomY = Math.random();
           const size = Math.random() * 2 + 1;
-          
-            return (
-    <div 
-      key={`spark-extra-${i}`} 
-      className={`spark-extra-${i} w-${size} h-${size} rounded-full absolute animate-spark-${i % 3 + 1}`}
-      style={{
-        top: `${randomY * 100}%`,
-        left: `${randomX * 100}%`,
-        width: `${size}px`,
-        height: `${size}px`,
-        background: isMoving 
-          ? `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.9) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`
-          : `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.6) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`,
-        boxShadow: isMoving 
-          ? `0 0 ${8 + size}px ${2 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.5)` 
-          : `0 0 ${5 + size}px ${1 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.3)`,
-        ...getDistanceStyle(randomX, randomY, 1 + Math.random())
-      }}>
-    </div>
-  );
-})}
+
+          return (
+            <div 
+              key={`spark-extra-${i}`} 
+              className={`spark-extra-${i} rounded-full absolute animate-spark-${i % 3 + 1}`}
+              style={{
+                top: `${randomY * 100}%`,
+                left: `${randomX * 100}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                background: isMoving 
+                  ? `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.9) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`
+                  : `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.6) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`,
+                boxShadow: isMoving 
+                  ? `0 0 ${8 + size}px ${2 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.5)` 
+                  : `0 0 ${5 + size}px ${1 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.3)`,
+                ...getDistanceStyle(randomX, randomY, 1 + Math.random())
+              }}>
+            </div>
+          );
+        })}
       </div>
     </>
   );
 });
 
+// Dynamic import for heavy components with loading state
+const AnimatedBackgroundWithSuspense = React.lazy(() => 
+  import('./components/AnimatedBackground').catch(() => ({ 
+    default: AnimatedBackground 
+  }))
+);
+
 export default function Home() {
   const [showTrainings, setShowTrainings] = useState<boolean>(false);
+  const [isClient, setIsClient] = useState<boolean>(false);
+  
+  // Set isClient to true once component mounts - for hydration safety
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // Trigger animation when scrolled to the trainings section
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const trainingsSection = document.getElementById('trainings-section');
@@ -269,8 +275,12 @@ export default function Home() {
   
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Animated background */}
-      <AnimatedBackground />
+      {/* Only render animation on client-side */}
+      {isClient && (
+        <React.Suspense fallback={<div className="fixed inset-0 bg-slate-900"></div>}>
+          <AnimatedBackgroundWithSuspense />
+        </React.Suspense>
+      )}
       
       {/* Main content */}
       <div className="relative z-10">
