@@ -9,7 +9,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Branding Section */}
         <div>
-          <h2 className="text-xl font-semibold flex items-center space-x-2">
+          <h2 className="text-2xl font-bold flex items-center space-x-2">
+
             <span role="img" aria-label="graduation">🎓</span>
             <span>Nxt Sync</span>
           </h2>
