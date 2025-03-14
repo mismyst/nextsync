@@ -187,35 +187,34 @@ export default function Home() {
       </span>
     </h2>
     
-    <div className="flex flex-col lg:flex-row gap-6">
-      {/* Image container with reduced height */}
-      <div className="lg:w-1/2 relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-        <div className="aspect-video w-full h-[250px] relative">
+    <div className="flex flex-col gap-6 max-w-3xl mx-auto">
+      {/* Image container */}
+      <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+        <div className="aspect-[16/9] w-full h-[300px] relative">
           <Image 
             src="/images/community.jpg" 
             alt="Community of developers and learners" 
             fill
             style={{ objectFit: 'cover' }}
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="100vw"
             priority
             className="transition-all duration-500 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 p-4">
-            <h3 className="text-xl font-bold text-white mb-1">Join Our Community</h3>
-            <p className="text-blue-300 text-sm">Connect with experts and fellow learners.</p>
+          <div className="absolute bottom-0 left-0 p-5">
+            <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
+            <p className="text-blue-300">Connect with experts and fellow learners in our supportive environment.</p>
           </div>
         </div>
       </div>
       
-      {/* Contact form container - reduced padding */}
-      <div className="lg:w-1/2 backdrop-blur-sm bg-white/5 rounded-xl p-4 md:p-6 border border-gray-800 shadow-2xl">
+      {/* Contact form container - now below the image */}
+      <div className="backdrop-blur-sm bg-white/5 rounded-xl p-5 md:p-6 border border-gray-800 shadow-2xl">
         <ContactForm />
       </div>
     </div>
   </div>
 </section>
-        
         <Footer />
       </div>
     </main>
