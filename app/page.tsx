@@ -550,7 +550,7 @@ return (
                     <div>
                       <h3 className="font-semibold text-white">Mentorship Programs</h3>
 
-                      <p className="text-sm text-white-600">Learn from industry leaders who guide your career</p>
+                      <p className="text-sm text-white">Learn from industry leaders who guide your career</p>
                     </div>
                   </div>
                   <div className="flex items-start">
