@@ -436,17 +436,16 @@ const Page = function Page() {
                 {/* Image side */}
                 <div className="w-full md:w-1/2 relative">
                   <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
-                    <Image 
-                      src="/images/community.jpg" 
-                      alt="Our Learning Community" 
-                      fill
-                      className="object-contain" 
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority
-                    />
-                  </div>
-                </div>
-                
+                    <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
+   <Image 
+    src="/images/community.jpg" 
+    alt="Our Learning Community" 
+    fill
+    className="object-contain p-0 w-full h-full"
+    sizes="(max-width: 768px) 100vw, 50vw"
+    priority
+  />
+</div>
                 {/* Content side */}
                 <div className="w-full md:w-1/2">
                   <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent mb-4">
