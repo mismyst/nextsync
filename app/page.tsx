@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from './components/Navbar/Navbar';
@@ -35,10 +35,11 @@ const trainingsData: Training[] = [
   }
 ];
 
-// Enhanced AnimatedBackground component with circuit theme
+// Enhanced AnimatedBackground component with circuit theme and video background
 const AnimatedBackground = React.memo(function AnimatedBackground() {
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState<boolean>(false);
+  const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
   
   // Track mouse position
   useEffect(() => {
@@ -86,8 +87,28 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
   
   return (
     <>
-      {/* Dark gradient background with circuit theme */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-black via-gray-900 to-slate-900"></div>
+      {/* Video Background */}
+      <div className="fixed inset-0 -z-30 overflow-hidden">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute min-w-full min-h-full object-cover"
+          style={{ 
+            width: '100%', 
+            height: '100%',
+            opacity: videoLoaded ? 0.6 : 0
+          }}
+          onLoadedData={() => setVideoLoaded(true)}
+        >
+          <source src="/molecules.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      {/* Dark gradient overlay */}
+      <div className="fixed inset-0 -z-25 bg-gradient-to-br from-black via-gray-900 to-slate-900 opacity-70"></div>
       
       {/* Circuit pattern overlay */}
       <div 
@@ -200,392 +221,212 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
           const randomY = Math.random();
           const size = Math.random() * 2 + 1;
           
-          return (
-            <div 
-              key={`spark-extra-${i}`}
-              className={`spark-extra-${i} rounded-full absolute animate-spark-${i % 3 + 1}`} 
-              style={{
-                width: `${size}px`,
-                height: `${size}px`,
-                left: `${randomX * 100}%`,
-                top: `${randomY * 100}%`,
-                background: isMoving 
-                  ? `radial-gradient(circle, rgba(${i % 2 ? 0 : 50},${150 + i * 10},${200 - i * 10},0.9) 0%, rgba(0,100,150,0.1) 70%)`
-                  : `radial-gradient(circle, rgba(${i % 2 ? 0 : 50},${150 + i * 10},${200 - i * 10},0.6) 0%, rgba(0,100,150,0.1) 70%)`,
-                boxShadow: isMoving ? `0 0 ${7 + i % 5}px ${2 + i % 3}px rgba(0,${150 + i * 10},${200 - i * 10},0.6)` : `0 0 ${5 + i % 3}px ${1 + i % 2}px rgba(0,${150 + i * 10},${200 - i * 10},0.3)`,
-                ...getDistanceStyle(randomX, randomY, 1 + Math.random())
-              }}>
-            </div>
-          );
-        })}
-        
-        {/* Circuit lines that move with cursor */}
-        <div className="circuit-lines">
-          {Array.from({ length: 8 }).map((_, i) => {
-            const startX = i % 2 ? 0 : 100;
-            const startY = Math.random() * 100;
-            const isHorizontal = i % 3 === 0;
-            const length = 30 + Math.random() * 40;
-            
             return (
-              <div 
-                key={`line-${i}`}
-                className={`circuit-line-${i} absolute opacity-30 animate-line-${i % 4 + 1}`}
-                style={{
-                  left: `${startX}%`,
-                  top: `${startY}%`,
-                  width: isHorizontal ? `${length}%` : '1px',
-                  height: isHorizontal ? '1px' : `${length}%`,
-                  background: isMoving 
-                    ? `linear-gradient(${isHorizontal ? '90deg' : '180deg'}, transparent, rgba(0,${150 + i * 10},${200 - i * 10},0.8), transparent)`
-                    : `linear-gradient(${isHorizontal ? '90deg' : '180deg'}, transparent, rgba(0,${150 + i * 10},${200 - i * 10},0.5), transparent)`,
-                  boxShadow: isMoving ? `0 0 5px rgba(0,${150 + i * 10},${200 - i * 10},0.8)` : `0 0 3px rgba(0,${150 + i * 10},${200 - i * 10},0.5)`,
-                  ...getDistanceStyle(startX/100, startY/100, 0.8)
-                }}>
-              </div>
-            );
-          })}
-        </div>
+    <div 
+      key={`spark-extra-${i}`} 
+      className={`spark-extra-${i} w-${size} h-${size} rounded-full absolute animate-spark-${i % 3 + 1}`}
+      style={{
+        top: `${randomY * 100}%`,
+        left: `${randomX * 100}%`,
+        width: `${size}px`,
+        height: `${size}px`,
+        background: isMoving 
+          ? `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.9) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`
+          : `radial-gradient(circle, rgba(0,${150 + i * 8},${180 + i * 6},0.6) 0%, rgba(0,${100 + i * 5},${120 + i * 5},0.1) 70%)`,
+        boxShadow: isMoving 
+          ? `0 0 ${8 + size}px ${2 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.5)` 
+          : `0 0 ${5 + size}px ${1 + size}px rgba(0,${150 + i * 8},${180 + i * 6},0.3)`,
+        ...getDistanceStyle(randomX, randomY, 1 + Math.random())
+      }}>
+    </div>
+  );
+})}
       </div>
-      
-      {/* Dark glass overlay for content */}
-      <div 
-        className="fixed inset-0 -z-10 bg-black/20 backdrop-blur-sm"
-        style={{
-          backdropFilter: `blur(${isMoving ? '2px' : '3px'})`,
-          transition: 'backdrop-filter 0.3s ease-out'
-        }}
-      ></div>
-      
-      <style jsx global>{`
-        @keyframes flow-1 {
-          0% { transform: translateX(0) translateY(0) scale(1); }
-          25% { transform: translateX(20vw) translateY(3vh) scale(1.1); }
-          50% { transform: translateX(35vw) translateY(-2vh) scale(1); }
-          75% { transform: translateX(15vw) translateY(-4vh) scale(0.9); }
-          100% { transform: translateX(0) translateY(0) scale(1); }
-        }
-        
-        @keyframes flow-2 {
-          0% { transform: translateX(0) translateY(0) scale(1); }
-          33% { transform: translateX(-20vw) translateY(5vh) scale(1.05); }
-          66% { transform: translateX(-35vw) translateY(-3vh) scale(0.95); }
-          100% { transform: translateX(0) translateY(0) scale(1); }
-        }
-        
-        @keyframes flow-3 {
-          0% { transform: translateX(0) translateY(0) scale(1); }
-          30% { transform: translateX(-5vw) translateY(20vh) scale(1.1); }
-          60% { transform: translateX(8vw) translateY(35vh) scale(0.9); }
-          100% { transform: translateX(0) translateY(0) scale(1); }
-        }
-        
-        @keyframes blob-1 {
-          0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-          25% { transform: translate(2vw, -1vh) scale(1.03) rotate(5deg); border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%; }
-          50% { transform: translate(4vw, 2vh) scale(1) rotate(10deg); border-radius: 30% 70% 70% 30% / 50% 40% 60% 50%; }
-          75% { transform: translate(1vw, 3vh) scale(0.97) rotate(5deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-          100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-        }
-        
-        @keyframes blob-2 {
-          0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
-          33% { transform: translate(-3vw, 2vh) scale(1.05) rotate(-8deg); border-radius: 40% 60% 50% 50% / 30% 60% 40% 70%; }
-          66% { transform: translate(-1vw, -3vh) scale(0.95) rotate(-15deg); border-radius: 70% 30% 40% 60% / 40% 50% 50% 60%; }
-          100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
-        }
-        
-        @keyframes spark-1 {
-          0% { opacity: 0.4; transform: scale(0.8); }
-          20% { opacity: 1; transform: scale(1.8); }
-          40% { opacity: 0.6; transform: scale(0.9); }
-          60% { opacity: 0.8; transform: scale(1.2); }
-          80% { opacity: 0.3; transform: scale(0.6); }
-          100% { opacity: 0.4; transform: scale(0.8); }
-        }
-        
-        @keyframes spark-2 {
-          0% { opacity: 0.5; transform: scale(1); }
-          30% { opacity: 0.9; transform: scale(1.5); }
-          60% { opacity: 0.3; transform: scale(0.7); }
-          100% { opacity: 0.5; transform: scale(1); }
-        }
-        
-        @keyframes spark-3 {
-          0% { opacity: 0.3; transform: scale(0.6); }
-          40% { opacity: 1; transform: scale(1.4); }
-          80% { opacity: 0.5; transform: scale(0.8); }
-          100% { opacity: 0.3; transform: scale(0.6); }
-        }
-        
-        @keyframes line-1 {
-          0% { opacity: 0.1; }
-          30% { opacity: 0.5; }
-          60% { opacity: 0.3; }
-          100% { opacity: 0.1; }
-        }
-        
-        @keyframes line-2 {
-          0% { opacity: 0.2; }
-          25% { opacity: 0.6; }
-          50% { opacity: 0.3; }
-          75% { opacity: 0.5; }
-          100% { opacity: 0.2; }
-        }
-        
-        @keyframes line-3 {
-          0% { opacity: 0.1; }
-          40% { opacity: 0.4; }
-          80% { opacity: 0.2; }
-          100% { opacity: 0.1; }
-        }
-        
-        @keyframes line-4 {
-          0% { opacity: 0.3; }
-          50% { opacity: 0.7; }
-          100% { opacity: 0.3; }
-        }
-        
-        .animate-flow-1 {
-          animation: flow-1 25s ease-in-out infinite;
-        }
-        
-        .animate-flow-2 {
-          animation: flow-2 32s ease-in-out infinite;
-        }
-        
-        .animate-flow-3 {
-          animation: flow-3 28s ease-in-out infinite;
-        }
-        
-        .animate-blob-1 {
-          animation: blob-1 20s ease-in-out infinite;
-        }
-        
-        .animate-blob-2 {
-          animation: blob-2 25s ease-in-out infinite;
-        }
-        
-        .animate-spark-1 {
-          animation: spark-1 3s ease-in-out infinite;
-        }
-        
-        .animate-spark-2 {
-          animation: spark-2 4s ease-in-out infinite;
-        }
-        
-        .animate-spark-3 {
-          animation: spark-3 3.5s ease-in-out infinite;
-        }
-        
-        .animate-line-1 {
-          animation: line-1 8s ease-in-out infinite;
-        }
-        
-        .animate-line-2 {
-          animation: line-2 10s ease-in-out infinite;
-        }
-        
-        .animate-line-3 {
-          animation: line-3 9s ease-in-out infinite;
-        }
-        
-        .animate-line-4 {
-          animation: line-4 7s ease-in-out infinite;
-        }
-      `}</style>
     </>
   );
 });
-export default function Page() {
-  const [isClient, setIsClient] = useState<boolean>(false);
 
+export default function Home() {
+  const [showTrainings, setShowTrainings] = useState<boolean>(false);
+  
+  // Trigger animation when scrolled to the trainings section
   useEffect(() => {
-    setIsClient(true);
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const trainingsSection = document.getElementById('trainings-section');
+      
+      if (trainingsSection) {
+        const trainingsSectionTop = trainingsSection.offsetTop;
+        if (scrollPosition > trainingsSectionTop - window.innerHeight / 1.5) {
+          setShowTrainings(true);
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-return (
-  <div className="relative min-h-screen w-full overflow-hidden">
-    <AnimatedBackground />
-
-    {/* Main Content Container */}
-    <div className="relative z-10 min-h-screen flex flex-col">
-      <Navbar />
-      <main className="w-full max-w-none px-0 flex-grow">
-        {/* Hero section */}
+  
+  return (
+    <main className="min-h-screen relative overflow-hidden">
+      {/* Animated background */}
+      <AnimatedBackground />
+      
+      {/* Main content */}
+      <div className="relative z-10">
+        <Navbar />
         <HeroSection />
         
-        {/* Partners section */}
-        <div className="my-4 sm:my-6 md:my-8">
-          <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
-            <Partners />
-          </div>
-        </div>
-        
-       {/* Training cards section */}
-  <div className="my-6 sm:my-8 md:my-12">
-    <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-slate-900/40 backdrop-blur-md shadow-lg border border-green-500/20">
-      <div className="flex justify-between items-center mb-10">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-300 to-blue-400 bg-clip-text text-transparent tracking-tight">Premium Training</h2>
-        <a href="#" className="text-green-400 hover:text-green-300 text-base hidden md:flex items-center font-semibold transition-all duration-300 hover:translate-x-1">
-          Explore All Courses
-          <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </a>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
-        {trainingsData.map((training, index) => (
-          <div key={index} className="relative rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col group">
-            <div className={`bg-gradient-to-br from-green-800 to-blue-900 p-6 pt-6 px-6 pb-0 min-h-120 flex flex-col h-full`}>
-              {/* Premium badge */}
-              <div className="absolute top-5 right-5">
-                <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center backdrop-blur-sm border border-green-400/40 transition-all duration-300 group-hover:scale-110">
-                  <span className="text-white text-xl font-bold drop-shadow-md">PRO</span>
-                </div>
-              </div>
-              
-              {/* Content with improved spacing and layout */}
-              <div className="pr-24 pb-24">
-                <div className="mb-4 inline-block px-4 py-1.5 bg-green-500/10 rounded-full backdrop-blur-sm border border-green-500/20">
-                  <span className="text-sm font-bold text-green-300 tracking-wide">CERTIFICATION INCLUDED</span>
-                </div>
-                
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 line-clamp-2 leading-tight">{training.title}</h3>
-                
-                <div className="text-white/90 text-base space-y-5 mt-8">
-                  <p className="text-white font-medium text-lg">Master these in-demand skills:</p>
-                  <ul className="grid grid-cols-1 gap-y-4 mt-5">
-                    {training.skills.slice(0, 7).map((skill, skillIndex) => (
-                      <li key={skillIndex} className="flex items-start text-base group-hover:translate-x-1 transition-transform duration-300">
-                        <svg className="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="truncate">{skill}</span>
-                      </li>
-                    ))}
-                    {training.skills.length > 7 && (
-                      <li className="flex items-center text-sm pl-8">
-                        <span className="text-green-300 italic">+{training.skills.length - 7} more skills included...</span>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-              
-              {/* Enhanced call-to-action button */}
-              <div className="mt-auto -mx-6 -mb-px">
-                <a 
-                  href="https://forms.gle/DKJsgZNqCmuL2j7W8" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full py-5 bg-black text-white text-base font-bold uppercase tracking-wider transition-all duration-300 hover:bg-green-900 flex items-center justify-center group-hover:bg-green-800"
+        {/* Trainings Section */}
+        <section id="trainings-section" className="py-24 relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+              <span className="relative inline-block">
+                Our Training Programs
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
+              </span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {trainingsData.map((training, index) => (
+                <div 
+                  key={training.title}
+                  className={`${training.bgColor} rounded-lg p-8 shadow-xl transform transition-all duration-700 ${
+                    showTrainings 
+                      ? 'translate-y-0 opacity-100' 
+                      : index % 2 === 0 
+                        ? 'translate-y-24 opacity-0' 
+                        : '-translate-y-24 opacity-0'
+                  }`}
                 >
-                  <span>ENROLL NOW</span>
-                  <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">{training.title}</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {training.skills.map((skill) => (
+                      <span 
+                        key={skill} 
+                        className="inline-block bg-white/10 rounded-full px-4 py-2 text-sm text-white backdrop-blur-sm"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Features Section */}
+        <section className="py-20 relative">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+              <span className="relative inline-block">
+                Why Choose Us
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
+              </span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Feature 1 */}
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-lg shadow-lg backdrop-blur-sm border border-slate-700">
+                <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M12 18.364l-4.95 4.95M12 5.414l-4.95-4.95M23 12h-1M3.34 7.364l.707-.707M4.343 17.657l-.707.707M4 12H3"></path>
                   </svg>
-                </a>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Expert Instructors</h3>
+                <p className="text-gray-300">Learn from industry professionals with years of experience in their respective fields.</p>
+              </div>
+              
+              {/* Feature 2 */}
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-lg shadow-lg backdrop-blur-sm border border-slate-700">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Hands-on Projects</h3>
+                <p className="text-gray-300">Apply your knowledge through real-world projects that enhance your portfolio and practical skills.</p>
+              </div>
+              
+              {/* Feature 3 */}
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-lg shadow-lg backdrop-blur-sm border border-slate-700">
+                <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Job Placement</h3>
+                <p className="text-gray-300">Access our extensive network of industry partners and receive career guidance and job placement assistance.</p>
               </div>
             </div>
           </div>
-        ))}
-      </div>
-      
-      {/* Added bonus banner */}
-      <div className="mt-10 bg-gradient-to-r from-green-700/90 to-blue-800/90 rounded-xl p-5 sm:p-7 text-white text-center border border-green-500/30">
-        <p className="font-bold text-lg">🎁 BONUS: Enroll in any course today and get access to our exclusive mentorship program!</p>
-      </div>
-    </div>
-  </div>
+        </section>
         
-        {/* Community Section with Image - FIXED STRUCTURE */}
-        <div className="my-0 sm:my-0 md:my-0"> 
-          <div className="mx-0 sm:mx-0 md:mx-0 lg:mx-0 p-0 sm:p-0 md:p-0 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30"> 
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              {/* Image side - INCREASED SIZE */}
-              <div className="w-full md:w-1/2 relative">
-                <div className="relative h-80 sm:h-96 md:h-120 lg:h-140 w-full rounded-xl overflow-hidden shadow-lg">
-                  <Image
-                    src="/images/community.jpg"
-                    alt="Our Learning Community"
-                    fill
-                    className="object-cover" 
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
+        {/* Partners Section */}
+        <Partners />
+        
+        {/* Contact Section */}
+        <section id="contact" className="py-20">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+              <span className="relative inline-block">
+                Get In Touch
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
+              </span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-lg shadow-lg backdrop-blur-sm border border-slate-700">
+                <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Address</h4>
+                      <p className="text-gray-300">123 Training Center, Tech Hub, Innovation City</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Email</h4>
+                      <p className="text-gray-300">info@trainingcenter.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Phone</h4>
+                      <p className="text-gray-300">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Content side */}
-              <div className="w-full md:w-1/2">
-                <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-
-
-                  Join Our Learning Community
-                </h2>
-                <p className="text-base sm:text-lg text-white">Connect with professionals and industry experts</p>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="bg-teal-100 p-2 rounded-full mr-4">
-                      <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-xl text-white">Networking Events</h3>
-                      <p className="text-sm text-white">Connect with professionals and industry experts</p>
-
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="bg-teal-100 p-2 rounded-full mr-4">
-                      <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-xl text-white">Mentorship Programs</h3>
-
-                      <p className="text-base sm:text-lg text-white">Learn from industry leaders who guide your career</p>
-
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="bg-teal-100 p-2 rounded-full mr-4">
-                      <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-xl text-white">Job Opportunities</h3>
-
-                      <p className="text-base sm:text-lg text-white">Access exclusive career opportunities and placements</p>
-
-                    </div>
-                  </div>
-                </div>
-                <button className="mt-8 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-semibold text-lg py-3 px-6 rounded-lg transition-all duration-300 shadow-md">
-
-
-                  Join Community
-                </button>
-              </div>
+              <ContactForm />
             </div>
           </div>
-        </div>
+        </section>
         
-        {/* Contact form */}
-        <div className="my-4 sm:my-6 md:my-8">
-          <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 lg:p-8 rounded-2xl bg-white/40 backdrop-blur-lg shadow-lg border border-white/40">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 sm:mb-10 text-slate-800 drop-shadow-sm">What&apos;s your suggestion?</h2>
-            {isClient && <ContactForm />}
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
-  </div>
-);
+        <Footer />
+      </div>
+    </main>
+  );
 }
-
