@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const VideoBackground = React.memo(function VideoBackground() {
   const [videoLoaded, setVideoLoaded] = useState(false);
