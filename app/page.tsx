@@ -520,6 +520,7 @@ return (
               {/* Content side */}
               <div className="w-full md:w-1/2">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+
                   Join Our Learning Community
                 </h2>
                 <p className="text-white mb-6">
