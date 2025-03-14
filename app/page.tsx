@@ -565,7 +565,8 @@ return (
                     </div>
                   </div>
                 </div>
-                <button className="mt-8 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-md">
+                <button className="mt-8 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-semibold text-lg py-3 px-6 rounded-lg transition-all duration-300 shadow-md">
+
 
                   Join Community
                 </button>
