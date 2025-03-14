@@ -77,7 +77,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-3">
               <FaEnvelope className="text-green-400"  /> {/* Changed icon color to green */}
-              <span>contact@NxtSync.com</span>
+              <span className="text-base">contact@NxtSync.com</span>
             </li>
             <li className="flex items-center space-x-3">
               <FaPhone className="text-green-400" /> {/* Changed icon color to green */}
