@@ -404,8 +404,8 @@ const Page = function Page() {
     setIsClient(true);
   }, []);
 
-  return (
-     <>
+ return (
+  <>
     <div className="relative min-h-screen w-full overflow-hidden">
       <AnimatedBackground />
 
@@ -492,24 +492,22 @@ const Page = function Page() {
           </div>
           
           {/* Community Section with Image - FIXED STRUCTURE */}
-<div className="my-0 sm:my-0 md:my-0"> {/* Removed margins here */}
-  <div className="mx-0 sm:mx-0 md:mx-0 lg:mx-0 p-0 sm:p-0 md:p-0 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30"> {/* Removed padding and margins */}
-    <div className="flex flex-col md:flex-row gap-8 items-center">
-      {/* Image side - INCREASED SIZE */}
-      <div className="w-full md:w-1/2 relative">
-        <div className="relative h-80 sm:h-96 md:h-120 lg:h-140 w-full rounded-xl overflow-hidden shadow-lg">
-          <Image
-            src="/images/community.jpg"
-            alt="Our Learning Community"
-            fill
-            className="object-cover"  {/* Changed to object-cover for better fill behavior */}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-          />
-        </div>
-      </div>
-      </div>
-   
+          <div className="my-0 sm:my-0 md:my-0"> 
+            <div className="mx-0 sm:mx-0 md:mx-0 lg:mx-0 p-0 sm:p-0 md:p-0 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30"> 
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                {/* Image side - INCREASED SIZE */}
+                <div className="w-full md:w-1/2 relative">
+                  <div className="relative h-80 sm:h-96 md:h-120 lg:h-140 w-full rounded-xl overflow-hidden shadow-lg">
+                    <Image
+                      src="/images/community.jpg"
+                      alt="Our Learning Community"
+                      fill
+                      className="object-cover" {/* Changed to object-cover for better fill behavior */}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
+                </div>
                 
                 {/* Content side */}
                 <div className="w-full md:w-1/2">
@@ -574,9 +572,6 @@ const Page = function Page() {
         <Footer />
       </div>
     </div>
-   </div>
-    </>
-  );
-};
-
+  </>
+);
 export default Page;
