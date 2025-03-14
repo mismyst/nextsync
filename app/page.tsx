@@ -541,6 +541,7 @@ return (
                     <div>
                       <h3 className="font-semibold text-white">Networking Events</h3>
 
+
                       <p className="text-sm text-white">Connect with professionals and industry experts</p>
 
                     </div>
