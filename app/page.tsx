@@ -175,21 +175,44 @@ export default function Home() {
         {/* Partners Section */}
         <Partners />
         
-        {/* Contact Section */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-black to-gray-900">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
-              <span className="relative inline-block">
-                Contact Us
-                <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
-              </span>
-            </h2>
-            
-            <div className="w-full backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
-              <ContactForm />
-            </div>
+       {/* Contact Section */}
+<section id="contact" className="py-24 bg-gradient-to-br from-black to-gray-900">
+  <div className="container mx-auto px-4 md:px-6">
+    <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+      <span className="relative inline-block">
+        Contact Us
+        <span className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-500"></span>
+      </span>
+    </h2>
+    
+    <div className="flex flex-col lg:flex-row gap-8">
+      {/* Image container with rounded corners */}
+      <div className="lg:w-1/2 h-full relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+        <div className="aspect-[4/3] lg:aspect-auto lg:h-full relative">
+          <Image 
+            src="/community.jpg" 
+            alt="Community of developers and learners" 
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+            className="transition-all duration-500 hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 p-6 lg:p-8">
+            <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
+            <p className="text-cyan-300">Connect with experts and fellow learners in our supportive environment.</p>
           </div>
-        </section>
+        </div>
+      </div>
+      
+      {/* Contact form container */}
+      <div className="lg:w-1/2 backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 lg:p-10 border border-gray-800 shadow-2xl">
+        <ContactForm />
+      </div>
+    </div>
+  </div>
+</section>
         
         <Footer />
       </div>
