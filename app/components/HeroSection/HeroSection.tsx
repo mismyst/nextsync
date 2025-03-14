@@ -7,7 +7,7 @@ const HeroSection: React.FC = () => {
   const [email, setEmail] = useState<string>('');
 
   return (
-    <section className="relative bg-white overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
