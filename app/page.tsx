@@ -397,7 +397,7 @@ const AnimatedBackground = React.memo(function AnimatedBackground() {
     </>
   );
 });
-export default function Page {
+export default function Page() {
   const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
@@ -571,4 +571,5 @@ return (
     </div>
   </div>
 );
+}
 
