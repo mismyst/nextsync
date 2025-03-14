@@ -507,9 +507,7 @@ const Page = function Page() {
           />
         </div>
       </div>
-    </div>
-  </div>
-</div>
+   
                 
                 {/* Content side */}
                 <div className="w-full md:w-1/2">
