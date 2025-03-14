@@ -429,23 +429,24 @@ const Page = function Page() {
             </div>
           </div>
           
-          {/* Community Section with Image */}
+          {/* Community Section with Image - FIXED STRUCTURE */}
           <div className="my-6 sm:my-8 md:my-12">
             <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                {/* Image side */}
+                {/* Image side - FIXED */}
                 <div className="w-full md:w-1/2 relative">
                   <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
-                    <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
-   <Image 
-    src="/images/community.jpg" 
-    alt="Our Learning Community" 
-    fill
-    className="object-contain p-0 w-full h-full"
-    sizes="(max-width: 768px) 100vw, 50vw"
-    priority
-  />
-</div>
+                    <Image 
+                      src="/images/community.jpg" 
+                      alt="Our Learning Community" 
+                      fill
+                      className="object-contain p-0 w-full h-full" 
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
+                </div>
+                
                 {/* Content side */}
                 <div className="w-full md:w-1/2">
                   <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent mb-4">
