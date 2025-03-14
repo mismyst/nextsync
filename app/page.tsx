@@ -208,8 +208,7 @@ export default function Home() {
         </div>
       </div>
       
-      {/* Contact form container - now below the image */}
-      <div className="backdrop-blur-sm bg-white/5 rounded-xl p-5 md:p-6 border border-gray-800 shadow-2xl">
+       <div className="backdrop-blur-sm bg-white/5 rounded-xl p-5 md:p-6 border border-gray-800 shadow-2xl mx-auto w-full max-w-3xl">
         <ContactForm />
       </div>
     </div>
