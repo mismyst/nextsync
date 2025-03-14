@@ -18,36 +18,17 @@ const Partners = () => {
       {/* Updated heading with white text and blue underline styling */}
       <h3 className="text-3xl font-bold text-center mb-10 text-white relative">
         Our Trusted Partners
-        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 mt-1"></span>
+        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-48 h-1 bg-blue-500 mt-1"></span>
       </h3>
       
       {/* This container has the "partners-container" class which should be styled in global.css */}
       <div className="partners-container overflow-hidden">
         {/* This div has the "partners-slider" class which is animated in global.css */}
         <div className="partners-slider">
-          {/* First set of logos */}
-          {partnerLogos.map((logo) => (
+          {/* Triple the logos to ensure no gaps in the animation */}
+          {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, index) => (
             <div 
-              key={logo.id} 
-              className="partner-logo w-36 h-36 mx-3 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
-            >
-              <div className="relative w-full h-20 mb-2">
-                <Image
-                  src={logo.image}
-                  alt={`${logo.name} logo`}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-              <span className="text-gray-800 font-semibold text-center">{logo.name}</span>
-            </div>
-          ))}
-          
-          {/* Duplicated logos for seamless animation */}
-          {partnerLogos.map((logo) => (
-            <div 
-              key={`${logo.id}-duplicate`} 
+              key={`${logo.id}-${index}`} 
               className="partner-logo w-36 h-36 mx-3 bg-white/50 rounded-xl flex flex-col items-center justify-center p-4 shadow-sm"
             >
               <div className="relative w-full h-20 mb-2">
@@ -77,7 +58,8 @@ const Partners = () => {
         .partners-slider {
           display: flex;
           width: fit-content;
-          animation: slide 10s linear infinite; /* Ensure 'infinite' is set for continuous animation */
+          animation: slide 20s linear infinite; /* Ensure 'infinite' is set for continuous animation */
+          gap: 0; /* Ensure there's no gap between logos */
         }
         
         @keyframes slide {
@@ -85,7 +67,8 @@ const Partners = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%); /* Only move by the length of the original set */
+            /* Move exactly by the width of one set of logos */
+            transform: translateX(calc(-50% - 6px)); /* Adjusted to remove any potential gap */
           }
         }
         
