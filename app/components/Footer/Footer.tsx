@@ -80,7 +80,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-3">
               <FaPhone className="text-green-400" /> {/* Changed icon color to green */}
-              <span className="text-base">+91 6361136916</span>
+              <span className="text-lg">+91 6361136916</span>
             </li>
           </ul>
         </div>
