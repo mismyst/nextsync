@@ -405,6 +405,7 @@ const Page = function Page() {
   }, []);
 
   return (
+     <>
     <div className="relative min-h-screen w-full overflow-hidden">
       <AnimatedBackground />
 
@@ -574,6 +575,7 @@ const Page = function Page() {
       </div>
     </div>
    </div>
+    </>
   );
 };
 
