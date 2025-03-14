@@ -421,73 +421,83 @@ return (
           </div>
         </div>
         
-        {/* Training cards section */}
-        <div className="my-6 sm:my-8 md:my-12">
-          <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-white/30 backdrop-blur-md shadow-lg border border-white/30">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent">Premium Training</h2>
-              <a href="#" className="text-teal-600 hover:text-teal-700 text-sm hidden md:block font-semibold">Explore All Courses →</a>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              {trainingsData.map((training, index) => (
-                <div key={index} className="relative rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
-                  <div className={`bg-gradient-to-br from-teal-600 to-blue-600 p-5 pt-5 px-5 pb-0 min-h-120 flex flex-col h-full`}>
-                    {/* Premium badge */}
-                    <div className="absolute top-5 right-5">
-                      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm border border-white/40">
-                        <span className="text-white text-xl font-bold">PRO</span>
-                      </div>
-                    </div>
-                    
-                    {/* Content with improved spacing and layout */}
-                    <div className="pr-20 pb-20">
-                      <div className="mb-3 inline-block px-3 py-1 bg-white/10 rounded-full backdrop-blur-sm">
-                        <span className="text-xs font-bold text-teal-100">CERTIFICATION INCLUDED</span>
-                      </div>
-                      
-                      <h3 className="text-xl font-bold text-white mb-5 line-clamp-2">{training.title}</h3>
-                      
-                      <div className="text-white/90 text-sm space-y-4 mt-6">
-                        <p className="text-white font-medium">Master these in-demand skills:</p>
-                        <ul className="grid grid-cols-1 gap-y-3 mt-4">
-                          {training.skills.slice(0, 7).map((skill, skillIndex) => (
-                            <li key={skillIndex} className="flex items-start text-sm">
-                              <svg className="w-4 h-4 text-teal-300 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                              </svg>
-                              <span className="truncate">{skill}</span>
-                            </li>
-                          ))}
-                          {training.skills.length > 7 && (
-                            <li className="flex items-center text-xs pl-6">
-                              <span className="text-teal-200 italic">+{training.skills.length - 7} more skills included...</span>
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    {/* Enhanced call-to-action button */}
-                    <div className="mt-auto -mx-5 -mb-px">
-                      <button className="w-full py-4 bg-black text-white text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-teal-900 flex items-center justify-center">
-                        <span>ENROLL NOW</span>
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
+       {/* Training cards section */}
+  <div className="my-6 sm:my-8 md:my-12">
+    <div className="mx-3 sm:mx-6 md:mx-12 lg:mx-16 p-4 sm:p-6 md:p-8 rounded-2xl bg-slate-900/40 backdrop-blur-md shadow-lg border border-green-500/20">
+      <div className="flex justify-between items-center mb-10">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-300 to-blue-400 bg-clip-text text-transparent tracking-tight">Premium Training</h2>
+        <a href="#" className="text-green-400 hover:text-green-300 text-base hidden md:flex items-center font-semibold transition-all duration-300 hover:translate-x-1">
+          Explore All Courses
+          <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+        {trainingsData.map((training, index) => (
+          <div key={index} className="relative rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col group">
+            <div className={`bg-gradient-to-br from-green-800 to-blue-900 p-6 pt-6 px-6 pb-0 min-h-120 flex flex-col h-full`}>
+              {/* Premium badge */}
+              <div className="absolute top-5 right-5">
+                <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center backdrop-blur-sm border border-green-400/40 transition-all duration-300 group-hover:scale-110">
+                  <span className="text-white text-xl font-bold drop-shadow-md">PRO</span>
                 </div>
-              ))}
-            </div>
-            
-            {/* Added bonus banner */}
-            <div className="mt-8 bg-gradient-to-r from-teal-600/90 to-blue-600/90 rounded-xl p-4 sm:p-6 text-white text-center">
-              <p className="font-bold">🎁 BONUS: Enroll in any course today and get access to our exclusive mentorship program!</p>
+              </div>
+              
+              {/* Content with improved spacing and layout */}
+              <div className="pr-24 pb-24">
+                <div className="mb-4 inline-block px-4 py-1.5 bg-green-500/10 rounded-full backdrop-blur-sm border border-green-500/20">
+                  <span className="text-sm font-bold text-green-300 tracking-wide">CERTIFICATION INCLUDED</span>
+                </div>
+                
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 line-clamp-2 leading-tight">{training.title}</h3>
+                
+                <div className="text-white/90 text-base space-y-5 mt-8">
+                  <p className="text-white font-medium text-lg">Master these in-demand skills:</p>
+                  <ul className="grid grid-cols-1 gap-y-4 mt-5">
+                    {training.skills.slice(0, 7).map((skill, skillIndex) => (
+                      <li key={skillIndex} className="flex items-start text-base group-hover:translate-x-1 transition-transform duration-300">
+                        <svg className="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span className="truncate">{skill}</span>
+                      </li>
+                    ))}
+                    {training.skills.length > 7 && (
+                      <li className="flex items-center text-sm pl-8">
+                        <span className="text-green-300 italic">+{training.skills.length - 7} more skills included...</span>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Enhanced call-to-action button */}
+              <div className="mt-auto -mx-6 -mb-px">
+                <a 
+                  href="https://forms.gle/DKJsgZNqCmuL2j7W8" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full py-5 bg-black text-white text-base font-bold uppercase tracking-wider transition-all duration-300 hover:bg-green-900 flex items-center justify-center group-hover:bg-green-800"
+                >
+                  <span>ENROLL NOW</span>
+                  <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
+      </div>
+      
+      {/* Added bonus banner */}
+      <div className="mt-10 bg-gradient-to-r from-green-700/90 to-blue-800/90 rounded-xl p-5 sm:p-7 text-white text-center border border-green-500/30">
+        <p className="font-bold text-lg">🎁 BONUS: Enroll in any course today and get access to our exclusive mentorship program!</p>
+      </div>
+    </div>
+  </div>
         
         {/* Community Section with Image - FIXED STRUCTURE */}
         <div className="my-0 sm:my-0 md:my-0"> 
