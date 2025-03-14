@@ -32,7 +32,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+          <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li><a href="#about" className="text-white hover:text-green-400 transition"> {/* Changed text to white */}
               About Us
