@@ -58,8 +58,7 @@ export default function Home() {
       <div className="relative z-10">
         <Navbar />
         <HeroSection />
-        
-       {/* Trainings Section */}
+     {/* Trainings Section */}
 <section id="trainings-section" className="py-24 relative overflow-hidden">
   <div className="container mx-auto px-4">
     <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
@@ -73,7 +72,7 @@ export default function Home() {
       {trainingsData.map((training, index) => (
         <div 
           key={training.title}
-          className={`${training.bgColor} rounded-lg shadow-xl transform transition-all duration-700 overflow-hidden ${
+          className={`${training.bgColor} rounded-lg shadow-xl transform transition-all duration-700 overflow-hidden flex flex-col h-full ${
             showTrainings 
               ? 'translate-y-0 opacity-100' 
               : index % 2 === 0 
@@ -85,7 +84,7 @@ export default function Home() {
             <h3 className="text-2xl md:text-3xl font-bold text-white">{training.title}</h3>
           </div>
           
-          <div className="p-6">
+          <div className="p-6 flex-1">
             <h4 className="text-lg font-semibold text-white/90 mb-4">Key Skills Covered:</h4>
             <ul className="space-y-3">
               {training.skills.map((skill) => (
