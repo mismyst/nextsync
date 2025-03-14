@@ -558,7 +558,8 @@ return (
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white">Job Opportunities</h3>
+                      <h3 className="font-semibold text-xl text-white">Job Opportunities</h3>
+
                       <p className="text-sm text-white">Access exclusive career opportunities and placements</p>
                     </div>
                   </div>
