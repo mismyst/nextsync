@@ -77,7 +77,7 @@ const Partners = () => {
         .partners-slider {
           display: flex;
           width: fit-content;
-          animation: slide 3s linear infinite; /* Ensure 'infinite' is set for continuous animation */
+          animation: slide 10s linear infinite; /* Ensure 'infinite' is set for continuous animation */
         }
         
         @keyframes slide {
