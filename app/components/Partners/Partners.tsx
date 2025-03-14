@@ -18,7 +18,7 @@ const Partners = () => {
       {/* Updated heading with white text and blue underline styling */}
       <h4 className="text-3xl font-bold text-center mb-10 text-white relative">
         Our Trusted Partners
-        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-63 h-1 bg-blue-500 mt-1"></span>
+        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-67 h-1 bg-blue-500 mt-1"></span>
       </h4>
       
       {/* This container has the "partners-container" class which should be styled in global.css */}
