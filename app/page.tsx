@@ -106,23 +106,7 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  
-                  <div className="p-6 bg-black/20">
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <button className="flex-1 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center">
-                        Learn More
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
-                      </button>
-                      <button className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all duration-300 font-medium flex items-center justify-center">
-                        Enroll Now
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
+               
                 </div>
               ))}
             </div>
