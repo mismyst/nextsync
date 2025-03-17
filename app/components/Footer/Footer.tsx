@@ -29,26 +29,12 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-2xl font-bold mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <li><a href="#about" className="text-white text-xl hover:text-green-400 transition"> {/* Changed text to white */}
-              About Us
-            </a></li>
-            <li><a href="#programs" className="text-white text-xl hover:text-green-400 transition"> {/* Changed text to white */}
-              Specialised Programs
-            </a></li>
-          </ul>
-        </div>
-
+       
         {/* More */}
         <div>
           <h3 className="text-2xl font-semibold mb-4">More</h3>
           <ul className="space-y-2">
-            <li><a href="#faqs" className="text-white text-xl hover:text-green-400 transition"> {/* Changed text to white */}
-              FAQs
-            </a></li>
+           
             <li><a href="/PrivacyPolicy" className="text-white text-xl hover:text-green-400 transition"> {/* Changed text to white */}
               Privacy Policy
             </a></li>
